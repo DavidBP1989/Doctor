@@ -1,0 +1,725 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="emeciModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="CatCategoEstudios">
+    <Key>
+      <PropertyRef Name="idcategoriaestudio" />
+    </Key>
+    <Property Name="idcategoriaestudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tipo" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="catdiagnostico">
+    <Key>
+      <PropertyRef Name="idcatdiagnostico" />
+    </Key>
+    <Property Name="idcatdiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="lineas" Type="nvarchar" MaxLength="500" />
+    <Property Name="idmedico" Type="int" />
+  </EntityType>
+  <EntityType Name="CatEstudios">
+    <Key>
+      <PropertyRef Name="idestudio" />
+    </Key>
+    <Property Name="idestudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="idcategoriaestudio" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="catrecetas">
+    <Key>
+      <PropertyRef Name="idcatreceta" />
+    </Key>
+    <Property Name="idcatreceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="lineas" Type="ntext" />
+    <Property Name="idmedico" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Ciudades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="idciudad" />
+    </Key>
+    <Property Name="idciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="idEstado" Type="nvarchar" MaxLength="2" />
+    <Property Name="IdPais" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="ConsultaGinecologa">
+    <Key>
+      <PropertyRef Name="idconsultaginecologa" />
+    </Key>
+    <Property Name="idconsultaginecologa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idconsulta" Type="int" Nullable="false" />
+    <Property Name="FechaUltimaMestruacion" Type="smalldatetime" />
+    <Property Name="Gestas" Type="tinyint" />
+    <Property Name="ParaGestas" Type="tinyint" />
+    <Property Name="Cesareas" Type="tinyint" />
+    <Property Name="abortos" Type="tinyint" />
+    <Property Name="RecienNacidosVivos" Type="tinyint" />
+    <Property Name="mortinatos" Type="tinyint" />
+    <Property Name="EdadInicioVidaSexual" Type="tinyint" />
+    <Property Name="menacma" Type="nchar" MaxLength="10" />
+    <Property Name="oligonorrea" Type="bit" />
+    <Property Name="Proiomenorrea" Type="bit" />
+    <Property Name="Hipermenorrea" Type="bit" />
+    <Property Name="Dismenorrea" Type="bit" />
+    <Property Name="Dispareunia" Type="bit" />
+    <Property Name="Leucorrea" Type="bit" />
+    <Property Name="Lactorrea" Type="bit" />
+    <Property Name="Amenorrea" Type="bit" />
+    <Property Name="Metrorragia" Type="bit" />
+    <Property Name="Otros" Type="bit" />
+    <Property Name="OtrosEspecifique" Type="ntext" />
+    <Property Name="TienePareja" Type="bit" />
+    <Property Name="SexoPareja" Type="nvarchar" MaxLength="1" />
+    <Property Name="EstadoCivilPareja" Type="nvarchar" MaxLength="30" />
+    <Property Name="GrupoRHPareja" Type="nvarchar" MaxLength="30" />
+    <Property Name="FechaNacimientoPareja" Type="smalldatetime" />
+    <Property Name="OcupacionPareja" Type="nvarchar" MaxLength="30" />
+    <Property Name="TelefonoPareja" Type="nvarchar" MaxLength="30" />
+    <Property Name="nombrePareja" Type="nvarchar" MaxLength="60" />
+    <Property Name="edadPareja" Type="nvarchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="ConsultaObstetrica">
+    <Key>
+      <PropertyRef Name="IdConsultaObstetrica" />
+    </Key>
+    <Property Name="IdConsultaObstetrica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="noembarazo" Type="tinyint" />
+    <Property Name="abortos" Type="tinyint" />
+    <Property Name="FechaUltmoParto" Type="smalldatetime" />
+    <Property Name="PrimerDiaUltimaMestruacuion" Type="smalldatetime" />
+    <Property Name="ToxemiasPrevias" Type="tinyint" />
+    <Property Name="CesareasPrevia" Type="tinyint" />
+    <Property Name="UsoDeForceps" Type="tinyint" />
+    <Property Name="Motinatos" Type="tinyint" />
+    <Property Name="RMVivos" Type="tinyint" />
+    <Property Name="EmbarazoEtopicos" Type="tinyint" />
+    <Property Name="EmbrazosComplicadosPrevios" Type="tinyint" />
+    <Property Name="EmbrazoEtopicoExplique" Type="ntext" />
+    <Property Name="EmbarazosComplicadosExplique" Type="ntext" />
+    <Property Name="NoComplicacionesPertinales" Type="tinyint" />
+    <Property Name="ComplicacionesPerinatalesExplique" Type="ntext" />
+    <Property Name="NoEmbrazosAnormales" Type="tinyint" />
+    <Property Name="EmbarazosAnormalesExplique" Type="ntext" />
+    <Property Name="FU" Type="tinyint" />
+    <Property Name="FCF" Type="tinyint" />
+    <Property Name="CC" Type="tinyint" />
+    <Property Name="CA" Type="tinyint" />
+    <Property Name="LF" Type="tinyint" />
+    <Property Name="DSP" Type="tinyint" />
+    <Property Name="Posicion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Presentacion" Type="nvarchar" MaxLength="30" />
+    <Property Name="siuacuion" Type="nvarchar" MaxLength="30" />
+    <Property Name="Actitud" Type="nvarchar" MaxLength="30" />
+    <Property Name="MovimientosFetales" Type="nvarchar" MaxLength="30" />
+    <Property Name="PesoAproxProducto" Type="tinyint" />
+    <Property Name="TA" Type="tinyint" />
+    <Property Name="FCM" Type="tinyint" />
+    <Property Name="Edema" Type="nvarchar" MaxLength="30" />
+    <Property Name="SeHizoUf" Type="bit" />
+    <Property Name="idconsulta" Type="int" />
+    <Property Name="activaSexualmente" Type="bit" />
+    <Property Name="EspecifiqueToxemias" Type="nvarchar" MaxLength="100" />
+    <Property Name="Partos" Type="tinyint" />
+    <Property Name="TipoDistocia" Type="tinyint" />
+    <Property Name="MotivoDistocia" Type="tinyint" />
+    <Property Name="EspecifiqueMotivoDistocia" Type="nvarchar" MaxLength="80" />
+    <Property Name="EspecifiqueTipoDistocia" Type="nvarchar" MaxLength="80" />
+    <Property Name="ultrasonido" Type="nvarchar" MaxLength="100" />
+    <Property Name="exploracionFisica" Type="nvarchar" MaxLength="100" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Consultas">
+    <Key>
+      <PropertyRef Name="idconsulta" />
+    </Key>
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="idconsulta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Peso" Type="real" />
+    <Property Name="Altura" Type="real" />
+    <Property Name="Temperatura" Type="real" />
+    <Property Name="Cabeza" Type="real" />
+    <Property Name="perimetroCefalico" Type="real" />
+    <Property Name="TensionArterial" Type="int" />
+    <Property Name="TensionArterialB" Type="int" />
+    <Property Name="FrecuenciaCardiaca" Type="int" />
+    <Property Name="FrecuenciaRespiratoria" Type="int" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="motivo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SignosSintomas1" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SignosSintomas2" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SignosSintomas3" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MedidasPreventivas" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ProximaCita" Type="smalldatetime" />
+    <Property Name="observaciones" Type="ntext" />
+    <Property Name="Pronostico" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DatosTarjeta">
+    <Key>
+      <PropertyRef Name="iddatostarjeta" />
+    </Key>
+    <Property Name="noTarjeta" Type="nvarchar" MaxLength="15" />
+    <Property Name="Coordenada" Type="nvarchar" MaxLength="3" />
+    <Property Name="Dato" Type="nvarchar" MaxLength="3" />
+    <Property Name="iddatostarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Diagnosticos">
+    <Key>
+      <PropertyRef Name="iddiagnostico" />
+    </Key>
+    <Property Name="idpaciente" Type="int" Nullable="false" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="Lineas" Type="ntext" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="LineasVital" Type="ntext" />
+    <Property Name="datos" Type="ntext" />
+    <Property Name="idconsulta" Type="int" />
+    <Property Name="iddiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DiagnosticosExc">
+    <Key>
+      <PropertyRef Name="iddiagexc" />
+    </Key>
+    <Property Name="idconsulta" Type="int" />
+    <Property Name="iddiagexc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lineas" Type="ntext" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Estados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Estados">
+    <Key>
+      <PropertyRef Name="idEstado" />
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="idEstado" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdPais" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Estudios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Estudios">
+    <Key>
+      <PropertyRef Name="idEstudio" />
+    </Key>
+    <Property Name="idEstudio" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="NombreEstudio" Type="nvarchar" MaxLength="80" />
+    <Property Name="CentroMedico" Type="nvarchar" MaxLength="50" />
+    <Property Name="idexpediente" Type="int" />
+    <Property Name="Resultado" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="EstudiosGab">
+    <Key>
+      <PropertyRef Name="idestudiogab" />
+    </Key>
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="Lineas" Type="ntext" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="idestudiogab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idconsulta" Type="int" />
+  </EntityType>
+  <EntityType Name="EstudiosLab">
+    <Key>
+      <PropertyRef Name="idestudiolab" />
+    </Key>
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="Lineas" Type="ntext" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="idestudiolab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idconsulta" Type="int" />
+  </EntityType>
+  <EntityType Name="Familiares">
+    <Key>
+      <PropertyRef Name="IdFamiliar" />
+    </Key>
+    <Property Name="Nombre" Type="nvarchar" MaxLength="80" />
+    <Property Name="Sexo" Type="nvarchar" MaxLength="1" />
+    <Property Name="IdFamiliar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nacimiento" Type="smalldatetime" />
+    <Property Name="Enfermedades" Type="ntext" />
+    <Property Name="Relacion" Type="int" Nullable="false" />
+    <Property Name="DetalleRelacion" Type="nvarchar" MaxLength="80" />
+    <Property Name="idpaciente" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Imagenes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Imagenes">
+    <Key>
+      <PropertyRef Name="IdImagen" />
+    </Key>
+    <Property Name="IdImagen" Type="int" Nullable="false" />
+    <Property Name="idExpediente" Type="int" />
+    <Property Name="Archivo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ArchivoThumb" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Medico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Medico">
+    <Key>
+      <PropertyRef Name="Idmedico" />
+    </Key>
+    <Property Name="IdRegistro" Type="int" Nullable="false" />
+    <Property Name="Idmedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdEspecialidad" Type="int" />
+    <Property Name="CedulaEspecialidad" Type="nvarchar" MaxLength="50" />
+    <Property Name="CertCMCP" Type="nvarchar" MaxLength="50" />
+    <Property Name="AgrupacionLocal" Type="nvarchar" MaxLength="50" />
+    <Property Name="AgrupacionNacional" Type="nvarchar" MaxLength="50" />
+    <Property Name="RFC" Type="nvarchar" MaxLength="20" />
+    <Property Name="PediatraPlus" Type="tinyint" />
+    <Property Name="CedulaProfesional" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoRegSSA" Type="nvarchar" MaxLength="50" />
+    <Property Name="UniversidadEspecialidad" Type="nvarchar" MaxLength="50" />
+    <Property Name="HospitalResidenciaPediatra" Type="nvarchar" MaxLength="50" />
+    <Property Name="DomicilioConsultorio" Type="nvarchar" MaxLength="50" />
+    <Property Name="TelefonoConsultorio" Type="nvarchar" MaxLength="50" />
+    <Property Name="TelefonoFax" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+    <Property Name="computadora" Type="nvarchar" MaxLength="25" />
+    <Property Name="guid" Type="nvarchar" MaxLength="30" />
+    <Property Name="recetatop" Type="int" />
+    <Property Name="recetabottom" Type="int" />
+    <Property Name="recetaleft" Type="int" />
+    <Property Name="consultatop" Type="int" />
+    <Property Name="recetaright" Type="int" />
+    <Property Name="consultabottom" Type="int" />
+    <Property Name="consultaleft" Type="int" />
+    <Property Name="consultaright" Type="int" />
+  </EntityType>
+  <EntityType Name="Paciente">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="IdRegistro" Type="int" Nullable="false" />
+    <Property Name="Edad" Type="smallint" />
+    <Property Name="Sexo" Type="nvarchar" MaxLength="1" />
+    <Property Name="Escolaridad" Type="nvarchar" MaxLength="30" />
+    <Property Name="idPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+    <Property Name="grupoRH" Type="nvarchar" MaxLength="25" />
+    <Property Name="FechaNacimiento" Type="smalldatetime" />
+    <Property Name="HospitalNacer" Type="nvarchar" MaxLength="150" />
+    <Property Name="LugarNacer" Type="nvarchar" MaxLength="50" />
+    <Property Name="AbortosPrevios" Type="tinyint" />
+    <Property Name="PesoNacer" Type="real" />
+    <Property Name="TallaNacer" Type="real" />
+    <Property Name="PerCefalicoNacer" Type="real" />
+    <Property Name="AlergiaMedicina" Type="ntext" />
+    <Property Name="AlergiaOtros" Type="ntext" />
+    <Property Name="Patologia" Type="ntext" />
+    <Property Name="telefonooficina" Type="nvarchar" MaxLength="50" />
+    <Property Name="Etapa" Type="tinyint" />
+    <Property Name="TipoEscolaridad" Type="tinyint" />
+    <Property Name="otraescolaridad" Type="nvarchar" MaxLength="30" />
+    <Property Name="EmbarazoNo" Type="tinyint" />
+    <Property Name="TipoEmbarazo" Type="nvarchar" MaxLength="2" />
+    <Property Name="EmbarazoParto" Type="nvarchar" MaxLength="2" />
+    <Property Name="tipodistocia" Type="nvarchar" MaxLength="1" />
+    <Property Name="tipodistociamencione" Type="nvarchar" MaxLength="80" />
+    <Property Name="motivodistocia" Type="nvarchar" MaxLength="1" />
+    <Property Name="motivodistociamencione" Type="nvarchar" MaxLength="80" />
+    <Property Name="CalApgarMin" Type="tinyint" />
+    <Property Name="CalApgar5Min" Type="tinyint" />
+    <Property Name="CalSilverMin" Type="tinyint" />
+    <Property Name="CalSilver5Min" Type="tinyint" />
+    <Property Name="Tamizneonatal" Type="nvarchar" MaxLength="1" />
+    <Property Name="NoFolioTamiz" Type="nvarchar" MaxLength="10" />
+    <Property Name="CompINM" Type="ntext" />
+    <Property Name="CompINMManejo" Type="ntext" />
+    <Property Name="CompMed" Type="ntext" />
+    <Property Name="CompMedManejo" Type="ntext" />
+    <Property Name="lactanciaMat" Type="nvarchar" MaxLength="1" />
+    <Property Name="tipolactancia" Type="nvarchar" MaxLength="1" />
+    <Property Name="nombreformula" Type="nvarchar" MaxLength="30" />
+    <Property Name="motivoreduccion" Type="ntext" />
+    <Property Name="motivoSuspension" Type="ntext" />
+    <Property Name="fechaConsultaPed" Type="smalldatetime" />
+    <Property Name="AntecedentePerionatal" Type="ntext" />
+    <Property Name="rubeola" Type="nvarchar" MaxLength="3" />
+    <Property Name="sarampion" Type="nvarchar" MaxLength="3" />
+    <Property Name="tosferina" Type="nvarchar" MaxLength="3" />
+    <Property Name="roseola" Type="nvarchar" MaxLength="3" />
+    <Property Name="varicela" Type="nvarchar" MaxLength="3" />
+    <Property Name="EnfInfectocontagiosas" Type="ntext" />
+    <Property Name="EnfContagiosas" Type="char" MaxLength="12" />
+    <Property Name="EnfContagiosasyEvol" Type="ntext" />
+    <Property Name="NombrePadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="ApellPaternoPadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="ApellMaternoPadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="NacimientoPadre" Type="smalldatetime" />
+    <Property Name="EstadoCivilPadre" Type="int" />
+    <Property Name="EscolaridadPadre" Type="int" />
+    <Property Name="DetalleEscolaridadPadre" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaludPadre" Type="tinyint" />
+    <Property Name="DetalleSaludPadre" Type="ntext" />
+    <Property Name="toxicomaniaPadre" Type="bit" />
+    <Property Name="DetalletoxicomaniaPadre" Type="ntext" />
+    <Property Name="AntecedentePadre" Type="char" MaxLength="8" />
+    <Property Name="OtrosAntecedentesPadre" Type="ntext" />
+    <Property Name="NombreMadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="ApellPaternoMadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="ApellMaternoMadre" Type="nvarchar" MaxLength="25" />
+    <Property Name="NacimientoMadre" Type="smalldatetime" />
+    <Property Name="EstadoCivilMadre" Type="int" />
+    <Property Name="EscolaridadMadre" Type="int" />
+    <Property Name="DetalleEscolaridadMadre" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaludMadre" Type="tinyint" />
+    <Property Name="DetalleSaludMadre" Type="ntext" />
+    <Property Name="toxicomaniaMadre" Type="bit" />
+    <Property Name="DetalletoxicomaniaMadre" Type="ntext" />
+    <Property Name="AntecedenteMadre" Type="char" MaxLength="8" />
+    <Property Name="OtrosAntecedentesMadre" Type="ntext" />
+    <Property Name="SostenCefalico" Type="int" />
+    <Property Name="Ablactacion" Type="int" />
+    <Property Name="Posicionsedente" Type="int" />
+    <Property Name="Destete" Type="int" />
+    <Property Name="Guarderia" Type="int" />
+    <Property Name="Jardin" Type="int" />
+    <Property Name="Primaria" Type="int" />
+    <Property Name="Secundaria" Type="int" />
+    <Property Name="Preparatoria" Type="int" />
+    <Property Name="Urbanización" Type="int" />
+    <Property Name="TipodeVivienda" Type="int" />
+    <Property Name="Cohabitantes" Type="int" />
+    <Property Name="caminarSinAyuda" Type="int" />
+    <Property Name="primerasilaba" Type="int" />
+    <Property Name="primeraspalabras" Type="int" />
+    <Property Name="historialclinico" Type="ntext" />
+    <Property Name="otravacuna" Type="nvarchar" MaxLength="150" />
+    <Property Name="vacunaenfprev" Type="nvarchar" MaxLength="80" />
+    <Property Name="vacunadosis" Type="nvarchar" MaxLength="30" />
+    <Property Name="vacunaedad" Type="nvarchar" MaxLength="30" />
+    <Property Name="vacunafecha" Type="nvarchar" MaxLength="30" />
+    <Property Name="TrataDiagExclusivos" Type="ntext" />
+    <Property Name="consultas" Type="ntext" />
+    <Property Name="PreCta" Type="nvarchar" MaxLength="7" />
+    <Property Name="preClave" Type="nvarchar" MaxLength="7" />
+    <Property Name="OtrasConsultas" Type="ntext" />
+    <Property Name="mortinatos" Type="tinyint" />
+    <Property Name="EdadGestal" Type="tinyint" />
+    <Property Name="tipoEdadGestal" Type="tinyint" />
+    <Property Name="acepto" Type="bit" />
+    <Property Name="ocupacion" Type="nvarchar" MaxLength="30" />
+    <Property Name="religion" Type="nvarchar" MaxLength="30" />
+    <Property Name="EdadMenarca" Type="int" />
+    <Property Name="estadoCivil" Type="int" />
+  </EntityType>
+  <EntityType Name="Patologias">
+    <Key>
+      <PropertyRef Name="idpatologia" />
+    </Key>
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fecha" Type="nvarchar" MaxLength="30" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+    <Property Name="Alergeno" Type="nvarchar" MaxLength="50" />
+    <Property Name="Manejo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Evoluciones" Type="nvarchar" MaxLength="50" />
+    <Property Name="EdadAdquirida" Type="int" />
+    <Property Name="Categoria" Type="int" />
+    <Property Name="RelacionSospechosa" Type="nvarchar" MaxLength="250" />
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="idpatologia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recetas">
+    <Key>
+      <PropertyRef Name="idreceta" />
+    </Key>
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="Lineas" Type="ntext" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="idreceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idconsulta" Type="int" />
+  </EntityType>
+  <EntityType Name="Registro">
+    <Key>
+      <PropertyRef Name="idRegistro" />
+    </Key>
+    <Property Name="idRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+    <Property Name="Domicilio" Type="nvarchar" MaxLength="150" />
+    <Property Name="Colonia" Type="nvarchar" MaxLength="150" />
+    <Property Name="idCiudad" Type="int" />
+    <Property Name="idEstado" Type="nvarchar" MaxLength="2" />
+    <Property Name="IdPais" Type="nvarchar" MaxLength="2" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+    <Property Name="TelefonoCel" Type="nvarchar" MaxLength="50" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
+    <Property Name="Status" Type="nvarchar" MaxLength="1" />
+    <Property Name="IdUsuario" Type="nvarchar" MaxLength="25" />
+    <Property Name="FechaRegistro" Type="smalldatetime" />
+    <Property Name="FechaExpiracion" Type="smalldatetime" />
+    <Property Name="Emails" Type="nvarchar" MaxLength="150" />
+    <Property Name="FechaRenovacion" Type="smalldatetime" />
+    <Property Name="OtraCiudad" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoExt" Type="nvarchar" MaxLength="5" />
+    <Property Name="CodigoPostal" Type="nvarchar" MaxLength="5" />
+    <Property Name="clave" Type="nvarchar" MaxLength="15" />
+    <Property Name="Emeci" Type="nvarchar" MaxLength="15" />
+    <Property Name="apellido2" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Tarjetas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Tarjetas">
+    <Key>
+      <PropertyRef Name="idtarjeta" />
+    </Key>
+    <Property Name="idtarjeta" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaRegistro" Type="smalldatetime" />
+    <Property Name="FechaExpira" Type="smalldatetime" />
+    <Property Name="EjeX" Type="tinyint" />
+    <Property Name="EjeY" Type="tinyint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.TemaComentarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TemaComentarios">
+    <Key>
+      <PropertyRef Name="idtema" />
+    </Key>
+    <Property Name="IdTemaComentario" Type="int" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="IdMedico" Type="int" />
+    <Property Name="Comentario" Type="nvarchar" MaxLength="400" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="idtema" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Temas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Temas">
+    <Key>
+      <PropertyRef Name="IdTema" />
+    </Key>
+    <Property Name="IdTema" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="tinyint" />
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="idMedicoCreo" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.trackermedicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="trackermedicos">
+    <Key>
+      <PropertyRef Name="idtracker" />
+    </Key>
+    <Property Name="idtracker" Type="int" Nullable="false" />
+    <Property Name="TypeLink" Type="nvarchar" MaxLength="1" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="fecha" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="Vacunas">
+    <Key>
+      <PropertyRef Name="idvacuna" />
+    </Key>
+    <Property Name="Fecha" Type="smalldatetime" />
+    <Property Name="codigo" Type="nvarchar" MaxLength="2" />
+    <Property Name="idpaciente" Type="int" />
+    <Property Name="vacunaenfprev" Type="nvarchar" MaxLength="50" />
+    <Property Name="vacunadosis" Type="nvarchar" MaxLength="30" />
+    <Property Name="vacunaEdad" Type="nvarchar" MaxLength="30" />
+    <Property Name="idvacuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Especialidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Especialidades">
+    <Key>
+      <PropertyRef Name="IdEspecialidad" />
+    </Key>
+    <Property Name="IdEspecialidad" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Paises' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="IdPais" Type="nvarchar" MaxLength="2" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.trackermedicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="trackermedicos1">
+    <Key>
+      <PropertyRef Name="idtracker" />
+    </Key>
+    <Property Name="idtracker" Type="int" Nullable="false" />
+    <Property Name="TypeLink" Type="nvarchar" MaxLength="1" />
+    <Property Name="idmedico" Type="int" />
+    <Property Name="fecha" Type="smalldatetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Nombre" Type="ntext" />
+    <Property Name="Password" Type="nvarchar" MaxLength="25" />
+    <Property Name="Status" Type="nvarchar" MaxLength="1" />
+    <Property Name="FechaAcceso" Type="smalldatetime" />
+    <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="emeciModelStoreContainer">
+    <EntitySet Name="CatCategoEstudios" EntityType="Self.CatCategoEstudios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catdiagnostico" EntityType="Self.catdiagnostico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CatEstudios" EntityType="Self.CatEstudios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catrecetas" EntityType="Self.catrecetas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsultaGinecologa" EntityType="Self.ConsultaGinecologa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsultaObstetrica" EntityType="Self.ConsultaObstetrica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatosTarjeta" EntityType="Self.DatosTarjeta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Diagnosticos" EntityType="Self.Diagnosticos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DiagnosticosExc" EntityType="Self.DiagnosticosExc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstudiosGab" EntityType="Self.EstudiosGab" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstudiosLab" EntityType="Self.EstudiosLab" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Familiares" EntityType="Self.Familiares" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patologias" EntityType="Self.Patologias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recetas" EntityType="Self.Recetas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vacunas" EntityType="Self.Vacunas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ciudades" EntityType="Self.Ciudades" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Ciudades].[idciudad] AS [idciudad], 
+[Ciudades].[Nombre] AS [Nombre], 
+[Ciudades].[idEstado] AS [idEstado], 
+[Ciudades].[IdPais] AS [IdPais]
+FROM [dbo].[Ciudades] AS [Ciudades]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Estados" EntityType="Self.Estados" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Estados].[idEstado] AS [idEstado], 
+[Estados].[Nombre] AS [Nombre], 
+[Estados].[IdPais] AS [IdPais], 
+[Estados].[codigo] AS [codigo]
+FROM [dbo].[Estados] AS [Estados]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Estudios" EntityType="Self.Estudios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Estudios].[idEstudio] AS [idEstudio], 
+[Estudios].[Fecha] AS [Fecha], 
+[Estudios].[NombreEstudio] AS [NombreEstudio], 
+[Estudios].[CentroMedico] AS [CentroMedico], 
+[Estudios].[idexpediente] AS [idexpediente], 
+[Estudios].[Resultado] AS [Resultado]
+FROM [dbo].[Estudios] AS [Estudios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Imagenes" EntityType="Self.Imagenes" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Imagenes].[IdImagen] AS [IdImagen], 
+[Imagenes].[idExpediente] AS [idExpediente], 
+[Imagenes].[Archivo] AS [Archivo], 
+[Imagenes].[ArchivoThumb] AS [ArchivoThumb]
+FROM [dbo].[Imagenes] AS [Imagenes]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Medico" EntityType="Self.Medico" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Medico].[IdRegistro] AS [IdRegistro], 
+[Medico].[Idmedico] AS [Idmedico], 
+[Medico].[IdEspecialidad] AS [IdEspecialidad], 
+[Medico].[CedulaEspecialidad] AS [CedulaEspecialidad], 
+[Medico].[CertCMCP] AS [CertCMCP], 
+[Medico].[AgrupacionLocal] AS [AgrupacionLocal], 
+[Medico].[AgrupacionNacional] AS [AgrupacionNacional], 
+[Medico].[RFC] AS [RFC], 
+[Medico].[PediatraPlus] AS [PediatraPlus], 
+[Medico].[CedulaProfesional] AS [CedulaProfesional], 
+[Medico].[NoRegSSA] AS [NoRegSSA], 
+[Medico].[UniversidadEspecialidad] AS [UniversidadEspecialidad], 
+[Medico].[HospitalResidenciaPediatra] AS [HospitalResidenciaPediatra], 
+[Medico].[DomicilioConsultorio] AS [DomicilioConsultorio], 
+[Medico].[TelefonoConsultorio] AS [TelefonoConsultorio], 
+[Medico].[TelefonoFax] AS [TelefonoFax], 
+[Medico].[NoTarjeta] AS [NoTarjeta], 
+[Medico].[computadora] AS [computadora], 
+[Medico].[guid] AS [guid], 
+[Medico].[recetatop] AS [recetatop], 
+[Medico].[recetabottom] AS [recetabottom], 
+[Medico].[recetaleft] AS [recetaleft], 
+[Medico].[consultatop] AS [consultatop], 
+[Medico].[recetaright] AS [recetaright], 
+[Medico].[consultabottom] AS [consultabottom], 
+[Medico].[consultaleft] AS [consultaleft], 
+[Medico].[consultaright] AS [consultaright]
+FROM [dbo].[Medico] AS [Medico]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Tarjetas].[idtarjeta] AS [idtarjeta], 
+[Tarjetas].[NoTarjeta] AS [NoTarjeta], 
+[Tarjetas].[FechaRegistro] AS [FechaRegistro], 
+[Tarjetas].[FechaExpira] AS [FechaExpira], 
+[Tarjetas].[EjeX] AS [EjeX], 
+[Tarjetas].[EjeY] AS [EjeY]
+FROM [dbo].[Tarjetas] AS [Tarjetas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TemaComentarios" EntityType="Self.TemaComentarios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[TemaComentarios].[IdTemaComentario] AS [IdTemaComentario], 
+[TemaComentarios].[Fecha] AS [Fecha], 
+[TemaComentarios].[IdMedico] AS [IdMedico], 
+[TemaComentarios].[Comentario] AS [Comentario], 
+[TemaComentarios].[Status] AS [Status], 
+[TemaComentarios].[idtema] AS [idtema]
+FROM [dbo].[TemaComentarios] AS [TemaComentarios]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Temas" EntityType="Self.Temas" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[Temas].[IdTema] AS [IdTema], 
+[Temas].[Nombre] AS [Nombre], 
+[Temas].[Descripcion] AS [Descripcion], 
+[Temas].[Status] AS [Status], 
+[Temas].[Fecha] AS [Fecha], 
+[Temas].[idMedicoCreo] AS [idMedicoCreo]
+FROM [dbo].[Temas] AS [Temas]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="trackermedicos" EntityType="Self.trackermedicos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[trackermedicos].[idtracker] AS [idtracker], 
+[trackermedicos].[TypeLink] AS [TypeLink], 
+[trackermedicos].[idmedico] AS [idmedico], 
+[trackermedicos].[fecha] AS [fecha]
+FROM [dbo].[trackermedicos] AS [trackermedicos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Especialidades" EntityType="Self.Especialidades" store:Type="Tables" store:Schema="emecidbuser">
+      <DefiningQuery>SELECT 
+[Especialidades].[IdEspecialidad] AS [IdEspecialidad], 
+[Especialidades].[Nombre] AS [Nombre]
+FROM [emecidbuser].[Especialidades] AS [Especialidades]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Paises" EntityType="Self.Paises" store:Type="Tables" store:Schema="emecidbuser">
+      <DefiningQuery>SELECT 
+[Paises].[IdPais] AS [IdPais], 
+[Paises].[Nombre] AS [Nombre]
+FROM [emecidbuser].[Paises] AS [Paises]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="trackermedicos1" EntityType="Self.trackermedicos1" store:Type="Tables" store:Schema="emecidbuser" store:Name="trackermedicos">
+      <DefiningQuery>SELECT 
+[trackermedicos1].[idtracker] AS [idtracker], 
+[trackermedicos1].[TypeLink] AS [TypeLink], 
+[trackermedicos1].[idmedico] AS [idmedico], 
+[trackermedicos1].[fecha] AS [fecha]
+FROM [emecidbuser].[trackermedicos] AS [trackermedicos1]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="emecidbuser">
+      <DefiningQuery>SELECT 
+[Usuarios].[IdUsuario] AS [IdUsuario], 
+[Usuarios].[Nombre] AS [Nombre], 
+[Usuarios].[Password] AS [Password], 
+[Usuarios].[Status] AS [Status], 
+[Usuarios].[FechaAcceso] AS [FechaAcceso], 
+[Usuarios].[NoTarjeta] AS [NoTarjeta]
+FROM [emecidbuser].[Usuarios] AS [Usuarios]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

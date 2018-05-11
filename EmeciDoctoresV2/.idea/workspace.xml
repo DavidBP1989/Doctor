@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="18f5fd8a-c7c4-4a56-896c-1632cc09a913" name="Default" comment="" />
+    <ignored path="EMECI Web Template.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="EMECI Web Template" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.6711906">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1819">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="registro-de-medico.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+                  <folding>
+                    <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="consulta.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/consulta.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="432" column="20" selection-start="23188" selection-end="23458" vertical-scroll-proportion="-13.615385" vertical-offset="6990" max-vertical-offset="13464">
+                  <folding>
+                    <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/main.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="25" column="25" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="seleccionar-paciente.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="agregar-paciente.html" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="384" column="0" selection-start="21894" selection-end="21894" vertical-scroll-proportion="0.9212963" vertical-offset="5732" max-vertical-offset="6681">
+                  <folding>
+                    <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="emeci.less" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/css/emeci.less">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="31" column="0" selection-start="630" selection-end="630" vertical-scroll-proportion="0.6099537" vertical-offset="0" max-vertical-offset="7922">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main.css" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/css/main.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="9" column="24" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/css/emeci.sass" />
+        <option value="$PROJECT_DIR$/datos-del-medico.html" />
+        <option value="$PROJECT_DIR$/registro-de-medico.html" />
+        <option value="$PROJECT_DIR$/seleccionar-paciente.html" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/consulta.html" />
+        <option value="$PROJECT_DIR$/js/main.js" />
+        <option value="$PROJECT_DIR$/agregar-paciente.html" />
+        <option value="$PROJECT_DIR$/css/main.css" />
+        <option value="$PROJECT_DIR$/css/emeci.less" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EMECI Web Template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="settings" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="C:/Ruby200/lib/ruby/gems/2.0.0/gems/sass-3.2.14/bin/sass" />
+    <property name="LayoutCode.rearrangeEntriesHTML" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="recentsLimit" value="5" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\2014\Emeci\EMECI Web Template" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.consulta.html">
+    <configuration default="false" name="consulta.html" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true" temporary="true" uri="http://localhost:63342/EMECI Web Template/consulta.html">
+      <RunnerSettings RunnerId="JavascriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="CHROME" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
+      <browser start="false" url="" with-js-debugger="false" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.consulta.html" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.consulta.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="18f5fd8a-c7c4-4a56-896c-1632cc09a913" name="Default" comment="" />
+      <created>1393786764595</created>
+      <updated>1393786764595</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15007898" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14639284" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.5002633" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32901832" sideWeight="0.4997367" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USERS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="297" column="0" selection-start="4565" selection-end="4565" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="343" column="0" selection-start="18684" selection-end="18688" vertical-scroll-proportion="0.0" vertical-offset="5831" max-vertical-offset="13464">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="54" selection-start="1033" selection-end="1033" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="310" column="0" selection-start="4820" selection-end="4820" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="413" column="115" selection-start="22031" selection-end="22031" vertical-scroll-proportion="0.0" vertical-offset="6376" max-vertical-offset="13464">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="310" column="0" selection-start="4820" selection-end="4820" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="39" selection-start="3983" selection-end="3983" vertical-scroll-proportion="0.0" vertical-offset="1132" max-vertical-offset="13243">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1615" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="312" column="0" selection-start="4822" selection-end="4822" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7616">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="412" column="87" selection-start="21942" selection-end="21942" vertical-scroll-proportion="0.0" vertical-offset="7004" max-vertical-offset="11798">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1271" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="23" selection-start="3106" selection-end="3106" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7310">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1853">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="232" column="98" selection-start="10700" selection-end="10700" vertical-scroll-proportion="0.0" vertical-offset="3779" max-vertical-offset="8704">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="0" selection-start="3812" selection-end="3812" vertical-scroll-proportion="0.0" vertical-offset="1271" max-vertical-offset="2992">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="355" column="14" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/Clientes/USA/WCS UI/HtmlTemplateWCSUI/Htm Template WCSUI/css/application.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="0" selection-start="903" selection-end="984" vertical-scroll-proportion="1.6125715" vertical-offset="0" max-vertical-offset="3587" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/animate.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1170" column="22" selection-start="22297" selection-end="22308" vertical-scroll-proportion="-16.307692" vertical-offset="19466" max-vertical-offset="47838">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datos-del-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="0" selection-start="3796" selection-end="3796" vertical-scroll-proportion="0.49303943" vertical-offset="1224" max-vertical-offset="3009" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/registro-de-medico.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="213" column="69" selection-start="11363" selection-end="11363" vertical-scroll-proportion="0.0" vertical-offset="3377" max-vertical-offset="4896">
+          <folding>
+            <marker date="1394065979945" expanded="true" signature="1127:1387" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/seleccionar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="85" selection-start="3574" selection-end="3574" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="3009">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="46" selection-start="1121" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1819">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="25" selection-start="669" selection-end="669" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consulta.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="432" column="20" selection-start="23188" selection-end="23458" vertical-scroll-proportion="-13.615385" vertical-offset="6990" max-vertical-offset="13464">
+          <folding>
+            <marker date="1394332808702" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/agregar-paciente.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="384" column="0" selection-start="21894" selection-end="21894" vertical-scroll-proportion="0.9212963" vertical-offset="5732" max-vertical-offset="6681">
+          <folding>
+            <marker date="1394829412238" expanded="true" signature="1105:1365" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="24" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/emeci.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="630" selection-end="630" vertical-scroll-proportion="0.6099537" vertical-offset="0" max-vertical-offset="7922">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

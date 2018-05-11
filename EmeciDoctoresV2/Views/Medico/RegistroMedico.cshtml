@@ -1,0 +1,422 @@
+﻿@{
+
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <style type="text/css">
+		    .success { background-color: #DFF0D8; color: #468847; border: 1px solid #468847; }
+		    .error { background-color: #F2DEDE; color: #B94A48; border: 1px solid #B94A48 }
+	    </style>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <script src="~/js/vendor/jquery1.10.js"></script>
+        <script src="~/js/validador.js"></script>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name = "format-detection" content = "telephone=no">
+
+        <!-- Cargando Hojas de Estilos -->
+        <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+         <link rel="stylesheet" href="~/css/main.css">
+        <link rel="stylesheet" href="~/css/emeci.css">
+
+        <!-- Agregamos el Modernizr para compatibilidad HTML5 -->
+        
+        <script type="text/javascript">var $ = jQuery.noConflict();</script>
+        <script src="~/js/jquery.maskedinput.js"></script>
+        <script src="~/js/typeaheadTwiter.js"></script>
+        <link href="~/css/typeahead.css" rel="stylesheet" />
+
+
+    </head>
+    <body id="pagina-de-acceso">
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>
+                or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 ">
+
+                    <div id="registro-de-doctor" class="panel panel-primary">
+                        <div class="panel-heading text-center">
+                            <div class="panel-title">
+                                <h1>Mis Datos</h1>
+                            </div>
+                        </div>
+
+                        <div class="panel-body" style="padding: 2em ">
+
+                            <form role="form" >
+
+                                <h2>Información del Especialista</h2>
+                                 <hr/>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Nombre(s)</label>
+                                        <input type="text" id="name" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Apellido(s)</label>
+                                        <input type="text" id="lastname" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>RFC:</label>
+                                        <input type="text" id="rfc" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>No. Cédula Profesional SEP</label>
+                                        <input type="text" id="cedula" class="form-control" />
+                                    </div>
+
+
+
+                                    <div class="form-group col-sm-4">
+                                        <label>No.S.S.A</label>
+                                        <input type="text" id="nossa" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label>No. Certificacion (CMCP)</label>
+                                        <input type="text" id="cmcp" class="form-control" />
+                                    </div>
+                                </div>
+                                <hr/>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Hospital de Residencia Profesional</label>
+                                        <input type="text" id="hospitalresidencia" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label>Universidad de Especialidad</label>
+                                        <input type="text" id="uniEspecialidad" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Cédula de Especialidad</label>
+                                        <input type="text" id="cedulaEspecialidad" class="form-control" />
+                                    </div>
+                                </div>
+                                <div style="display:none" class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Sub Especialidad</label>
+                                        <input type="text" class="form-control"  id="subespecialidad" />
+                                            
+                                    </div>
+                                   
+                                    <div class="form-group col-sm-4">
+                                        <label for="">Cédula de Subespecialidad</label>
+                                        <input type="text" id="cedulasubespecialidad" class="form-control" />
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Nombre del Colegio Estatal</label>
+                                        <input id="colegioespecialidad" type="text" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-6 ">
+                                        <label>Nombre de Agrupación Estatal</label>
+                                        <input id="nombreagrupacion" type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <h2>Domicilio</h2>
+                                <hr/>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Domicilio</label>
+                                        <input type="text" id="domicilio" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-3 ">
+                                        <label>No. Exterior</label>
+                                        <input type="text" id="noexterior" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label>Código Postal</label>
+                                        <input type="text" id="CP" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Colonia</label>
+                                        <input type="text" id="colonia" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4 ">
+                                        <label>Estado</label>
+                                            <input type="text" id="estado" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Ciudad</label>
+                                        <input type="text" id="Ciudad" class="form-control" />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                  
+                                    <div class="form-group col-sm-4 ">
+                                        <label>Domicilio de Consultorio</label>
+                                        <input type="text" id="domicilioconsultorio" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Teléfono</label>
+                                        <input type="text" id="tel" class="form-control" />
+                                    </div>
+                                </div>
+
+
+
+                                <h2>Contacto</h2>
+                                <hr/>
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Teléfono</label>
+                                        <input type="text" id="telC"  class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4 ">
+                                        <label>Celular</label>
+                                        <input type="text" id="celular" class="form-control" />
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label>Fax</label>
+                                        <input type="text" id="fax" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label>Correos Electrónicos</label>
+                                        <input type="text" id="email" class="form-control" />
+                                    </div>
+                                    <div style="display:none" class="form-group col-sm-4 ">
+                                        <label>Tipo de Pediatra</label>
+                                        <input type="text" id="tipopediatra" class="form-control" />
+                                    </div>
+                                    
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="text-center">
+
+                                            <input id="aceptar-politicas" type="checkbox"/>
+                                            <label for="aceptar-politicas">
+                                            Acepta las  <a href="~/uso.pdf" target="_blank">politicas de uso de EMECI</a> y haber leido nuestras <a href="~/privacidad.pdf" target="_blank">politicas de privacidad</a>.
+                                            </label>
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+
+
+                                    <div class="col-sm-12">
+                                        <p class="text-center"><input type="button" id="btn-registrar-doctor"  class="btn btn-primary btn-lg" value="Finalizar Registro" /></p>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="@ViewBag.Estados" id="listStates" />
+                                <input type="hidden" value="@ViewBag.Ciudades" id="listCity" />
+                            </form>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Cargando Scripts -->
+        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
+        <script>            window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="~/js/vendor/bootstrap.min.js"></script>
+        <script src="~/js/vendor/jquery.easyWizard.js"></script>
+
+        <script src="~/js/main.js"></script>
+    <script>
+
+        $(document).ready(function(){
+            var idState = '';
+            var idCity = '';
+            var n = true;
+            $('#tel, #telC, #celular').mask('999 99 99999');
+            var obj = [
+                { done : false, ctrl : 'name', val : ''},
+                { done : false, ctrl : 'lastname', val : '' },
+                { done : false, ctrl : 'rfc', val : ''},
+                { done : false, ctrl : 'cedula', val : ''},
+                { done : false, ctrl : 'nossa', val : ''},
+                { done : false, ctrl : 'cmcp', val : ''},
+                { done : false, ctrl : 'hospitalresidencia', val : ''},
+                { done : false, ctrl : 'uniEspecialidad', val : ''},
+                { done : false, ctrl : 'cedulaEspecialidad', val : ''},
+                { done : true, ctrl : 'subespecialidad', val : ''},
+                { done : true, ctrl : 'cedulasubespecialidad', val : ''},
+                { done : false, ctrl : 'colegioespecialidad', val : ''},
+                { done : false, ctrl : 'nombreagrupacion', val : ''},
+                { done : false, ctrl : 'noexterior', val : ''},
+                { done : false, ctrl : 'CP', val : ''},
+                { done : false, ctrl : 'domicilio', val : ''},
+                { done : false, ctrl : 'colonia', val : ''},
+                { done : false, ctrl : 'estado', val : ''},
+                { done : false, ctrl : 'Ciudad', val : ''},
+                { done : false, ctrl : 'domicilioconsultorio', val : ''},
+                { done : false, ctrl : 'tel', val : ''},
+                { done : false, ctrl : 'telC', val : ''},
+                { done : false, ctrl : 'celular', val : ''},
+                { done : false, ctrl : 'fax', val : ''},
+                { done : false, ctrl : 'email', val : ''},
+                { done : true, ctrl: 'tipopediatra', val: '' }
+            ];
+
+            $('input[type=text]').keyup(function(){
+                var elm = $(this)[0];
+                var v = false;
+
+                if (elm.id == 'email') {
+                    v = validateForm.Mail(elm);
+                } else {
+                    v = validateForm.All(elm);
+                }
+                
+                for (var n = 0; n < obj.length; n++){
+                    if (elm.id == obj[n].ctrl) {
+                        obj[n].done = v;
+                        break;
+                    }
+                }
+            });
+
+            $('#btn-registrar-doctor').click(function(){
+                n = true;
+
+                for (b = 0; b < obj.length; b++){
+                    n = (n && obj[b].done);
+                    obj[b].val = findElement(obj[b].ctrl).value;
+                }
+
+                //checa politicas
+                var check = findElement('aceptar-politicas').checked;
+                n = (n && check);
+
+                //crear objeto a mandar
+                var data = '';
+                for (c = 0; c < obj.length; c++){
+                    data += obj[c].ctrl + '=' + obj[c].val + '&';
+                }
+
+                data += 'modify=false';
+                if (n) {
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url : '/Medico/SaveRegistroMedico',
+                        data: data
+                    });
+                    alert('Registro Exitoso');
+                    window.location = "pacientes";
+                } else {
+                    $('#btn-registrar-doctor')
+                    .animate({'margin-left' : '-10px'}, 200)
+                    .animate({'margin-left' : '20px'}, 200)
+                    .animate({'margin-left' : '10px'}, 200, 
+                        function(){ 
+                            setTimeout(function(){
+
+                            },500);
+                        });
+
+                    for (var i = 0; i < obj.length; i++) {
+                        var o = true;
+                        if (obj[i].ctrl == 'email') {
+                            o = validateForm.Mail(findElement(obj[i].ctrl));
+                        } else {
+                            o = validateForm.All(findElement(obj[i].ctrl));
+                        }
+
+                        n = (n && o);
+                    }
+                    return n;
+                }
+            });
+            
+
+            //autocomplete Estado
+            var state = $('#listStates').val();
+            var jsonStates = JSON.parse(state);
+            var s = [];
+            for (var i = 0; i < jsonStates.length; i++){
+                s.push(jsonStates[i].Nombre)
+            }
+
+            $('#estado').typeahead({
+                local: s
+            }).on('typeahead:selected', function(obj, val){
+                for (var n = 0; n < jsonStates.length; n++){
+                    if (jsonStates[n].Nombre == val.value) idState = jsonStates[n].idEstado;
+                }
+            });
+
+            //autocomplete Ciudad
+            var city = $('#listCity').val();
+            var jsonCitys = JSON.parse(city);
+            var c = [];
+            for (var i = 0; i < jsonCitys.length; i++){
+                c.push(jsonCitys[i].Nombre);
+            }
+
+            $('#Ciudad').typeahead({
+                local: c
+            }).on('typeahead:selected', function(obj, val){
+                for (var n = 0; n < jsonCitys.length; n++){
+                    if (jsonCitys[n].Nombre == val.value) idCity = jsonCitys[n].idciudad;
+                }
+            });
+
+            //quita el popup
+            $('input[type=text]').focusout(function(){
+                if ($('* .popupAlert').length > 0){
+                    $('* .popupAlert').remove();
+                }
+            });
+
+            $('input[type=text]').focus(function(){
+                if ($(this)[0].id == 'Ciudad' || $(this)[0].id == 'estado'){
+                    $("html, body").animate({ scrollTop: $('body').height()}, 600);
+                    return false;
+                }
+            });
+        });
+    </script>
+    </body>
+</html>

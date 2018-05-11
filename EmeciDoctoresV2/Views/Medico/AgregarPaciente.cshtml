@@ -1,0 +1,556 @@
+﻿@{
+    ViewBag.Title = "Agregar Paciente";
+}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+       
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name = "format-detection" content = "telephone=no">
+
+        <!-- Cargando Hojas de Estilos -->
+        <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+         <link rel="stylesheet" href="~/css/main.css">
+        <link rel="stylesheet" href="~/css/emeci.css">
+
+        <!-- Agregamos el Modernizr para compatibilidad HTML5 -->  
+        <script src="~/js/vendor/jquery1.10.js"></script>
+        <script>var $ = jQuery.noConflict();</script>
+        <script src="~/js/jquery.maskedinput.js"></script>
+        <script src="~/js/validador.js"></script>
+        <script src="~/js/jquery.blockUI.js"></script>
+
+    </head>
+    <body>
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>
+                or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                var b = true;
+
+                var datat="";
+                datat += "emeci1=" + $("#emeci1").val();   
+                datat += "&emeci2=" +  $("#emeci2").val(); 
+                datat += "&emeci3="+ $("#emeci3").val();
+                
+               // $('#Telefono').mask('999 99 99999');
+               // $('#emeci11').mask('99999');
+               // $('#emeci22').mask('9999');
+               // $('#emeci33').mask('9999');
+
+                var obj = [
+                    { done : false, ctrl: 'nombre'},
+                    { done : false, ctrl: 'apellidos'},
+                    { done : false, ctrl: 'nombremadre'},
+                    { done : false, ctrl: 'NombrePadre'},
+                    { done : false, ctrl: 'Telefono'},
+                    { done : false, ctrl: 'Email'},
+                    { done : false, ctrl: 'Alergia'},
+                    { done : false, ctrl: 'Pwd'}
+                ];
+
+                $('input[type=text],input[type=password],input[type=tel]').keyup(function(){
+                    var elm = $(this)[0];
+                    var c = true;
+                    //if (elm.id == 'Email') {
+                    //    c = validateForm.Mail(elm);
+                    //} else {
+                        c = validateForm.All(elm);
+                    //}
+
+                    for (var i = 0; i < obj.length; i++){
+                        if (obj[i].ctrl == elm.id) {
+                            obj[i].done = c;
+                            break;
+                        }
+                    }
+                });
+
+                $("#btn").click(function () {
+                    var c = true;
+                    var elm;
+                    for (var i = 0; i < obj.length; i++) {
+                          elm = $("#" + obj[i].ctrl)[0];
+                          c = validateForm.All(elm);                          
+                          obj[i].done = c;                              
+                        }
+                    
+
+
+                    b = true;
+
+                    for (var i = 0; i < obj.length; i++){
+                        b = (b && obj[i].done);
+                    }
+
+                    var samePass = validateForm.pass(findElement('Pwd'), findElement('PwdC'))
+                    b = (b && samePass);
+                    /*if (findElement('Pwd').value == findElement('passAccess').value) {
+                        b = (b && true);
+                    } else b = (b && false);*/
+                    datat = "";
+                    datat += "emeci1=" + $("#emeci1").val();
+                    datat += "&emeci2=" + $("#emeci2").val();
+                    datat += "&emeci3=" + $("#emeci3").val();
+                    if (b){
+
+                        for (var i = 0; i < obj.length; i++){
+                            datat += '&' + obj[i].ctrl + '=' + findElement(obj[i].ctrl).value;
+                        }
+
+                        datat += "&Fechanac1="+ $("#Fechanac1").val(); 
+                        datat += "&Fechanac2="+ $("#Fechanac2").val();
+                        datat += "&Fechanac3="+ $("#Fechanac3").val(); 
+
+                        $.blockUI({ message: '<h1> <img src="../img/301.gif"> Espere un momento por favor...</h1>' });
+
+                        /*
+                            Guardarlo en localstorage
+                        */
+                        var ls = { nameTask: 'Agregar nuevo paciente' };
+                        ls.data = datat;
+                        ls.href = 'AgregarNuevoPaciente';
+                        Storage.save(ls);
+
+                        $.post("AgregarNuevoPaciente", datat, function (data, textStatus) {
+
+                            if (data.idpac == 0)
+                                alert("No se puede Agregar paciente: " + data.ex);
+                            else {
+                                alert("Paciente Guardado Correctamente..!");
+                                Storage.remove();
+                                window.location = "Consulta?idpac=" + data.idpac;
+                            }
+                        }, "json");
+
+                    } else { 
+                        $('#btn')
+                        .animate({'margin-left' : '-10px'}, 200)
+                        .animate({'margin-left' : '20px'}, 200)
+                        .animate({'margin-left' : '10px'}, 200, 
+                            function(){ 
+                                setTimeout(function(){
+
+                                },500);
+                            });
+
+                        for (var i = 0; i < obj.length; i++) {
+                            var o = true;
+                           // if (obj[i].ctrl == 'Email') {
+                            //    o = validateForm.Mail(findElement(obj[i].ctrl));
+                          //  } else {
+                                o = validateForm.All(findElement(obj[i].ctrl));
+                          //  }
+                           
+                            b = (b && o);
+                        }
+                        return b;
+                    }
+                });
+
+                $('#PwdC').focus(function(){
+                    $(this).val('');
+                    $('* .popupAlert').remove();
+                });
+            });
+        </script>
+        <!-- Cabecera de Aplicacion -->
+        <header id="encabezado-de-pagina" class="container-fluid">
+
+             <div class="logotipo col-sm-3 col-md-2">
+                <!-- Logo EMECI -->
+                <img src="~/img/emeci.png" alt="EMECI"/>
+            </div>
+            <div class="col-sm-9 col-md-10">
+
+                <div class="row">
+                    <div class="col-sm-8 col-md-8 col-lg-9">
+
+                        <nav id="menu-principal">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="pacientes" class="active"><span class="icon glyphicon glyphicon-heart"></span>
+                                        Pacientes</a>
+                                </li>
+                                <li>
+                                    <a href="MisDatosMedico"><span class="icon glyphicon glyphicon-user"></span>
+                                        Mis Datos</a>
+                                </li>
+
+
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                    <div class="col-sm-4 col-md-4 col-lg-3">
+                        <div class="datos-del-medico">
+                            <p class="nombre">@ViewBag.Mednombre</p>
+                            <p class="clave">EMECI: @ViewBag.MedEmeci</p>
+                            <a href="salir" class="btn btn-default">Salir del Sistema</a>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header> <!-- fin: #encabezado-de-pagina -->
+
+
+        <div class="container-fluid">
+
+
+                <section id="contenido-principal" class="col-sm-12 col-md-12">
+                    <div class="encabezado">
+                        <h1 class="pull-left">Mis Pacientes</h1>
+
+                        <div class="acciones pull-right">
+                            <a href="#agregar-paciente" class="btn btn-primary disabled">Agregar Paciente</a>
+                        </div>
+
+                    </div>
+
+                    <div class="contenido">
+
+                        <div id="nuevo-paciente" class="panel-de-contenido col-sm-offset-3 col-sm-6">
+
+                            <div class="encabezado-de-panel">
+                                <h2>Nuevo paciente</h2>
+                            </div>
+
+                            <div class="contenido-de-panel">
+
+                                <form method="post" action="AgregarPaciente">
+                                
+                                    <!-- Informacion sobre la tarjeta EMECI del paciente -->
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#informacion-de-tarjeta" data-toggle="tab">Paciente EMECI</a></li>
+                                        <li><a href="#activacion-de-paciente-en-emeci" data-toggle="tab">Activar Nueva Tarjeta</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                     
+
+                                        <div id="informacion-de-tarjeta" class="tab-pane fade in active">
+                                            <div class="form-group  numero-de-tarjeta panel-body"  >
+                                                <label for="">Numero de Tarjeta EMECI</label>
+                                                <div class="row">
+                                                    <div class="col-sm-12 ">
+                                                        <div >
+                                                            <input id="emeci11" type="text" name="emeci1" class="form-control"     />                                                           
+                                                            <span  class="separador">-</span>
+                                                            <input id="emeci22" type="text" name="emeci2"  class="form-control"    />
+                                                            <span class="separador">-</span>
+                                                            <input id="emeci33" type="text" name="emeci3"  class="form-control"    />                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group clave-de-tarjeta">
+                                                <label for="">Clave de la Tarjeta</label>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="casilla">@ViewBag.cord</div>
+                                                        <input type="hidden" value="@ViewBag.cord" name="coordenada"   />
+                                                        <input type="text" name="valor"  class="form-control clave"   />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="war">
+                                                    <div class="checkbox ">
+                                                        <label>
+                                                            <input id="chk-acceso-sin-tarjeta" type="checkbox">
+                                                        </label>
+                                                        <label for="chk-acceso-sin-tarjeta" class="reset-caps text-danger">Permitir al doctor ingresar a el expediente sin requerir la clave en la tarjeta.</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group acciones text-center">
+                                                <input type="submit" class="btn btn-primary btn-lg" value="Agregar Paciente" />
+                                            </div>
+                                             
+                                             @Html.ValidationSummary(true)
+
+                                        </div><!-- fin: #informacion-de-tarjeta -->
+
+
+                                     
+                                        <!-- En caso de que sea un paciente nuevo en el sistema EMECI -->
+                                        <div id="activacion-de-paciente-en-emeci" class="tab-pane fade in ">
+
+
+                                            <div class="panel-body">
+
+
+                                                <div id="informacion-de-tarjeta">
+                                                    <div class="form-group numero-de-tarjeta"  >
+                                                        <label for="">Numero de Tarjeta EMECI</label>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 ">
+                                                                <div >
+                                                                    <input id="emeci1" type="text" readonly="True" name="emeci1" class="form-control"  value="@ViewBag.Emeci1"   />
+                                                                    <span class="separador">-</span>
+                                                                    <input id="emeci2" type="text" readonly="True" name="emeci2"  class="form-control" value="@ViewBag.Emeci2"   />
+                                                                    <span class="separador">-</span>
+                                                                    <input id="emeci3" type="text" readonly="True" name="emeci3"  class="form-control" value="@ViewBag.Emeci3"  />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Nombre(s)</label>
+                                                        <input id="nombre" type="text" name="nombre" class="form-control "   />
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="">Apellido(s)</label>
+                                                        <input id="apellidos" type="text" name="apellidos" class="form-control "    />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Nombre completo de la Madre</label>
+                                                        <input id="nombremadre" type="text"  class="form-control " name="nombremadre"   />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Nombre completo del Padre</label>
+                                                        <input id="NombrePadre" type="text" name="NombrePadre" class="form-control "  />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Teléfono</label>
+                                                        <input id="Telefono" type="tel" name="Telefono" class="form-control "  />
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Correo Electrónico</label>
+                                                        <input type="text"  class="form-control" name="Email" id="Email" >
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Fecha de Nacimiento</label>
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-4">
+                                                                <select id="Fechanac1" class="form-control" name="Fecha1" >
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                    <option>6</option>
+                                                                    <option>7</option>
+                                                                    <option>8</option>
+                                                                    <option>9</option>
+                                                                    <option>10</option>
+                                                                    <option>11</option>
+                                                                    <option>12</option>
+                                                                    <option>13</option>
+                                                                    <option>14</option>
+                                                                    <option>15</option>
+                                                                    <option>16</option>
+                                                                    <option>17</option>
+                                                                    <option>18</option>
+                                                                    <option>19</option>
+                                                                    <option>20</option>
+                                                                    <option>21</option>
+                                                                    <option>22</option>
+                                                                    <option>23</option>
+                                                                    <option>24</option>
+                                                                    <option>25</option>
+                                                                    <option>26</option>
+                                                                    <option>27</option>
+                                                                    <option>28</option>
+                                                                    <option>29</option>
+                                                                    <option>30</option>
+                                                                    <option>31</option>
+
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <select id="Fechanac2" name="Fecha2" class="form-control col-md-4">
+                                                                    <option value="1">Enero</option>
+                                                                    <option value="2">Febrero</option>
+                                                                    <option value="3">Marzo</option>
+                                                                    <option value="4">Abril</option>
+                                                                    <option value="5">Mayo</option>
+                                                                    <option value="6">Junio</option>
+                                                                    <option value="7">Julio</option>
+                                                                    <option value="8">Agosto</option>
+                                                                    <option value="9">Septiembre</option>
+                                                                    <option value="10">Octubre</option>
+                                                                    <option value="11">Noviembre</option>
+                                                                    <option value="12">Diciembre</option>
+                                                                </select>
+                                                            </div>
+                                                           
+                                                            @{
+                                                                List<SelectListItem> listItems = new List<SelectListItem>();
+
+                                                                for (int i = 1900; i <= DateTime.Now.Year; i++)
+                                                                {
+
+
+                                                                    listItems.Add(new SelectListItem
+                                                                    {
+                                                                        Text = i.ToString(),
+                                                                        Value = i.ToString()
+
+                                                                    });
+                                                                    listItems.Last().Selected = ((i == DateTime.Now.Year) ? true : false);
+
+                                                                }
+
+                                                            }
+
+
+                                                            <div class="col-md-4">
+                                                                @Html.DropDownList("Fecha3" , listItems, new { @class = "form-control col-md-4", id= "Fechanac3" })
+
+                                                               
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Alergia</label>
+                                                        <input id="Alergia" type="text" name="Alergia" class="form-control "  />
+                                                    </div>
+                                                </div>
+
+                                                <h2>Acceso</h2>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Contraseña de Acceso</label>
+                                                        <input id="Pwd" type="password" class="form-control" name="Pwd"  />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="">Confirmar Contraseña</label>
+                                                        <input type="password" id="PwdC" class="form-control "  />
+                                                    </div>
+                                                </div>
+
+                                                </div>
+
+                                                <div class="form-group acciones text-center">
+                                                    <a href="#" id="btn" class="btn btn-primary btn-lg">Activar Tarjeta del Paciente</a>
+                                                </div>
+
+
+                                            </div><!-- fin: #registro-de-paciente-en-emeci -->
+
+                                            </div>
+
+                                     <input type="hidden" value="@ViewBag.pass" id="passAccess" />
+                                    </div>
+
+                                </form>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+         </div>
+
+
+        <!-- Modal para Activar Tarjeta -->
+        <div id="activar-tarjeta" class="modal fade modal-dialog-md ">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Activación de Tarjeta</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <h3 class="text-center well-lg">La tarjeta <strong>XXXX - XXXX</strong> de <strong>Perez Lopez Francisco</strong> ha sido activada correctamente. </h3>
+
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <script src="~/js/vendor/bootstrap.min.js"></script>
+
+        <script src="~/js/main.js"></script>
+
+        <script>
+
+            $('#emeci11').keypress(function () {
+                if ($(this).val().length >= 4) {
+                    $('#emeci22').focus();
+                }
+            })
+
+            $('#emeci22').keypress(function () {
+                if ($(this).val().length >= 3) {
+                    $('#emeci33').focus();
+                }
+            })
+
+            //keep alive
+            setInterval(function () {
+                console.log("setinten");
+                $.get('../Consulta/KeepAlive?idmed=@ViewBag.idmed');
+                console.log("setinten");
+            }, 60000); // 14 mins * 60 * 1000
+
+        </script>
+
+       
+    </body>
+</html>

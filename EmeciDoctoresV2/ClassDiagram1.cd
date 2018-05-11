@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EmeciDoctoresV2.Models.emeciEntities" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAEAIAAAAbDJIAAAACHCCQABAAAKBABISGBhkEDABAI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.CatCategoEstudios" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAgABAACQAAEAAMAAAAAAAACACAEAAAAAAAAAAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.catdiagnostico" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIAAEIAIBIACQAAAAAAIAAAAAIQAAAAAACAIAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.CatEstudios" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAgAABAIAABAEABMAAAAAAAACACAEgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.catrecetas" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAIFAEAgIBIACQAABAAAIAAAAAAAAAAAAACAIAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Consultas" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAyi6TCFgBNM2gEUACYACA4kAQSMlxsASAAUhkGACQY=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.DatosTarjeta" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBEAAAAABAQCAAICCAAAAAAEAgABAAJAAAGAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Diagnosticos" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACCCQAggAIBgAUUAAAAAAIEAAAAMgGgCAAEEECQASA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.EstudiosGab" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACBCQAggAIBoAEUAAAAAAIAAAAAAgEgCAAEAACiBQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.EstudiosLab" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACBCQAggAIBgQEUAAAAAAIAAAAAAgEgCAAEAECCBQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Medico" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BQDQFBgQMQCCATZUgKCJWGqODQJCTCGCgCyEEggKgRQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Paciente" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>/3+3ub9/f9/7v7f+r//fd9L/v7B/+vr9v57/355+33c=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Patologias" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABAQKElkAAoA00ACAAgAAEAAQAkh8iCABgiCAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Recetas" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QgCACQAgwEIBgAEUAACAIAIQAAAAAgEgCAAEAACAAQA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EmeciDoctoresV2.Models.Registro" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>yUmAQIweAy5GXARUFKAChIEEQBUAcSKABA0wSwEJpB0=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--CSS-->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.minv4.css" rel="stylesheet" />
+    <link href="~/css/emeci.css" rel="stylesheet" />
+    <style>
+        .menuPrincipal { background:#0099f4; padding-top:0.6em;}
+        .menuPrincipal ul { width:100%; margin:0 5px;}
+        .menuPrincipal ul li { padding-right:2px;}
+        .menuPrincipal ul li a
+        {
+            color:#CEE6FB;
+            font-weight:bold;
+            text-align:center;
+            padding: 0px 0px 0px;
+        }
+        .menuPrincipal ul li a .icon
+        {
+            font-size:38px;
+            margin-bottom:18px;
+            display:block;
+        }
+
+        .container-fluid { min-width: auto !important;}
+        .menuPrincipal ul li.active a{ color:#fff;}
+        .menuPrincipal ul li a:hover { 
+            color:#fff !important; 
+            text-decoration:none;
+            background-color:#0099f4;    
+        }
+        .menuPrincipal ul li a:focus { background:none;}
+        .menuPrincipal ul li a { font-size:14px;}
+        @@media screen and (max-width:1140px){
+            .nav li
+            {
+                font-size:13px;
+                padding-right:17px
+            }
+
+            .menuPrincipal ul li a .icon { font-size:25px;}
+            .datos-del-medico .nombre { font-size:15px; margin-top:0.2em !important;}
+         }
+        .datos-del-medico .clave { font-size:14px !important;}
+        .datos-del-medico .nombre { margin-top:0.2em !important;}
+        .logo { padding: 0.5em;}
+        .headerSection
+        {
+            background:#00a3ff;
+            padding:15px;
+            color:#fff;
+        }
+        .headerSection h1{ margin:0;}
+        .generales{ padding-left:1em !important;}
+        textarea{font-size:large !important; overflow:hidden;}
+        .btn { padding:6px 12px !important; font-size:14px;}
+        .btn-default{ color:black !important;}
+        .generales p { font-size:14px;}
+        @@media screen and (min-width:768px) and (max-width:875px){
+            .nav-item { margin-left:0px !important; padding-left:1px;}
+            .menuPrincipal{ padding-left:0px;}
+        }
+
+        @@media screen and (min-width:544px) and (max-width:577px){
+            .nav-item { margin-left:0px !important; padding-left:1px;}
+            .menuPrincipal{ padding-left:0px;}
+        }
+
+        @@media screen and (max-width:543px){
+            .menuPrincipal ul li a { text-align:left;}
+            .menuPrincipal ul li a .icon { display: inline;}
+            .menuPrincipal ul li { padding-top:10px;}
+        }
+
+        @@media screen and (max-width: 767px){
+            section{ font-size:11px !important;}
+            .drelationship label{ font-size:11px !important;}
+        }
+
+        @@media screen and (max-width: 991px){
+            #resumen-del-paciente .generales, #resumen-del-paciente .observaciones-vitales{ padding-bottom:5px;}
+            .contenido-de-panel label { white-space:pre !important; font-size:11px !important; word-break: break-all !important;}
+        }
+
+        .liPreviousQuery{ 
+            background-color:#39b3d7;
+            float:right;
+            width:360px;
+            border-radius:4px;
+            margin-top:4px;
+            text-align:center;
+        }
+        .liPreviousQuery a { color:white; font-weight:800;}
+        .liPreviousQuery a:hover { background-color:#39b3d7 !important;}
+        .liPreviousQuery a:focus { background-color:#39b3d7 !important;}
+        .modal-dialog{ position:unset !important;}
+    </style>
+
+    <!--SCRIPTS-->
+    <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function (){
+            var sex = '@ViewBag.sexPatient';
+            var age = '@ViewBag.PacAños';
+            var color;
+            var img = '../img/';
+
+            if (age == 0 && sex == 'M')
+                img += 'bebo.jpg';
+            else if (age == 0 && sex == 'F') img = '/img/beba.jpg';
+
+            if ((age > 0 && age <= 18) && sex == 'M') {
+                color = '#A8EDFF';
+                img += 'nino0-18.jpg';
+            };
+            if ((age > 0 && age <= 11) && sex == 'F') {
+                color = '#FF99FF';
+                img += 'nina0-11.jpg';
+            }
+            if (age >= 12 && sex == 'F') {
+                color = '#a23cdc';
+                img += 'mujer12.jpg';
+            }
+            if ((age >= 19 && age <= 60) && sex == 'M') {
+                color = '#FFCC66';
+                img += 'hombre19.jpg';
+            }
+            if (age >= 61 && sex == 'M') {
+                color = '#C8C8C8';
+                img += 'hombre61.jpg';
+            }
+
+            $('.headerSection').css('background-color', color);
+            $('#imgPatient').attr('src', img);
+        })
+    </script>
+</head>
+<body>
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-12 logo" style="background:#fff;">
+                <img src="~/img/emeci.png" class="img-responsive" alt="EMECI" />
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <nav class="navbar navbar-light bg-faded menuPrincipal">
+                    <button class="navbar-toggler hidden-sm-up" 
+                            type="button" 
+                            data-toggle="collapse" 
+                            data-target="#menuEMECI" 
+                            aria-controls="menuEMECI" 
+                            aria-expanded="false" 
+                            aria-label="Toggle navigation">
+                        &#9776;
+                    </button>
+                    <div class="collapse navbar-toggleable-xs" id="menuEMECI">
+                        <ul class="nav navbar-nav">
+                            
+                            <li class="nav-item">
+                                <a href="https://www.emeci.com/AccesEmeci.aspx?opt=V&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato"
+                                   target="_blank">
+                                    <span class="icon glyphicon glyphicon-list-alt"></span>
+                                    Vacunas
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://www.emeci.com/AccesEmeci.aspx?opt=E&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato"
+                                   target="_blank">
+                                    <span class="icon glyphicon glyphicon-briefcase"></span>
+                                    Expediente EMECI
+                                </a>
+                            </li>
+                            @*@if ((bool)ViewBag.showBtnObstetrica)
+                            {
+                                <li class="nav-item">
+                                    <a href="#" id="goObstetrica">
+                                        <span class="icon glyphicon glyphicon-tags"></span>
+                                        Obstetricia
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a href="#" id="goGinecologia">
+                                        <span class="icon glyphicon glyphicon-tags"></span>
+                                        Ginecolog&iacute;a
+                                    </a>
+                                </li>
+                            }*@
+                            <li class="nav-item pull-lg-right">
+                                <a href="pacientes">
+                                    <span class="icon glyphicon glyphicon-folder-close"></span>
+                                    Cerrar Expediente
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-2 col-md-12 col-sm-12">
+                <div class="datos-del-medico">
+                    <p class="nombre">@ViewBag.Mednombre</p>
+                    <p class="clave">EMECI: @ViewBag.MedEmeci</p>
+                    <a class="btn btn-default" style="white-space: normal" href="Salir">Salir del sistema</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-xs-12" id="resumen-del-paciente">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6 col-sm-6 col-lg-12">
+                            <div class="fotografia">
+                                <img class="img-responsive" id="imgPatient" />
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-sm-6 col-lg-12 generales">
+                            <h2>Generales</h2>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+                                    <h3>Nombre del Paciente</h3>
+                                    <p>@ViewBag.Pacnombre</p>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+                                    <h3>Tarjeta No.</h3>
+                                    <p>@ViewBag.notarjeta</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-6">
+                                    <h3>Fecha de Nacimiento</h3>
+                                    <p>@ViewBag.PacFechanacimiento</p>
+                                </div>
+                                <div class="col-lg-12 col-xs-6" >
+                                    <div class="row">
+                                        <div class="col-md-6 col-xs-6">
+                                            <h3>A&ntilde;o(s)</h3>
+                                            <p>@ViewBag.PacAños</p>
+                                        </div>
+                                        <div class="col-md-6 col-xs-6">
+                                            <h3>Meses</h3>
+                                            <p>@ViewBag.PacMeses</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+                                    <h3>Grupo y RH</h3>
+                                    <p>@ViewBag.PacgrupoRH</p>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+                                    <h3>Vencimiento</h3>
+                                    <p>@ViewBag.Vence</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-sm-12 col-lg-12">
+                            <h2>Observaciones Generales</h2>
+                            <div class="row observaciones-vitales">
+                                <div class="col-xs-12">
+                                    <h3>Alergias</h3>
+                                    <textarea class="form-control" rows="2">
+                                        @ViewBag.PacAlergiaMedicina
+                                    </textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h3>Reservado</h3>
+                                    <textarea class="form-control" rows="2">
+                                        @ViewBag.PacAlergiaOtros
+                                    </textarea>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h3>Patologias Relevantes</h3>
+                                    <textarea class="form-control" rows="2">
+                                        @ViewBag.PacPatologia
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-xs-12">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

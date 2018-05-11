@@ -1,0 +1,327 @@
+@import "animate.css";
+/* ==========================================================================
+   EMECI
+   Diseñador: Norman Cossio @normanbox
+   ========================================================================== */
+html {
+  height: 100%;
+}
+body {
+  background: #f5f5f5 url('../img/fondo-bebe.png') no-repeat bottom right;
+  color: #666;
+  height: 100%;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+/* Cabecera principal del de la aplicacion. */
+header {
+  background-color: #0099f4;
+  min-height: 110px;
+}
+h1 {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+}
+h2,
+h3 {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+h2 {
+  color: #00509c;
+  text-transform: uppercase;
+}
+h3 {
+  margin: 0;
+  color: #333333;
+  padding: 0.25em 0;
+}
+label {
+  color: #333333;
+  /*font-weight: 800; DAVID*/
+  text-transform: uppercase;
+}
+#pagina-de-acceso {
+  background-color: #00a3ff ;
+  background-image: url('../img/fondo-acceso-emeci.jpg') !important;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+#formulario-de-acceso {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 5px;
+  margin: 5em auto;
+}
+#formulario-de-acceso .logotipo {
+  margin-bottom: 1em;
+}
+.container-fluid {
+  min-width: 1024px;
+  overflow: hidden;
+}
+.logotipo {
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 0.5em;
+  min-height: 110px;
+}
+.logotipo img {
+  max-width: 186px;
+  width: 100%;
+}
+.bienvenido {
+  color: #fff;
+  font-size: 3em;
+  padding: 20px 15px 0;
+}
+#menu-principal {
+  padding-top: 1em;
+  width: 100%;
+}
+#menu-principal ul {
+  margin: 0 5px;
+}
+#menu-principal ul li {
+  display: inline-block;
+}
+#menu-principal ul li a {
+  color: #CEE6FB;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 10px 10px;
+}
+#menu-principal ul li a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+#menu-principal ul li a.active {
+  color: #fff;
+}
+#menu-principal ul li a .icon {
+  display: block;
+  font-size: 38px;
+  margin-bottom: 18px;
+}
+.datos-del-medico {
+  color: #fff;
+}
+.datos-del-medico p {
+  margin: 0;
+}
+.datos-del-medico .nombre {
+  margin-top: 0.5em;
+  font-size: 18px;
+  font-weight: 300;
+}
+.datos-del-medico .clave {
+  color: #85c2f8;
+}
+.datos-del-medico a.btn-default {
+  color: #00a3ff;
+  font-weight: bold;
+  padding: 4px 10px;
+  margin-top: 0.4em;
+}
+#resumen-del-paciente {
+  background-color: #fff;
+  background: #ffffff url('../img/sombra-barra-lateral.png') repeat-y top right;
+  border-right: 1px solid #cccccc;
+  min-height: 960px;
+  padding: 15px;
+  padding-bottom: 100%;
+  margin-bottom: -100%;
+}
+#resumen-del-paciente h2 {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1em 0;
+  margin: 0.5em 0;
+}
+#resumen-del-paciente h3 {
+  padding: 0.5em 0;
+}
+#resumen-del-paciente .fotografia {
+  margin: -15px -15px 0;
+}
+#resumen-del-paciente .fotografia img {
+  width: 100%;
+}
+#resumen-del-paciente .generales,
+#resumen-del-paciente .observaciones-vitales {
+  padding: 0 5px;
+}
+#contenido-principal .encabezado {
+  background-color: #00a3ff;
+  margin: 0 -15px;
+  overflow: hidden;
+  padding: 15px;
+}
+#contenido-principal .encabezado .acciones .btn {
+  margin-left: 5px;
+}
+#contenido-principal .encabezado h1 {
+  color: #fff;
+  margin: 0;
+  font-weight: 300;
+}
+.panel-de-contenido {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.panel-de-contenido .encabezado-de-panel {
+  background-color: #00a3ff;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.panel-de-contenido .encabezado-de-panel h2 {
+  color: #fff;
+  font-size: 18px;
+  margin: 0;
+  padding: 15px;
+}
+.panel-de-contenido .contenido-de-panel {
+  background-color: #fafafa;
+  border: 1px solid #dddddd;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 30px;
+}
+.btn {
+  font-weight: 800;
+}
+.btn-primary {
+  background-color: #00d05d;
+  color: #fff;
+  border: none;
+  /* box-shadow: 0 4px 0 #008bd9; */
+  text-shadow: 0 2px 0  #00a047;
+  font-size: 16px;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  background-color: #13D469;
+  color: #fff;
+  /*  box-shadow: 0 4px 0 #008bd9; */
+  text-shadow: 0 2px 0  #00a047;
+  font-size: 16px;
+}
+#dd-listado-de-consultas {
+  margin-top: 6px;
+  margin-right: 8px;
+}
+#nueva-consulta textarea.form-control {
+  min-height: 80px;
+}
+#nueva-consulta .botones-de-acciones {
+  text-align: center;
+}
+#nueva-consulta.col-sm-6 .botones-de-acciones button {
+  width: 48%;
+  margin-bottom: 0.5em;
+}
+input.buscar-paciente {
+  background: transparent url('../img/buscar.png') no-repeat;
+  background-position: 10px 3px;
+  padding-left: 40px;
+}
+#pacientes table tr:hover {
+  cursor: pointer;
+}
+#pacientes table tr.active td {
+  background-color: #DBEDF9;
+}
+#informacion-de-tarjeta {
+  padding: 0 20px;
+}
+#informacion-de-tarjeta .numero-de-tarjeta input {
+  width: 75px;
+  display: inline-block !important;
+  vertical-align: top;
+  font-weight: 700;
+}
+#informacion-de-tarjeta .numero-de-tarjeta .separador {
+  font-size: 2em;
+  display: inline-block;
+  padding: 0 4px;
+  margin-top: -4px;
+}
+#informacion-de-tarjeta .clave-de-tarjeta .casilla {
+  font-size: 34px;
+  color: #2A93DC;
+  font-weight: 800;
+  display: inline-block;
+}
+#informacion-de-tarjeta label.reset-caps {
+  text-transform: none;
+}
+#informacion-de-tarjeta .clave-de-tarjeta .clave {
+  display: inline-block;
+  width: 80px;
+  margin: -18px 0 0 15px;
+}
+#registro-de-doctor {
+  margin: 50px 0;
+  background-color: #fcfcfc;
+}
+.listado-de-estudios tr {
+  cursor: pointer;
+}
+.listado-de-estudios tr td {
+  vertical-align: middle;
+}
+.listado-de-estudios .selector {
+  text-align: center;
+  color: #eeeeee;
+  width: 50px;
+}
+.listado-de-estudios .activo .selector {
+  text-align: center;
+  color: #00a047;
+}
+
+/*david*/
+.popupAlert {
+  position: absolute;
+  background: #FEEFB3;
+  border-radius: 3px;
+  width: 270px;
+  top:-27px;
+  color:#9F6000;
+  padding: 8px 0 5px 50px;
+  left: 75px;
+  border: 1px solid;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-image: url("../img/warning.png");
+  background-size: 21px;
+}
+.popupAlert:after, .popupAlert:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.popupAlert:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-top-color: #FEEFB3;
+  border-width: 15px;
+  margin-left: 0px;
+}
+.popupAlert:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-top-color: #9f6000;
+  border-width: 16px;
+  margin-left: -1px;
+}

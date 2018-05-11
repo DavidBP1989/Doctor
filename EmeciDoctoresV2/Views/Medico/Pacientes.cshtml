@@ -1,0 +1,406 @@
+﻿@{
+    ViewBag.Title = "Pacientes";
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name = "format-detection" content = "telephone=no">
+
+        <!-- Cargando Hojas de Estilos -->
+        <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+         <link rel="stylesheet" href="~/css/main.css">
+        <link rel="stylesheet" href="~/css/emeci.css">
+
+        <!-- Agregamos el Modernizr para compatibilidad HTML5 -->
+        <script src="~/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        
+               <script src="~/js/vendor/jquery1.10.js"></script>
+             <script src="~/js/typeaheadTwiter.js"></script>
+        <link href="~/css/typeahead.css" rel="stylesheet" />
+
+        <script src="~/js/jquery.sortElements.js"></script>
+    
+        <script src="~/js/jqBootstrapValidation.js"></script>
+    </head>
+    <body>
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>
+                or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <script>
+            function quitaacentos(s) {
+                var r = s.toLowerCase();
+               
+                r = r.replace(new RegExp(/[àáâãäå]/g), "a");
+                r = r.replace(new RegExp(/[èéêë]/g), "e");
+                r = r.replace(new RegExp(/[ìíîï]/g), "i");
+               
+                r = r.replace(new RegExp(/[òóôõö]/g), "o");
+                r = r.replace(new RegExp(/[ùúûü]/g), "u");
+
+                return r;
+            }
+
+            var strjsoncons = '@Html.Raw(ViewBag.jsoncons)';
+
+            var jsoncons = JSON.parse(quitaacentos(strjsoncons));
+
+             strjsoncons = '@Html.Raw(ViewBag.jsoncons2)';
+
+            var jsoncons2 = JSON.parse(quitaacentos(strjsoncons));
+
+            function guardaPwd()
+            {
+                var pwd = $("#pwd").val(), newpwd = $("#nuevopwd").val(), reppwd = $("#repitapwd").val();
+                var datat = "currentpwd=" + pwd + "&newpwd=" + newpwd;
+                if (pwd != "" && newpwd != "" ) {
+                    if (reppwd != newpwd) {
+                        alert("Los datos no coinciden");
+
+                        $("#hpwd").click();
+                    }
+                    else
+
+                        $.post("ChangePwd", datat, function (data, textStatus) {
+                            console.log(data);
+                            if (data != "undefined") {
+                                if (data.success == "OK") {
+                                    alert("Cambio de Contraseña Correctamente..!");
+                                    $('#change-pwd').modal('hide');
+                                }
+                                else {
+                                    alert("No se pudo cambiar el pwd, " + data.message);
+                                    $("#hpwd").click();
+                                }
+                            }
+
+                        }, "json");
+
+
+                }
+                else
+                {
+                    alert("Los Datos Son requeridos");
+           
+                   
+                }
+                
+            }
+            
+
+        </script>
+
+        <!-- Cabecera de Aplicacion -->
+        <header id="encabezado-de-pagina" class="container-fluid">
+
+             <div class="logotipo col-sm-3 col-md-2">
+                <!-- Logo EMECI -->
+                <img src="~/img/emeci.png" alt="EMECI"/>
+            </div>
+            <div class="col-sm-9 col-md-10">
+
+                <div class="row">
+                    <div class="col-sm-8 col-md-8 col-lg-9">
+
+                        <nav id="menu-principal">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="pacientes" class="active"><span class="icon glyphicon glyphicon-heart"></span>
+                                        Pacientes</a>
+                                </li>
+                                <li>
+                                    <a href="MisDatosMedico"><span class="icon glyphicon glyphicon-user"></span>
+                                        Mis Datos</a>
+                                </li>
+
+                                <li><a id="hvideo" href="#" data-target="#panel-diag-videos" data-toggle="modal"  ><span class="icon glyphicon glyphicon-facetime-video"></span> Manual </a></li>
+
+                                 <li>
+                                    <a id="hpwd" href="#" data-target="#change-pwd" data-toggle="modal"><span class="icon glyphicon glyphicon-log-in"></span>
+                                         Cambiar Pwd</a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="http://www.medicamentosplm.com/Home/Medicamento">
+                                        <span class="icon glyphicon glyphicon-briefcase"></span>
+                                        Medicamentos
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                    </div>
+
+                    <div class="col-sm-4 col-md-4 col-lg-3">
+                        <div class="datos-del-medico">
+                            
+                            <p class="nombre">@ViewBag.Mednombre</p>
+                            <p class="clave">EMECI: @ViewBag.MedEmeci</p>
+                            <a href="salir" class="btn btn-default">Salir del Sistema</a>        
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header> <!-- fin: #encabezado-de-pagina -->
+
+
+        <div class="container-fluid">
+
+
+                <section id="contenido-principal" class="col-sm-12 col-md-12">
+                    <div class="encabezado">
+                        <h1 class="pull-left">Mis Pacientes</h1>
+
+                        <div class="acciones pull-right">
+                            <a href="AgregarPaciente" class="btn btn-primary">Agregar Paciente</a>
+                        </div>
+
+                    </div>
+
+                    <div class="contenido">
+
+                        <div id="pacientes" class="panel-de-contenido col-sm-offset-2 col-sm-8">
+
+
+                            <div class="encabezado-de-panel">
+                                <h2>Seleccionar paciente</h2>
+                            </div>
+
+
+                            <div class="contenido-de-panel">
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+
+                                        <input id="search" type="text" class="form-control buscar-paciente col-sm-8" placeholder="Buscar paciente" />
+                                    <p><br /><br />
+                                    </p>
+                                    </div>
+                                    <!--
+                                    <div class="col-sm-6 text-right">
+                                        <p>
+                                            <a href="consulta.html" class="btn btn-default">Nueva Consulta</a>
+                                        </p>
+                                    </div>
+                                    
+                                    -->
+                                </div>
+
+                                
+
+                                <table id="table" class="table table-bordered table-hover">
+                                    <tr>
+                                        <th id="thnombre">Nombre del Paciente</th>
+                                        <th id="thultima" style="width: 200px">Ultima Consulta</th>
+                                    </tr>
+                                     @foreach (dynamic item in ViewBag.PatientsRestult)
+                                     {
+                                    <tr>
+                                        <td><a href="consulta?idpac=@item.idpaciente">@(item.NombreApellido)</a> </td>
+                                        <td>@(item.fecha)</td>
+                                    </tr>
+                                     }
+                                   
+                                </table>
+
+                                <script>
+                                    var table = $('table');
+
+                                    $('#thnombre, #thultima')
+                                        .wrapInner('<span title="sort this column"/>')
+                                        .each(function () {
+
+                                            var th = $(this),
+                                                thIndex = th.index(),
+                                                inverse = false;
+
+                                            th.click(function () {
+
+                                                table.find('td').filter(function () {
+
+                                                    return $(this).index() === thIndex;
+
+                                                }).sortElements(function (a, b) {
+
+                                                    return $.text([a]) > $.text([b]) ?
+                                                        inverse ? -1 : 1
+                                                        : inverse ? 1 : -1;
+
+                                                }, function () {
+
+                                                    // parentNode is the element we want to move
+                                                    return this.parentNode;
+
+                                                });
+
+                                                inverse = !inverse;
+
+                                            });
+
+                                        });
+
+
+                                </script>
+
+                              
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+         </div>
+
+
+
+
+
+        <!-- Cargando Scripts -->
+
+        <script src="~/js/vendor/bootstrap.min.js"></script>
+
+
+          <script>
+              //var $rows = $('#table tr');
+              //$('#search').keyup(function () {
+              //    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+              //    if (val.length>2)
+              //        $rows.show().filter(function () {
+              //            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase().replace('á','a').replace('é','e').replace('í','i').replace('ó','o').replace('ú','u');
+              //            return ! ~text.indexOf(val);
+              //        }).hide();
+              //});
+              $(document).ready(function () {
+                  localStorage.showOptions = false;
+
+                  $('#search').typeahead({
+                      local: jsoncons, limit: 20
+                  }).on('typeahead:selected', function (obj, val) {
+                     
+                      for (var n = 0; n < jsoncons2.length; n++) {
+                     
+                          if (jsoncons2[n].nombreapellido == val.value) {
+                              var idPac = jsoncons2[n].idpaciente;
+                              window.location = "consulta?idpac=" + idPac;
+                             
+                          }
+                      }
+                  });
+
+                
+
+              });
+
+
+           
+
+          </script>
+
+
+          <!-- main videos -->
+        <div id="panel-diag-videos" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Videos de Ayuda</h4>
+                    </div>
+                    <div class="modal-body">                        
+                        <div class="row">
+                            <div class="form-group">
+
+                                <div class="col-sm-8">
+                                    <a href="http://www.emeci.com/sistemaweb/video1/index.html"  target="_blank">Video 1 - Sistema Web</a>                                     
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <a href="http://www.emeci.com/sistemaweb/video2/index.html"  target="_blank">Video 2 - Diagnosticos</a>                                     
+                                </div>                                
+
+                                <div class="col-sm-8">
+                                    <a href="http://www.emeci.com/sistemaweb/video3/index.html"  target="_blank">Video 3 - Estudios</a>                                     
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <a href="http://www.emeci.com/sistemaweb/video4/index.html" target="_blank">Video 4 - Tratamiento</a>                                     
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-diagnostico -->
+ 
+        <!-- Modal para pwd -->
+        <div id="change-pwd" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Cambiar Contraseña</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <div class="form-group ">
+                            <label class="control-label">
+                                Contraseña Actual
+                            </label>
+                            <div class="controls">
+                                <input type="password" data-minlength="6" class="form-control" id="pwd" placeholder="Contraseña Actual" required />
+                                <p class="help-block"></p>
+                            </div>
+
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label">
+                                Nueva Contraseña
+                            </label>
+                            <div class="controls">
+                                <input type="password" data-minlength="6" class="form-control" id="nuevopwd" placeholder="NuevaContraseña" required />
+                                <p class="help-block"></p>
+                            </div>
+
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label">
+                                Repita Contraseña
+                            </label>
+                            <div class="controls">
+                                <input type="password" class="form-control" id="repitapwd" data-match="#nuevopwd" data-match-error="No Coincide la contraseña" placeholder="Repita Contraseña" required />
+                                <p class="help-block"></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="javascript:guardaPwd();">Guardar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-pwd -->
+
+                <script>
+         $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+    </script>
+      
+    </body>
+</html>

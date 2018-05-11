@@ -1,0 +1,995 @@
+﻿@{
+    Layout = "~/Views/Shared/Master.cshtml";
+    <script src="~/js/pikaday.js"></script>
+    <script src="~/js/CsltaObstetrica/Obstetrica.js"></script>
+    <script>
+        window.idpac = @ViewBag.idPac;
+    </script>
+    <style>
+        select { height:2.2em !important; font-size:15px !important;}
+        @@media screen and (min-width:992px){
+            .contenido-de-panel label
+            {
+                font-size:12px;
+                white-space:pre;
+                word-break:break-all;
+            }
+         }
+        .smallText label{ font-size:11px !important;}
+    </style>
+    <link href="~/Content/pikaday.css" rel="stylesheet" />
+}
+
+<div class="row headerSection">
+    <div class="col-lg-4 col-md-6 col-sm-4 col-xs-12">
+        <h1>Consultas M&eacute;dicas</h1>
+    </div>
+    <div class="col-lg-8 col-md-6 col-sm-8 col-xs-12">
+        <div style="text-align:right">
+            <a onclick="SHPreviousQuery();" id="btnPrevious" class="btn btn-default">Mostrar Consulta Anterior</a>
+            <a onclick="SaveQuery();" class="btn btn-primary">Guardar Consulta</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12" style="margin-top:10px">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Cambiar tipo de consulta</h2>
+                <div class="form-group">
+                    <select class="form-control" onchange="location.href=this.value">
+                        <option value="@(Url.Action("ConsultaObstetrica", "Medico", new { idPac = ViewBag.idPac }))">Obstetrica</option>
+                        <option value="@(Url.Action("ConsultaGinecologica", "Medico", new { idPac = ViewBag.idPac }))">Ginecolog&iacute;a</option>
+                        <option value="@(Url.Action("Consulta", "Medico", new { idPac = ViewBag.idPac, FromGine = true }))">General</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="previousQuery" style="display:none" class="col-lg-6 panel-de-contenido previousQuery">
+        <div class="encabezado-de-panel">
+            <h2>Consulta anterior</h2>
+        </div>
+        <ul class="nav nav-pills nav-stacked liPreviousQuery">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    @ViewBag.consultationName
+                </a>
+                <ul class="dropdown-menu">
+                    @foreach (var c in ViewBag.consultation as IEnumerable<SelectListItem>)
+                    {
+                        <li style="cursor:pointer">
+                            <a onclick="ChangePreviousQuery(@c.Value)">@c.Text</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+        <div class="contenido-de-panel">
+            <br />
+            <form>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-5 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Embarazo</label>
+                            <p id="pEmbarazo"># @Html.Raw(ViewBag.noEmbarazo)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Peso (Kilos)</label>
+                            <p id="pPeso">@Html.Raw(ViewBag.peso)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Talla (Metros)</label>
+                            <p id="pTalla">@Html.Raw(ViewBag.talla)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label>Indice Masa Corporal</label>
+                            <p id="pMasa">@Html.Raw(ViewBag.masa)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Activa sexualmente</label>
+                            <p id="pActiva">
+                                @if (ViewBag.activaSex) { <span>Si</span> }
+                                @if (!ViewBag.activaSex) { <span>No</span> }
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Temperatura (°C)</label>
+                            <p id="pTempe">@Html.Raw(ViewBag.temperatura)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Pres. Arteria Sist&oacute;lica</label>
+                            <p id="psistolica">@Html.Raw(ViewBag.sistolica)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Pres. Arteria Diast&oacute;lica</label>
+                            <p id="pdistolica">@Html.Raw(ViewBag.distolica)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row smallText">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Abortos</label>
+                            <p id="pAbortos">@ViewBag.abortos</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Fecha &uacute;ltimo parto</label>
+                            <p id="pFechaParto">@Html.Raw(ViewBag.fechaUltParto)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                        <div class="form-group">
+                            <label>Primer d&iacute;a de &uacute;lt. menstruaci&oacute;n</label>
+                            <p id="pFechaMenstruacion">@Html.Raw(ViewBag.fechaUltMenstruacion)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
+                        <div class="form-group">
+                            <label>Toxemias previas</label>
+                            <p id="pToxemias">
+                                @if (ViewBag.toxemias == 1) { <span>Si</span> }
+                                @if (ViewBag.toxemias == 0){ <span>No</span> }
+                            </p>
+                            <div class="well" id="pEspToxemias" style="display:@(ViewBag.toxemias == 1 ? "block" : "none")">
+                                <label>Especifique</label>
+                                @Html.TextArea("espToxxxemias", (string)ViewBag.espToxemias, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>partos</label>
+                            <p id="pPartos">
+                                @if(ViewBag.partos == 0) { <span>Eut&oacute;cico</span>}
+                                @if(ViewBag.partos == 1) { <span>Distocico</span>}
+                            </p>
+                            <div id="showpPartos" class="well" style="display:@(ViewBag.partos == 1 ? "block" : "none")">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Tipo de distocia</label>
+                                            <p id="pTipoDistocia">
+                                                @if (ViewBag.tipoDistocia == 0) { <span>Ces&aacute;rea</span>}
+                                                @if (ViewBag.tipoDistocia == 1) { <span>F&oacute;rceps</span>}
+                                                @if (ViewBag.tipoDistocia == 2) { <span>Otros &minus;&minus;&gt;</span>}
+                                            </p>
+                                            <div id="pShowTipoDistocia" style="display:@(ViewBag.tipoDistocia == 2 ? "block" : "none")">
+                                                <label>Especifique</label>
+                                                @Html.TextArea("tipoooDistocia", (string)ViewBag.espTipoDistocia, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Motivo de la distocia</label>
+                                            <p id="pMotivoDistocia">
+                                                @if (ViewBag.motivoDistocia == 0) { <span>Sufrimiento fetal agudo</span>}
+                                                @if (ViewBag.motivoDistocia == 1) { <span>Postura an&oacute;mala</span>}
+                                                @if (ViewBag.motivoDistocia == 2) { <span>Prematurez</span>}
+                                                @if (ViewBag.motivoDistocia == 3) { <span>Otros &minus;&minus;&gt;</span>}
+                                            </p>
+                                            <div id="pShowMotivoDistocia" style="display:@(ViewBag.motivoDistocia == 3 ? "block" : "none")">
+                                                <label>Especifique</label>
+                                                @Html.TextArea("motivoooDistocia", (string)ViewBag.espMotivoDistocia, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Ces&aacute;reas previas</label>
+                            <p id="pCesareas">@ViewBag.cesareasPrevias</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Uso de forceps</label>
+                            <p id="pForceps">@ViewBag.forceps</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Mortinatos</label>
+                            <p id="pMortinatos">@ViewBag.mortinatos</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>R.N. Vivos</label>
+                            <p id="pRNVivos">@ViewBag.rnVivos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Embarazos ect&oacute;picos</label>
+                            <p  id="pEctopicos">
+                                @if (ViewBag.ectopico == 0) { <span>No</span>}
+                                @if (ViewBag.ectopico == 1) { <span>Si</span>}
+                            </p>
+                            <div class="well" id="pShowEctopico" style="display:@(ViewBag.ectopico == 1 ? "block" : "none")">
+                                <label>Especifique</label>
+                                @Html.TextArea("EspEctooopico", (string)ViewBag.espEctopico, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Complicaciones de embarazo previos</label>
+                            <p id="pEmbarazosPrevios">
+                                @if (ViewBag.complicacionesEmbarazo == 0) { <span>No</span>}
+                                @if (ViewBag.complicacionesEmbarazo == 1) { <span>Si</span>}
+                            </p>
+                            <div class="well" id="pShowEmbarazosPrevios" style="display:@(ViewBag.complicacionesEmbarazo == 1 ? "block" : "none")">
+                                <label>Especifique</label>
+                                @Html.TextArea("EspEmbarazoPrevio", (string)ViewBag.espComplicacionesEmbarazo, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Complicaciones perinatales</label>
+                            <p id="pPerinatales">
+                                @if (ViewBag.perinatales == 0) { <span>No</span>}
+                                @if (ViewBag.perinatales == 1) { <span>Si</span>}
+                            </p>
+                            <div class="well" id="pShowPerinatales" style="display:@(ViewBag.perinatales == 1 ? "block" : "none")">
+                                <label>Especifique</label>
+                                @Html.TextArea("periiinatales", (string)ViewBag.espPerinatales, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Embarazos anormales: Mola H, Anembri&oacute;nicos, etc.</label>
+                            <p id="pAnormales">
+                                @if (ViewBag.anormales == 0) { <span>No</span>}
+                                @if (ViewBag.anormales == 1) { <span>Si</span>}
+                            </p>
+                            <div class="well" id="pShowAnormales" style="display:@(ViewBag.anormales == 1 ? "block" : "none")">
+                                <label>Especifique</label>
+                                @Html.TextArea("anoormales", (string)ViewBag.espAnormales, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Observaciones</label>
+                            @Html.TextArea("mootiivo", (string)ViewBag.observaciones, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Control de embarazo</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ccol-xs-12 col-sm-6 col-md-4 col-lg-6">
+                        <div class="form-group">
+                            <label>semanas de gestaci&Oacute;n s/d</label>
+                            <p id="pGestacion">@Html.Raw(ViewBag.gestacion)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+                        <div class="form-group">
+                            <label>fecha probable de parto</label>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>f.u. (cm)</label>
+                            <p id="pfu">@Html.Raw(ViewBag.fu)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>f.c.f.</label>
+                            <p id="pfcf">@Html.Raw(ViewBag.fcf)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>c.c.</label>
+                            <p id="pcc">@Html.Raw(ViewBag.cc)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>c.a.</label>
+                            <p id="pca">@Html.Raw(ViewBag.ca)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>l.f.</label>
+                            <p id="plf">@Html.Raw(ViewBag.lf)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>d.b.p.</label>
+                            <p id="pdbp">@Html.Raw(ViewBag.dbp)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>posici&Oacute;n</label>
+                            <p id="pposicion">@Html.Raw(ViewBag.posicion)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>presentaci&Oacute;n</label>
+                            <p id="ppresentacion">@Html.Raw(ViewBag.presentacion)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>situaci&Oacute;n</label>
+                            <p id="psituacion">@Html.Raw(ViewBag.situacion)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>actitud</label>
+                            <p id="pactitud">@Html.Raw(ViewBag.actitud)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-6">
+                        <div class="form-group">
+                            <label>movimientos fetales</label>
+                            <p id="pfetales">@Html.Raw(ViewBag.fetales)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6">
+                        <div class="form-group">
+                            <label>peso aproximado producto</label>
+                            <p id="ppesoProducto">@Html.Raw(ViewBag.pesoProducto)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-6">
+                        <div class="form-group">
+                            <label>peso de la madre</label>
+                            <p id="ppesoMadre">@Html.Raw(ViewBag.pesoMadre)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-6">
+                        <div class="form-group">
+                            <label>t/a</label>
+                            <p id="pta">@Html.Raw(ViewBag.ta)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4">
+                        <div class="form-group">
+                            <label>f.c.m.</label>
+                            <p id="pcfm">@Html.Raw(ViewBag.fcm)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4">
+                        <div class="form-group">
+                            <label>edema</label>
+                            <p id="pedema">@Html.Raw(ViewBag.edema)</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4">
+                        <div class="form-group">
+                            <label>se hizo us</label>
+                            <p id="phizoUS">
+                                @if(!ViewBag.seHizoUS) { <span>No</span>}
+                                @if(ViewBag.seHizoUS) { <span>Si</span>}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>reporte de ultrazonido realizado</label>
+                            @Html.TextArea("uuultrazonido", (string)ViewBag.ultrasonido, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>motivo de consulta</label>
+                            @Html.TextArea("mootiivo", (string)ViewBag.motivoConsulta, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>exploraci&Oacute;n f&Iacute;sica</label>
+                            @Html.TextArea("explooracion", (string)ViewBag.exploracion, new { @class = "form-control", @rows = "3", @readonly = "readonly" })
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+    <!--Consulta-->
+    <div id="query" class="col-lg-12 panel-de-contenido">
+        <div class="encabezado-de-panel">
+            <h2>Nueva consulta Obstetrica</h2>
+        </div>
+        <div class="contenido-de-panel">
+            <form id="myForm" role="form">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-5 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Embarazo #</label>
+                            <select id="noEmbarazo" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-7 col-md-9 col-lg-9"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 n1">
+                        <div class="form-group">
+                            <label>Peso (Kilos)</label>
+                            <input id="peso" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 n1">
+                        <div class="form-group">
+                            <label>Talla (Metros)</label>
+                            <input id="talla" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2 n1">
+                        <div class="form-group">
+                            <label>Indice Masa Corporal</label>
+                            <input id="masa" disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 n-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 n3">
+                        <div class="form-group">
+                            <label>Activa sexualmente</label>
+                            <select id="activa" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 n3">
+                        <div class="form-group">
+                            <label>Temperatura (°C)</label>
+                            <input id="temperatura" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 n3">
+                        <div class="form-group">
+                            <label>Pres. Arterial Sist&oacute;lica</label>
+                            <input type="text" id="sistolica" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3 n3">
+                        <div class="form-group">
+                            <label>Pres. Arterial Diast&oacute;lica</label>
+                            <input type="text" id="diastolica" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row smallText">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 n4">
+                        <div class="form-group">
+                            <label>Abortos</label>
+                            <select class="form-control" id="abortos">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-2 n5">
+                        <div class="form-group">
+                            <label>Fecha &uacute;ltimo parto</label>
+                            <input type="text" id="ultParto" class="form-control calendar" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 n6">
+                        <div class="form-group">
+                            <label>Primer d&iacute;a de &uacute;lt. menstruaci&oacute;n</label>
+                            <input type="text" id="ultMenstruacion" class="form-control calendar" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 n7">
+                        <div class="form-group">
+                            <label>Toxemias previas</label>
+                            <select id="toxemias" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                            <div class="well" id="EspToxemia" style="display:none">
+                                <label>Especifique</label>
+                                <textarea id="TxtToxemias" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-9 n8">
+                        <div class="form-group">
+                            <label>partos</label>
+                            <select id="partos" style="width:250px;" class="form-control input-sm">
+                                <option value="0">Eut&oacute;cico</option>
+                                <option value="1">Distocico</option>
+                            </select>
+                            <div class="well" id="EspPartos" style="display:none">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label>Tipo de distocia</label>
+                                            <select id="distocia" class="form-control">
+                                                <option value="0">Ces&aacute;rea</option>
+                                                <option value="1">F&oacute;rceps</option>
+                                                <option value="2">Otros &minus;&minus;&gt;</option>
+                                            </select>
+                                            <div id="EspDistocia" style="display:none">
+                                                <label>Especifique</label>
+                                                <textarea id="EspTipoDistocia" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <div class="form-group">
+                                            <label>Motivo de la distocia</label>
+                                            <select id="motivoDistocia" class="form-control">
+                                                <option value="0">Sufrimiento fetal agudo</option>
+                                                <option value="1">Postura an&oacute;mala</option>
+                                                <option value="2">Prematurez</option>
+                                                <option value="3">Otros &minus;&minus;&gt;</option>
+                                            </select>
+                                            <div id="EspMotivoDistocia" style="display:none">
+                                                <label>Especifique</label>
+                                                <textarea id="TxtMotivoDistocia" class="form-control" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 n9"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Ces&aacute;reas previas</label>
+                            <select id="cesareas" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Uso de forceps</label>
+                            <select id="forceps" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>Mortinatos</label>
+                            <select id="mortinatos" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>R.N. Vivos</label>
+                            <select id="rnvivos" class="form-control">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Embarazos ect&oacute;picos</label>
+                            <select id="ectopico" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                            <div class="well" id="EspEctopico" style="display:none">
+                                <label>Especifique</label>
+                                <textarea id="TxtEctopico" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Complicaciones de embarazo previos</label>
+                            <select id="prevPregnancy" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                            <div class="well" id="EspPrevPregnancy" style="display:none">
+                                <label>Especifique</label>
+                                <textarea id="TxtComplicacionesEmbarazo" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Complicaciones perinatales</label>
+                            <select id="perinatales" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                            <div class="well" id="EspPerinatales" style="display:none">
+                                <label>Especifique</label>
+                                <textarea id="TxtPerinatales" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label>Embarazos anormales: Mola H, Anembri&oacute;nicos, etc.</label>
+                            <select id="anembrionicos" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                            <div class="well" id="EspAnembrionicos" style="display:none">
+                                <label>Especifique</label>
+                                <textarea id="TxtAnembrionicos" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Observaciones</label>
+                            <textarea id="observation" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Control de embarazo</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 n10">
+                        <div class="form-group">
+                            <label>semanas de gestaci&Oacute;n s/d</label>
+                            <input type="text" disabled id="gestacion" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 n10">
+                        <div class="form-group">
+                            <label>fecha probable de parto</label>
+                            <input type="text" disabled class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-6 n-10"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>f.u. (cm)</label>
+                            <input id="fu" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>f.c.f.</label>
+                            <input id="fcf" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>c.c.</label>
+                            <input id="cc" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>c.a.</label>
+                            <input id="ca" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>l.f.</label>
+                            <input id="lf" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <div class="form-group">
+                            <label>d.b.p.</label>
+                            <input id="dbp" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>posici&Oacute;n</label>
+                            <input id="posicion" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>presentaci&Oacute;n</label>
+                            <input id="presentacion" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>situaci&Oacute;n</label>
+                            <input id="situacion" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                        <div class="form-group">
+                            <label>actitud</label>
+                            <input id="actitud" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 n11">
+                        <div class="form-group">
+                            <label>movimientos fetales</label>
+                            <input id="fetales" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 n13">
+                        <div class="form-group">
+                            <label>peso aproximado producto (kg)</label>
+                            <input id="pesoProducto" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 n11">
+                        <div class="form-group">
+                            <label>peso de la madre (kg)</label>
+                            <input id="pesoMadre" type="text" readonly class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 n14">
+                        <div class="form-group">
+                            <label>t/a</label>
+                            <input id="ta" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 n12">
+                        <div class="form-group">
+                            <label>f.c.m.</label>
+                            <input id="fcm" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 n12">
+                        <div class="form-group">
+                            <label>edema</label>
+                            <input id="edema" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-3 col-lg-2 n12">
+                        <div class="form-group">
+                            <label>se hizo us</label>
+                            <select id="hizous" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Si</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>reporte de ultrasonido realizado</label>
+                            <textarea id="ultrazonido" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>motivo de consulta</label>
+                            <textarea id="motivoConsulta" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>exploraci&Oacute;n f&Iacute;sica</label>
+                            <textarea id="exploracion" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

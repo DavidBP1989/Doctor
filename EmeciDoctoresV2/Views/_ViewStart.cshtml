@@ -1,0 +1,126 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/magnific-popup.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script>var jquery1_7 = jQuery.noConflict();</script>
+<script src="~/Scripts/jquery.magnific-popup.js"></script>
+<script>
+    var Storage = (function () {
+        var method =
+        {
+            save: function (val) {
+                var pendingTasks = [];
+
+                if (localStorage.getItem('sessionEmeci') === null) pendingTasks.push(val);
+                else {
+                    pendingTasks = JSON.parse(localStorage.getItem('sessionEmeci'));
+                    pendingTasks.push(val);
+                }
+
+                localStorage.setItem('sessionEmeci', JSON.stringify(pendingTasks));
+                return;
+            }
+
+            , get: function () {
+                var pending = [];
+                if (localStorage.getItem('sessionEmeci') !== null) {
+                    pending = JSON.parse(localStorage.getItem('sessionEmeci'));
+                };
+
+                return pending;
+            }
+
+            , remove: function () { localStorage.removeItem('sessionEmeci'); }
+        };
+
+        return method;
+    })();
+
+    
+    function closePrint(left, top) {
+        jquery1_7.magnificPopup.close();
+        
+        $('#txtleft1').val(left);
+        $('#txttop1').val(top);
+    }
+
+    jquery1_7(document).ready(function () {
+        jquery1_7('#popUp').magnificPopup({
+            type: 'inline'
+            , preloader: true
+        });
+
+        jquery1_7('#clickPrint').magnificPopup({
+            type: 'inline'
+            , preloader: true
+            , alignTop: true
+        });
+
+        var pendingTasks = Storage.get();
+        if (pendingTasks.length)
+        {
+            if (jquery1_7('#pagina-de-acceso').length === 0) {
+                
+                var _htmlTask = '';
+                pendingTasks.map(function (p) {
+                    if (typeof p === 'object') {
+                        if (p.hasOwnProperty('nameTask'))
+                        {
+                            _htmlTask += '* &nbsp;' + p.nameTask;
+                            _htmlTask += '<br />';
+                        }
+                    }
+
+                });
+
+                jquery1_7('#tasks').html(_htmlTask);
+                jquery1_7('#popUp').trigger('click', function () { });
+            }
+        }
+
+
+        jquery1_7('#noPendingTasks').click(function () {
+            Storage.remove();
+            jquery1_7.magnificPopup.close()
+        });
+
+        jquery1_7('#siPendingTasks').click(function () {
+            var pendingTasks = Storage.get();
+            console.log(pendingTasks);
+            for (var i = 0; i < pendingTasks.length; i++)
+            {
+                jquery1_7.ajax({
+                    async: false
+                    , url: pendingTasks[i].href
+                    , data: pendingTasks[i].data
+                    , type: 'POST'
+                }).success(function () { console.log("Se realizo la tarea: " + pendingTasks[i].nameTask); });
+            }
+
+            Storage.remove();
+            jquery1_7.magnificPopup.close();
+        });
+    });
+    
+</script>
+<a id="popUp" style="display:none" href="#PendingTask"></a>
+<div id="PendingTask" class="white-popup-block mfp-hide">
+    <h2>Hay tareas que quedaron pendientes.</h2>
+    
+    <div id="tasks"></div>
+    <br />
+
+    <span>
+        ¿Desea realizar las tareas pendientes?
+        <input type="button" id="siPendingTasks" value="Si" /> &nbsp; 
+        <input type="button" id="noPendingTasks" value="No" />
+    </span>
+</div>
+
+
+<a id="clickPrint" style="display:none" href="#contentPrint"></a>
+<div style="display:none" id="contentPrint">
+    <iframe scrolling="no" role="application" id="framePrint"></iframe>
+</div>

@@ -1,0 +1,1759 @@
+﻿@{
+    ViewBag.Title = "Consulta";
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name = "format-detection" content = "telephone=no">
+
+        <!-- Cargando Hojas de Estilos -->
+        <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+         <link rel="stylesheet" href="~/css/main.css">
+        <link rel="stylesheet" href="~/css/emeci.css">
+
+        <script src="../js/vendor/jquery-1.10.1.min.js"></script>
+
+        <!-- Agregamos el Modernizr para compatibilidad HTML5 -->
+        <script src="~/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+       
+     <script>
+         
+    var requestMargins;
+    function validateMargins() {
+        var margins =
+        [
+            recipe =
+            {
+                top: $('#txttop1')
+                , bottom: $('#txtbottom1')
+                , left: $('#txtleft1')
+                , right: $('#txtright1')
+            }
+
+            , consultation =
+            {
+                top: $('#txttop2')
+                , bottom: $('#txtbotton2')
+                , left: $('#txtleft2')
+                , right: $('#txtright2')
+            }
+        ];
+
+        var validate = true;
+        margins.map(
+            function (m) {
+                for (var key in m) {
+                    if (validateForm.All(m[key][0])) validate = (validate && true);
+                    else validate = (validate && false);
+                };
+            }
+        );
+
+        requestMargins = margins;
+        return validate;
+    };
+
+    function guardaMargenes() {
+        if (!validateMargins()) {
+            $('#margins').animate({ 'margin-left': '-10px' }, 200)
+            .animate({ 'margin-left': '20px' }, 200)
+            .animate({ 'margin-left': '10px' }, 200,
+               function () {
+                   setTimeout(function () {
+
+                   }, 500);
+               });
+
+            return;
+        };
+
+        var datat = "recetatop=" + requestMargins[0].top.val();
+        datat += "&recetabottom=" + requestMargins[0].bottom.val();
+        datat += "&recetaleft=" + requestMargins[0].left.val();
+        datat += "&recetaright=" + requestMargins[0].right.val();
+
+        datat += "&consultatop=" + requestMargins[1].top.val();
+        datat += "&consultabottom=" + requestMargins[1].bottom.val();
+        datat += "&consultaleft=" + requestMargins[1].left.val();
+        datat += "&consultaright=" + requestMargins[1].right.val();
+
+        //$.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+        /*
+            Guardarlo en localstorage
+        */
+        var ls = { nameTask: 'Guardar margenes' };
+        ls.data = datat;
+        ls.href = '../Consulta/SaveMargenes';
+        Storage.save(ls);
+
+        $.post("../Consulta/SaveMargenes", datat, function (data, textStatus) {
+            alert("consulta guardarda correctamente..!");
+            $('#panel-margenes').modal('toggle');
+            Storage.remove();
+        }, "json");
+
+
+    }
+
+    function printDataRec(odiv) {
+        var divToPrint = document.getElementById(odiv);
+        newWin = window.open("");
+
+        var ohead = '<div style="margin-top:100px; margin-left:200px; margin-bottom:5px">Paciente: {0} &nbsp;&nbsp;&nbsp;&nbsp;Fecha: {1}</div>';
+        var ofoot = '<div style="margin-top:20px; margin-left:200px; margin-bottom:10px">{0}</div>';
+        ohead
+        // divToPrint.style.paddingTop="500px";
+        //var cadstyle = "<style> .noshowboton {display:none;}  .divmarg{ padding : 25px 0px 5px 200px; display:inline-block;} </style>";
+
+
+        var cTop = odiv === 'consulta-anterior' ? $('#txttop2').val() : $('#txttop1').val();
+        var cRight = odiv === 'consulta-anterior' ? $('#txtright2').val() : $('#txtright1').val();
+        var cLeft = odiv === 'consulta-anterior' ? $('#txtleft2').val() : $('#txtleft1').val();
+        var cBottom = odiv === 'consulta-anterior' ? $('#txtbotton2').val() : $('#txtbottom1').val();
+        var cadstyle = "<style>body { margin: " + cTop + "cm " + cRight + "cm " + cBottom + "cm " + cLeft + "cm; } .noshowboton {display:none;}  .divmarg{ padding : 25px 0px 5px 200px; display:inline-block;} .list-unstyled{display:none;} .btn{display:none;} .contenido-de-panel{padding:30px;} .col-sm-3, .col-sm-6{ float:left;} .row{display:table; margin-left:-15px; margin-right:-15px; width:100%;} .col-sm-3{width:25%;} .col-sm-6{width:25%;} .form-group {margin-bottom.15px;} .form-group label {text-transform:uppercase; font-weight: bold} .dropdown-menu{ display:none} </style>";
+
+
+        ofoot = ofoot.replace("{0}", $("#mednombre")[0].innerHTML);
+        ohead = ohead.replace("{0}", $("#pacnombre")[0].innerHTML).replace("{1}", "@DateTime.Now.Date.ToShortDateString()");
+
+               newWin.document.write(cadstyle + ohead + divToPrint.outerHTML + ofoot);
+
+               newWin.print();
+               newWin.close();
+           }
+
+    
+         function printData(element) {
+
+             jquery1_7('#clickPrint').trigger('click', function () { });
+             $('#contentPrint').show();
+
+             var url = '../printData.html?html=' + element;
+
+             url += '=@ViewBag.Mednombre \
+             =@ViewBag.Pacnombre \
+             =@ViewBag.PacFechanacimiento; @ViewBag.PacAños años y @ViewBag.PacMeses meses \
+             =@DateTime.Now.Date.ToShortDateString()';
+             url += '=' + $('#txttop1').val();
+             url += '=' + $('#txtleft1').val();
+             
+             $('#framePrint').attr('src', url);
+         }
+    @*function printData(odiv) { 
+        console.log(odiv);
+        newWin = window.open("");
+
+        var ohead = '<div>' +
+            '<h2>@ViewBag.Mednombre</h2>' +
+            '<span><b>Nombre del paciente: </b>@ViewBag.Pacnombre</span>' +
+         
+            '<p><span><b>Fecha de nacimiento: </b>@ViewBag.PacFechanacimiento; @ViewBag.PacAños años y @ViewBag.PacMeses meses</span>' +
+            '<span style="margin-left:100px"><b>Fecha: </b>@DateTime.Now.Date.ToShortDateString()</span></p>' +
+            '</div><br /><br />';
+
+        var ofoot = '<br /><div>' +
+           
+            '</div><br />';
+        
+        var cTop =  odiv === 'consulta-anterior' ? $('#txttop2').val() : $('#txttop1').val();
+        var cRight = odiv === 'consulta-anterior' ? $('#txtright2').val() : $('#txtright1').val();
+        var cLeft =  odiv === 'consulta-anterior' ? $('#txtleft2').val() : $('#txtleft1').val();
+        var cBottom = odiv === 'consulta-anterior' ? $('#txtbotton2').val() : $('#txtbottom1').val();
+        var cadstyle = "<style>body { margin: " + cTop + "cm " + cRight + "cm " + cBottom + "cm " + cLeft + "cm; } .noshowboton {display:none;}  .divmarg{ padding : 25px 0px 5px 200px; display:inline-block;} .list-unstyled{display:none;} .btn{display:none;} .contenido-de-panel{padding:30px;} .col-sm-3, .col-sm-6{ float:left;} .row{display:table; margin-left:-15px; margin-right:-15px; width:100%;} .col-sm-3{width:25%;} .col-sm-6{width:25%;} .form-group {margin-bottom.15px;} .form-group label {text-transform:uppercase; font-weight: bold} .dropdown-menu{ display:none} </style>";
+
+
+        newWin.document.write(cadstyle + ohead + $('#' + odiv)[0].outerHTML + ofoot);
+
+        newWin.print();
+        newWin.close();
+    }*@
+
+
+
+</script>
+
+
+    </head>
+    <body>
+
+
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a>
+                or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+        <!-- Cabecera de Aplicacion -->
+        <header id="encabezado-de-pagina" class="container-fluid">
+
+             <div class="logotipo col-sm-3 col-md-2">
+                <!-- Logo EMECI -->
+                <img src="~/img/emeci.png" alt="EMECI"/>
+            </div>
+            <div class="col-sm-9 col-md-10">
+
+                <div class="row">
+                    <div class="col-sm-8 col-md-8 col-lg-9">
+                        <nav id="menu-principal">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx?opt=C&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato" target="_blank" class="active"><span class="icon glyphicon glyphicon-heart"></span>
+                                        Consultas</a>
+
+                                </li>
+                                <li>
+                                    <a href="https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx?opt=V&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato" target="blank"><span class="icon glyphicon glyphicon-list-alt"></span>
+                                    Vacunas</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx?opt=E&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato" target="blank"><span class="icon glyphicon glyphicon-briefcase"></span>
+                                        Expediente EMECI</a>
+                                </li>
+
+                                 <li>
+                                    <a href="#" data-target="#panel-margenes" data-toggle="modal" ><span class="icon glyphicon glyphicon-th-large"></span>
+                                        Margenes</a>
+                                </li>
+                                
+                               
+
+                                <li class="pull-right">
+                                    <a href="pacientes"><span class="icon glyphicon glyphicon-folder-close"></span>
+                                    Cerrar Expediente</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+            
+
+                    <div class="col-sm-4 col-md-4 col-lg-3">
+                        <div class="datos-del-medico">
+                            <p id="mednombre" class="nombre">@ViewBag.Mednombre</p>
+                            <p class="clave">EMECI: @ViewBag.MedEmeci</p>
+                            <a href="salir" class="btn btn-default">Salir del Sistema</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header> <!-- fin: #encabezado-de-pagina -->
+       
+        <div class="container-fluid">
+
+                <div id="resumen-del-paciente" class="col-sm-3 col-md-2">
+
+                        <div class="fotografia">
+                            @{  int age = ViewBag.PacAños;
+                                string sex = ViewBag.Sexo;
+                                string img = "../img/bebe.jpg";
+
+                                if (age == 0 && sex == "M") { img = "../img/bebo.jpg"; }
+                                if (age == 0 && sex == "F") { img = "../img/beba.jpg"; }
+                                if ((age > 0 && age <= 18) && sex == "M") { img = "../img/nino0-18.jpg"; }
+                                if ((age > 0 && age <= 11) && sex == "F") { img = "../img/nina0-11.jpg"; }
+                                if (age >= 12 && sex == "F") { img = "../img/mujer12.jpg"; }
+                                if ((age >= 19 && age <= 60) && sex == "M") { img = "../img/hombre19.jpg"; }
+                                if (age >= 61 && sex == "M") { img = "../img/hombre61.jpg"; }
+                            }
+
+                            <img src="@img" alt="@age @sex"/>
+                        </div>
+                        
+                        <div class="generales">
+
+                            <h2>Generales</h2>
+
+                            <h3>Nombre del Paciente</h3>
+                            <p id="pacnombre">@ViewBag.Pacnombre</p>
+
+                            <h3>Tarjeta No.</h3>
+                            <p id="pacnombre">@ViewBag.notarjeta</p>
+
+                            <h3>Fecha de Nacimiento</h3>
+                            <p>@ViewBag.PacFechanacimiento</p>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3>Año(s)</h3>
+                                    <p>@ViewBag.PacAños</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>Meses</h3>
+                                    <p>@ViewBag.PacMeses </p>
+                                </div>
+                            </div>
+
+                            <h3>Grupo y RH</h3>
+                            <p>@ViewBag.PacgrupoRH</p>
+
+                            <h3>Vencimiento</h3>
+                            <p>@ViewBag.Vence</p>
+
+                        </div>
+                        
+                        <div class="observaciones-vitales">
+                            <h2>Observaciones Generales</h2>
+                            <h3>Alergias</h3>                            
+                            <textarea id="alergiasmed"  class="form-control" rows="2" >@ViewBag.PacAlergiaMedicina</textarea>
+                            <h3>Reservado</h3>                            
+                            <textarea id="alergiasotros"  class="form-control" rows="2" >@ViewBag.PacAlergiaOtros</textarea>
+                            <h3>Patologias Relevantes</h3>                            
+                            <textarea id="PacPatologia"  class="form-control" rows="2" >@ViewBag.PacPatologia</textarea>
+                        </div>
+                </div>
+
+                <script>
+
+                    //close window
+
+                    function closeEditorWarning() {
+                        return 'Are you sure?'
+                    }
+                    window.onbeforeunload = closeEditorWarning;
+
+
+                    //keep alive
+                    setInterval(function () {
+                        console.log("setinten");
+                        $.get('../Consulta/KeepAlive?idmed=@ViewBag.idmed');
+                        console.log("setinten");
+                    }, 60000); // 14 mins * 60 * 1000
+
+                   // metodo para guardar la consulta
+                   function selEstudio(tr)
+                   {
+                       var str = ""; var p = "";
+                        for(var i =0; i<tr.length;i++)
+                        {
+                            str += tr[i].children[1].children[0].innerHTML + p;
+                            p = "|";
+                        }
+                        return str;
+                   }
+                   function displaycero(v)
+                   {
+                       if (isNaN(v) || v=="") return "0";
+                       return v;
+                   }
+                    function guardaConsulta() {
+                        var strProno = "";
+                        var trlab=$("#accordion").find(".activo");
+                        var trgab=$("#accordion-estudios-de-gabinete").find(".activo");
+
+                        var datat = "idpac=" + @ViewBag.idpac + "&peso=" + displaycero($("#peso")[0].value) + "&talla=" + displaycero($("#talla")[0].value) + "&indicemasa=" + displaycero($("#indicemasa")[0].value); 
+                        
+                        datat += "&temperatura=" + displaycero($("#temperatura").val()) + "&tensionArterial=" + displaycero($("#tensionarterial").val()) + "&tensionArterialB=" + displaycero($("#tensionarterialB").val());
+
+                        datat += "&perimetroCef=" + displaycero($("#perimetrocef").val()) + "&frecCard=" + displaycero($("#freccard").val()) +  "&frecresp=" + displaycero($("#frecresp").val()) + "&motivo=" + $("#motivo").val(); 
+                        datat += "&expFisica=" + $("#expfisica").val()  + "&MedPrev="  + $("#medprev").val() + "&Observa=" + $("#observa").val();
+                        datat += "&tratamiento=" + tratamiento.join("|");   
+
+                        // poner lo de diagnosticos exclusivos //
+                        var index;
+                        var diagExc = "";
+                        var diagNoExc = "";
+                        
+                        for (index = 0; index < diagnostico.length; index++) {
+                            if (diagnostico[index].exc ==true)
+                                diagExc += diagnostico[index].diag + "|";
+                            else 
+                                diagNoExc += diagnostico[index].diag + "|";
+                        }
+
+                        datat += "&diagnostico=" + diagNoExc;//diagnostico.join("|");
+
+                        ///////////////////////////////////////////
+
+                        datat += "&estudioslab="+selEstudio(trlab);
+                        datat += "&estudiosgab=" + selEstudio(trgab);
+
+
+                        if ($("#buenovida").is(':checked')) strProno += $("#buenovida").val();
+                        if ($("#buenofuncion").is(':checked')) strProno += $("#buenofuncion").val();
+                        if ($("#malovida").is(':checked')) strProno += $("#malovida").val();
+                        if ($("#malofuncion").is(':checked')) strProno += $("#malofuncion").val();
+                        if ($("#reservadoevol").is(':checked')) strProno += $("#reservadoevol").val();
+
+
+
+                        datat += "&Pronostico=" + strProno;
+
+                        datat += "&alergiasmed=" + $("#alergiasmed").val();  
+                        datat += "&alergiasotros=" + $("#alergiasotros").val();
+                        datat += "&PacPatologia=" + $("#PacPatologia").val();
+
+                        // diag Exclusviso
+                        datat += "&diagnosticosExc=" + diagExc;
+
+                        $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                        /*
+                            Guardarlo en localstorage
+                        */
+                        var ls = { nameTask: 'Guardar consulta' };
+                        ls.data = datat;
+                        ls.href = 'Consulta';
+                        Storage.save(ls);
+
+                        $.post("Consula", datat, function (data, textStatus) {
+                            alert("consulta guardarda correctamente..!");
+                            window.onbeforeunload = null;
+                            Storage.remove();
+                            window.location="pacientes";
+                        }, "json").fail(function () {
+                            alert("Ocurrio una falla favor de loguearse de nuevo");
+                        });
+                        
+                    }
+
+                    // boton guardar como del popup
+                    function guardaDiagnostico() {
+                        var datat = "nombre=" + $("#txtDiagnosticoGuardarComo").val();
+                        var strDiag="";var sep=""
+                        for (var i = 0; i < diagnostico.length; i++)
+                        {
+                            strDiag += sep + diagnostico[i].diag ;
+                            sep = "|";
+
+                        }
+                        datat += "&lineas=" + strDiag;
+
+                        $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                        /*
+                            Guardarlo en localstorage
+                        */
+                        var ls = { nameTask: 'Guardar diagnostico' };
+                        ls.data = datat;
+                        ls.href = '../Consulta/SaveDiagnostico';
+                        Storage.save(ls);
+
+                        $.post("../Consulta/SaveDiagnostico", datat, function (data, textStatus) {
+                            alert("Diagnostico guardardo correctamente..!" );
+                            Storage.remove();
+                        }, "json");
+                        
+                    }
+                    //selecciona un diagnostico de los almacenados y mostrados
+                    function seleccionaDiagnostico(idx)
+                    {  
+                        $('#diagnosticos-almacenados').hide();       
+                         updateDiag(idx,6);                
+                        $('#nuevo-diagnostico').fadeIn();
+                       
+                    }
+
+                    function eliminarDiagnostico(id) {
+                        $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                        /*
+                            Guardarlo en localstorage
+                        */
+                        var ls = { nameTask: 'Eliminar diagnostico' };
+                        ls.data = "id=" + id;
+                        ls.href = '../Consulta/EliminaDiagnostico';
+                        Storage.save(ls);
+
+                        $.post("../Consulta/EliminaDiagnostico","id="+ id, function (data, textStatus) {
+                            alert("Diagnostico Eliminado correctamente..!");
+                            buscaDiagnostico();
+                            Storage.remove();
+                        }, "json");
+
+                    }
+
+                    function eliminaTratamiento(id) {
+
+                        $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                        /*
+                            Guardarlo en localstorage
+                        */
+                        var ls = { nameTask: 'Eliminar tratamiento' };
+                        ls.data = "id=" + id;
+                        ls.href = '../Consulta/EliminaTratamiento';
+                        Storage.save(ls);
+
+                        $.post("../Consulta/EliminaTratamiento", "id=" + id, function (data, textStatus) {
+                            alert("Tratamiento Eliminado correctamente..!");
+                            Storage.remove();
+                            buscaTratamiento();
+
+                        }, "json");
+
+                    }
+
+                    var rDiag;
+                    var arrBuscadiagnostico;
+                     function buscaDiagnostico() {
+                        var datat = "name=" + $("#txtDiagnostico").val() ;   
+                        $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+
+                         /*
+                             Guardarlo en localstorage
+                         */
+                        var ls = { nameTask: 'Busqueda de diagnostico' };
+                        ls.data = datat;
+                        ls.href = "../Consulta/BuscaDiagnostico";
+                        Storage.save(ls);
+
+                        $.post("../Consulta/BuscaDiagnostico", datat, function (data, textStatus) {                            
+                            Storage.remove();
+                            var tr = "<table>";
+                            arrBuscadiagnostico=data;
+                            for (var i = 0; i < data.length; i++) {
+                                tr+="<tr>";
+                                    tr+="<td>" + data[i].nombre +  "</td>";
+                                    tr += "<td class='col-sm-4'><a href='#' class='seleccionar btn btn-default btn-sm' onclick='seleccionaDiagnostico(" + i + ");'>Seleccionar</a><a href='#' class='seleccionar btn btn-default btn-sm' onclick='eliminarDiagnostico(" + data[i].id + ");'>Eliminar</a>   </td>";
+                                tr+="</tr>";
+                            }
+                            
+                            tr+="</table>";
+                            
+                            $("#tbldiagnosticos-almacenados tbody").html(tr);
+                                                       
+                        }, "json");
+                        
+                    }
+
+
+                </script>
+                <section id="contenido-principal" class="col-sm-9 col-md-10">
+
+                    <div class="encabezado">
+                        <h1 class="pull-left">Consultas Médicas</h1>
+
+                        <div class="acciones pull-right">
+                            <a id="btn-mostrar-consulta-anterior" href="#" class="btn btn-default">Mostrar Consulta Anterior</a>
+                            <a href="#" data-target="#panel-pronostico" data-toggle="modal"   class="btn btn-primary">Guardar Consulta</a>
+                        </div>
+
+                    </div>
+                    <div class="contenido">
+
+
+                        <!--Seccion para cambiar de consulta-->
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h2>Cambiar tipo de consulta</h2>
+                                    <select class="form-control" onchange="location.href=this.value">
+                                        <option value="@(Url.Action("Consulta", "Medico", new { idPac = ViewBag.idPac, FromGine = true }))">General</option>
+                                        <option value="@(Url.Action("ConsultaObstetrica", "Medico", new { idPac = ViewBag.idPac }))">Obstetrica</option>
+                                        <option value="@(Url.Action("ConsultaGinecologica", "Medico", new { idPac = ViewBag.idPac }))">Ginecolog&iacute;a</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="consulta-anterior" class="panel-de-contenido col-md-12 col-lg-6 hidden">
+                            <div class="encabezado-de-panel">
+                                <h2 style="display: inline-block">Consulta Anterior</h2>
+
+
+                                <div id="dd-listado-de-consultas" class="btn-group pull-right">
+                                    @if (ViewBag.pacConsultas.Count > 0)
+                                    {
+                                    <button id="bFecha" type="button" class="btn btn-info">
+                                       
+                                        @(((EmeciDoctoresV2.Models.Consultas)ViewBag.pacConsultas[0]).Fecha.Value.ToLongDateString())
+                                       
+                                           </button>
+                                        
+                                    }
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                    <script>
+                                        function clickconsulta(idcons) {
+
+                                            $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                                            $.post("ConsultaById", "idcons=" + idcons, function (data, textStatus) {
+
+                                                var alt = eval(data[0].altura);
+                                                if (alt > 2) alt = alt / 100;
+                                                $("#pPeso")[0].innerHTML = data[0].peso + " Kg";
+                                              
+                                                    $("#pAltura")[0].innerHTML = alt  + " M";
+                                                if (alt>0)
+                                                    $("#pMasa")[0].innerHTML = eval(data[0].peso / (alt * alt)).toFixed(2) + " Kg/m<sup>2</sup>";
+                                                else $("#pMasa")[0].innerHTML =  " Kg/m<sup>2</sup>";
+
+                                                $("#bFecha")[0].innerHTML = data[0].fecha;
+
+                                                $("#pFrecuenciaCardiaca")[0].innerHTML = data[0].frecuenciacardiaca + " x Min";
+                                                $("#pFrecuenciaRespiratoria")[0].innerHTML = data[0].frecuenciarespiratoria + " x Min";
+                                                $("#pMedidas")[0].innerHTML = data[0].medidaspreventivas;
+                                                $("#pMotivo")[0].innerHTML = data[0].motivo;
+                                                $("#pObservaciones")[0].innerHTML = data[0].observaciones;
+                                                $("#pPerimetroCefalico")[0].innerHTML = data[0].perimetrocefalico + "cm";
+                                                $("#pSintomas")[0].innerHTML = data[0].sintomas;
+
+                                                $("#pTemperatura")[0].innerHTML = data[0].temperatura + " C";
+                                                $("#pTensionArterial")[0].innerHTML = data[0].tensionarterial + " mmHg";
+
+                                                $("#pTensionArterial")[0].innerHTML = data[0].tensionarterial + " mmHg";
+
+                                                $("#pDiagnostico")[0].innerHTML = data[0].diagnostico;
+
+                                                $("#pEstGab")[0].innerHTML = data[0].EstGabinete;
+                                                $("#pEstLab")[0].innerHTML = data[0].EstLaboratorio;
+
+                                                $("#pTratamiento")[0].innerHTML = data[0].receta;
+                                            }
+
+                                        );
+
+
+                                        }
+                                       
+                                    </script>
+                                     @foreach (EmeciDoctoresV2.Models.Consultas item in ViewBag.pacConsultas)
+                                     {
+                                          <li><a href="#" onclick="clickconsulta(@item.idconsulta);return false;">@item.Fecha.Value.ToLongDateString()</a></li>
+
+                                     }
+                                     
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <div class="contenido-de-panel">
+
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Peso</label>
+                                        <p id="pPeso">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Peso) Kg</p>
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label>Talla</label>
+                                        @{
+                                            double valtura = 0;
+                                            double vmasa = 0; }
+                                        @if (((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Altura > 2)
+                                        {
+                                            valtura = (double)((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Altura / 100;
+                                        }
+                                        else
+                                        {
+                                            valtura = (double)((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Altura;
+                                            
+                                        }
+                                       @if (valtura > 0)
+                                       {
+                                           vmasa = (double)((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Peso ;
+                                           vmasa = vmasa / (valtura * valtura);
+                                       }
+                                            
+                                            
+                                        <p id="pAltura" >@(valtura.ToString("#0.00")) M.</p>
+                                     </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label>Indice de Masa Corporal</label>
+                                        <p id="pMasa">@(vmasa.ToString("#0.00")) Kg/m<sup>2</sup></p>
+                                    </div>
+                                         
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-3">
+                                        <label>Temperatura</label>
+                                        <p id="pTemperatura">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).Temperatura) C</p>
+                                    </div>
+
+                                    <div class="form-group col-sm-3">
+                                        <label>Presión Arterial</label>
+                                        <p id="pTensionArterial">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).TensionArterial) mmHg</p>
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label>Perímetro Cefálico</label>
+                                        <p id="pPerimetroCefalico" >@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).perimetroCefalico)cm </p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label>Frecuencia Cardiaca</label>
+                                        <p id="pFrecuenciaCardiaca" >@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).FrecuenciaCardiaca) x Min.</p>
+                                    </div>
+
+                                    <div class="form-group col-sm-6">
+                                        <label>Frecuencia Respiratoria</label>
+                                        <p id="pFrecuenciaRespiratoria">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).FrecuenciaRespiratoria) x Min.</p>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Motivo de la Consulta</label>
+                                    <p id="pMotivo">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).motivo)</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Exploración Fisica</label>
+                                    <p id="pSintomas" >
+                                     @(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).SignosSintomas1)
+                                     @(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).SignosSintomas2)
+                                     @(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).SignosSintomas3)    
+                                     </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Medidas Preventivas</label>
+                                    <p id="pMedidas">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).MedidasPreventivas)</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Observaciones</label>
+                                     <p id="pObservaciones">@(((EmeciDoctoresV2.Models.Consultas)ViewBag.Cons1).observaciones)</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Diagnostico</label>
+                                     <p id="pDiagnostico" >
+                                        @Html.Raw(ViewBag.Diagnosticos)                                     
+                                     </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tratamiento</label>
+
+                                     <p id="pTratamiento">
+                                            @Html.Raw(ViewBag.recetas)
+                                      
+                                     </p>
+                                    </div>
+
+                                <div class="form-group">
+                                    <label>Estudios de Laboratorio</label>
+                                    <p id="pEstLab">
+                                      
+                                        @Html.Raw(ViewBag.estLab)
+                                      
+                                    </p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Estudios de Gabinete</label>
+                                    <p id="pEstGab">
+                                           @Html.Raw(ViewBag.estGab)
+                                                   
+                                        
+                                    </p>
+                                </div>
+
+
+                                 <ul class="list-unstyled">
+
+                                     <li class="pull-right">
+                                        <a onclick="printData('consulta-anterior')" href="#"><span class="icon glyphicon glyphicon-print"></span>
+                                       Imprimir Consulta</a>
+                                    </li>
+
+                                    <li>                               
+                                        <a href="https://www.emeci.com/PacienteExpediente/AccesEmeci.aspx?opt=EST&emeci=@ViewBag.notarjeta&posicion=@ViewBag.TarjetaCord&dato=@ViewBag.TarjetaDato" target="blank">
+                                           <span class="icon glyphicon glyphicon-briefcase"></span>
+                                            Editar Reporte de Estudios Anteriores de Gabinete, Laboratorio y Otros
+                                        </a>
+                                    </li>
+
+                                    
+                                </ul>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="nueva-consulta" class="panel-de-contenido col-md-12 col-lg-12">
+
+                            <div class="encabezado-de-panel">
+                                <h2>Nueva Consulta</h2>
+                            </div>
+                            <script>
+                                function fmasacorporal() {
+                                    var talla = eval($("#talla").val());
+                                    var valor = eval($("#peso").val()) /(talla*talla);
+                                    if(eval(valor)>0)
+                                        $("#indicemasa").val(valor.toFixed(2));
+                                    else
+                                        $("#indicemasa").val("");
+                                    
+                                }
+                            </script>
+                            <div class="contenido-de-panel">
+
+                                    <form role="form">
+                                        <div class="row">
+                                                
+                                                <div class="form-group col-sm-2" style="width: 170px">
+                                                    <label>Peso</label> <br>
+                                                    <input type="text" id="peso" onchange="fmasacorporal();" class="form-control" style="width: 70px; display: inline-block; margin-left: 4px"  />
+                                                     <span>Kg.</span>
+                                                </div>
+
+                         
+                                                <div class="form-group  col-sm-2"  style="width: 190px">
+                                                    <label >Talla</label><br>
+                                                    <input type="text" id="talla" onchange="fmasacorporal();" class="form-control" style="width: 70px; display: inline-block; margin-left: 4px "  />
+                                                    <span>M.</span>
+                                                </div>
+
+                                                <div class="form-group  col-sm-2" style="width: 260px">
+                                                    <label>Indice de Masa Corporal</label><br>
+                                                    <input type="text" id="indicemasa" class="form-control"  style="width: 70px; display: inline-block; margin-left: 4px" />
+                                                    <span>Kg/m<sup>2</sup</span>
+                                                </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="form-group  col-sm-2" style="width: 170px">
+                                                <label for="">Temperatura</label><br>
+                                                <input type="text" id="temperatura" class="form-control" style="width: 70px; display: inline-block; margin-left: 4px "  />
+                                                <span>C.</span>
+                                            </div>
+                                            <div class="form-group  col-sm-2" style="width: 190px">
+                                                <label for="">Tensión Arterial</label><br>
+                                                <input type="text" id="tensionarterial" class="form-control"  style="width: 70px; display: inline-block; margin-left: 4px" />
+                                                <input type="text" id="tensionarterialB" name="tensionarterialB" class="form-control"  style="width: 70px; display: inline-block; margin-left: 4px" />
+                                            </div>
+                                            <div class="form-group col-sm-2" style="width: 240px">
+                                                <label for="">Perímetro Cefálico</label> <br>
+                                                <input type="text" id="perimetrocef" class="form-control" style="width: 70px; display: inline-block; margin-left: 4px"  />
+                                                <span>Cm.</span>
+                                            </div>
+                                         </div>
+
+                                        <div class="form-group row">
+                                            <div class="form-group  col-sm-3" style="width: 250px">
+                                                <label for="">Frecuencia Cardiaca</label><br>
+                                                <input type="text" id="freccard" class="form-control" style="width: 70px; display: inline-block; margin-left: 4px "  />
+                                                <span> x Min.</span>
+                                            </div>
+                                            <div class="form-group  col-sm-3" style="width: 270px">
+                                                <label for="">Frecuencia Respiratoria</label><br>
+                                                <input type="text" id="frecresp" class="form-control"  style="width: 70px; display: inline-block; margin-left: 4px" />
+                                                <span> x Min.</span>
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group ">
+                                            <label for="">Motivo de la Consulta</label>
+                                            <textarea id="motivo" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="">Exploración Física </label>
+                                            <textarea id="expfisica" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="">Medidas Preventivas</label>
+                                            <textarea id="medprev" class="form-control" rows="2"></textarea>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="">Observaciones</label>
+                                            <textarea id="observa" class="form-control" rows="2"></textarea>
+                                        </div>
+
+                                        <div class="botones-de-acciones">
+                                            <button id="btn-diagnostico" type="submit" class="btn btn-default btn-lg" data-toggle="modal" data-target="#panel-diagnostico">Diagnostico</button>
+                                            <button id="btn-tratamiento" type="submit" class="btn btn-default btn-lg" data-toggle="modal" data-target="#panel-tratamiento">Tratamiento</button>
+                                            <button id="btn-estudios-de-laboratorio" type="submit" class="btn btn-default btn-lg" data-toggle="modal" data-target="#panel-estudios-de-laboratorio">Estudios de Laboratorio</button>
+                                            <button id="btn-estudios-de-gabinete" type="submit" class="btn btn-default btn-lg" data-toggle="modal" data-target="#panel-estudios-de-gabinete">Estudios de Gabinete</button>
+                                        </div>
+                                    </form>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+         </div>
+
+         <script>
+
+             function CreateCustomTable(result) {
+                 var str = '<table>';
+                 
+                 for (var i = 0; i < result.length; i++) {
+
+                     str += '<tr><td><spam id="strat' + i.toString() + '" >' + result[i] + '</spam><textarea id="itrat' + i.toString() + '"   class="form-control" style="display:none" >' + result[i] + '</textarea></td>' + '<td style="width: 150px"><a id="tratedit' + i.toString() + '" href="javascript:updateTrat(' + i + ',0)" class="btn btn-link btn-sm noshowboton">Editar</a><a id="tratdel' + i.toString() + '" href="javascript:updateTrat(' + i + ',2)" class="btn btn-link btn-sm noshowboton">Eliminar</a>';
+                     str += '<a id="tratupdate' + i.toString() + '" style="display:none"  href="javascript:updateTrat(' + i + ',1)" class="btn btn-link btn-sm">Actualizar</a><a id="tratcancel' + i.toString() + '" style="display:none"  href="javascript:updateTrat(' + i + ',4)" class="btn btn-link btn-sm">Cancelar</a>';
+                     str += '</td></tr>';
+                 }
+                 str += '</table>';
+                 return str;
+             }
+
+             function ExcClick(o,i)
+             {
+                 console.log(i);
+                 diagnostico[i].exc = o.checked;
+                 console.log(o.checked);
+             }
+
+             function CreateDiagTable(result) {
+                 var str = '<table>';
+
+                 for (var i = 0; i < result.length; i++) {
+                     console.log("icdt"+result[i].diag);
+                     str += '<tr><td><spam id="sdiag' + i.toString() + '" >' + result[i].diag + '</spam><textarea id="idiag' + i.toString() + '"  class="form-control" style="display:none">' + result[i].diag + '</textarea></td>' + '<td style="width: 150px"><a id="diagedit' + i.toString() + '" href="javascript:updateDiag(' + i + ',0)" class="btn btn-link btn-sm noshowboton">Editar</a><a id="diagdel' + i.toString() + '" href="javascript:updateDiag(' + i + ',2)" class="btn btn-link btn-sm noshowboton">Eliminar</a>';
+                     str += '<a id="diagupdate' + i.toString() + '" style="display:none"  href="javascript:updateDiag(' + i + ',1)" class="btn btn-link btn-sm">Actualizar</a><a id="diagcancel' + i.toString() + '" style="display:none"  href="javascript:updateDiag(' + i + ',4)" class="btn btn-link btn-sm">Cancelar</a>';
+                     str += '</td><td><div style="width:80px"><input id="chkexclusivo' + i.toString() + '" type="checkbox" onclick="ExcClick(this,' + i.toString() + ');" />Exclusivo</div></td></tr>';
+                 }
+                 str += '</table>';
+                 return str;
+             }
+
+      
+             var diagnostico = new Array();
+
+             // agrega diagnostico manualmente
+             function agregarDiagnostico() {
+                 var obj = $("#txtDiagnostico");
+                 if (obj.val() != "") {
+                     var o = { diag:"",exc:false };
+                     o.diag=obj.val();
+                     diagnostico.push(o);
+                     obj.val("");
+                     $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+                     $('#diagnosticos-almacenados').hide();
+
+                     $('#nuevo-diagnostico').fadeIn();
+                 }
+             }
+
+             // actualiza la tabla de diagnosticos seleccionados
+
+             function updateDiag(ind, action) {
+                 switch (action) {
+                     case 0: // editar
+                         $("#idiag" + ind).show();
+                         $("#sdiag" + ind).hide();
+
+                         $("#diagupdate" + ind).show();
+                         $("#diagedit" + ind).hide();
+
+                         $("#diagcancel" + ind).show();
+
+                         $("#diagdel" + ind).hide();
+
+                         break;
+                     case 1: // update
+                         diagnostico[ind].diag = $("#idiag" + ind).val();
+                         $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+                         break;
+                     case 2: // Delete
+                         diagnostico.splice(ind, 1);
+                         $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+                         break;
+                     case 4: // Cancel
+                         $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+                         break;
+                     case 5: //Clear
+                         diagnostico.splice(0, diagnostico.length);
+                         $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+
+                         $('#diagnosticos-almacenados').hide();
+                        
+                         $('#nuevo-diagnostico').fadeIn();
+
+                         break;
+                     case 6: //fill guardardo
+                        // diagnostico.splice(0, diagnostico.length);
+                         var cad = arrBuscadiagnostico[ind].lineas.split("|");                        
+                         for (var i = 0; i < cad.length; i++) {
+                             console.log(cad[i]);                           
+                             diagnostico.push({ diag: cad[i], exc: false });
+                         }
+                         $("#tblDiagnosticos tbody").html(CreateDiagTable(diagnostico));
+                 }
+             }
+
+             //Edit Estudio
+             function updateEstudio(i, estudio,cmd) {
+                
+                        switch(cmd)
+                        { // Edit
+                            case 0:
+                                {
+                                    $("#div" + estudio + i ).hide();
+                                    $("#txt" + estudio + i ).show();
+                                    $("#aedit" + estudio + i ).hide();
+                                    $("#aacept" + estudio + i ).show();
+                                    $("#acanc" + estudio + i ).show(); break;
+                                }
+                            //Cancel
+                            case 1:
+                            case 2:
+                                {
+                                    $("#div" + estudio + i).show();
+                                    $("#txt"  + estudio +  i).hide();
+                                    $("#aedit" + estudio + i).show();
+                                    $("#aacept" + estudio + i).hide();
+                                    $("#acanc" + estudio + i).hide();
+                                    if (cmd == 2)//aceptar
+                                        $("#div" + estudio + i)[0].innerHTML = $("#txt" + estudio + i).val();
+
+                                    break;
+
+                                }
+                        
+                        }
+                 
+             }
+
+
+         </script>
+        <!-- Modal para Diagnosticos -->
+
+        <div id="panel-diagnostico" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Crear Diagnostico</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Escribe el diagnostico y haz click en agregar.</p>
+
+                        <div class="row">
+
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                     <input id="txtDiagnostico" type="text" class="form-control" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-info" onclick="agregarDiagnostico();" >Agregar</button>
+                                    <button type="button" id="btn-buscar-diagnostico" onclick="buscaDiagnostico();" class="btn btn-default">Buscar</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <div id="diagnosticos-almacenados" class="panel panel-default" style="margin-bottom: 0; display: none" >
+                            <div class="panel-heading">
+                                Diagnosticos Guardados
+                            </div>
+                            <table id="tbldiagnosticos-almacenados" class="table">
+                                <tr>
+                                    <td>Faringitis Aguda Viral </td>
+                                    <td style="width: 130px"><a href="#" class="seleccionar btn btn-default btn-sm">Seleccionar</a>  </td>
+                                </tr>
+                                
+                            </table>
+                        </div><!-- #diagnosticos-almacenados -->
+
+
+                        <div id="nuevo-diagnostico" class="panel panel-info " style="margin-bottom: 0" >
+                            <div class="panel-heading">
+                                Diagnostico del Paciente
+                            </div>
+                            <table id ="tblDiagnosticos" class="table">
+
+                                <tr class="sin-diagnostico">
+                                    <td colspan="2">
+                                        <div class="text-center alert-warning">No se ha agregado ningun diagnostico.</div>
+                                    </td>
+                                </tr>
+                                
+                            </table>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-default" onclick="updateDiag(5,5)" >Quitar todos</button>
+                                <button id="btndiagnostico" type="button" class="btn btn-default"  data-toggle="modal" data-target="#panel-diag-diagnostico" >Guardar como...</button>
+                                                              
+                            </div>
+                        </div><!-- fin: #nuevo-diagnostico -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-default pull-left" data-dismiss="modal" onclick="updateDiag(0, 5);" >Cancelar</button>
+                        <button type="button"  class="btn btn-primary" data-dismiss="modal">Agregar a Consulta</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-diagnostico -->
+        
+                <script>
+                    // Tratamientos
+
+            var tratamiento = new Array();
+            function agregarTratamiento() {
+                var obj = $("#txtTratamiento");
+                if (obj.val() != "") {
+                    tratamiento.push(obj.val());
+                    obj.val("");
+                    $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));
+                    $('#tratamientos-almacenados').hide();
+
+                    $('#nuevo-tratamiento').fadeIn();
+                }
+            }
+
+            function guardaTratamiento() {
+                var datat = "nombre=" + $("#txtTratamientoGuardarComo").val();
+                datat += "&lineas=" + tratamiento.join("|");
+
+                $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                /*
+                   Guardarlo en localstorage
+               */
+                var ls = { nameTask: 'Guardar tratamiento' };
+                ls.data = datat;
+                ls.href = '../Consulta/SaveTratamiento';
+                Storage.save(ls);
+
+                $.post("../Consulta/SaveTratamiento", datat, function (data, textStatus) {
+                    alert("Tratamiento guardardo correctamente..!");
+                    Storage.remove();
+                }, "json");
+
+            }
+
+            // boton guardar como del popup
+            function guardaTratamiento() {
+                var datat = "nombre=" + $("#txtTratamientoGuardarComo").val();
+                datat += "&lineas=" + tratamiento.join("|");
+
+                $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                /*
+                   Guardarlo en localstorage
+               */
+                var ls = { nameTask: 'Guardar Tratamiento' };
+                ls.data = datat;
+                ls.href = '../Consulta/SaveTratamiento';
+                Storage.save(ls);
+
+                $.post("../Consulta/SaveTratamiento", datat, function (data, textStatus) {
+                    alert("Tratamiento guardardo correctamente..!");
+                    Storage.remove();
+                }, "json");
+
+            }
+            //selecciona un diagnostico de los almacenados y mostrados
+            function seleccionaTratamiento(idx) {
+                $('#tratamientos-almacenados').hide();
+                updateTrat(idx, 6);
+                $('#nuevo-tratamiento').fadeIn();
+                return true;
+            }
+
+            var rTrat;
+            var arrBuscaTratamiento;
+            function buscaTratamiento() {
+                var datat = "name=" + $("#txtTratamiento").val();
+
+                $.blockUI({ message: '<h1>Espere un momento por favor...</h1>' });
+
+                $.post("../Consulta/BuscaTratamiento", datat, function (data, textStatus) {
+                    var tr = "<table>";
+                    arrBuscaTratamiento = data;
+                    for (var i = 0; i < data.length; i++) {
+                        tr += "<tr>";
+                        tr += "<td>" + data[i].nombre + "</td>";
+                        tr += "<td style='width: 130px'><a href='#' class='seleccionar btn btn-default btn-sm' onclick='seleccionaTratamiento(" + i + ");'>Seleccionar</a>  <a href='#' class='seleccionar btn btn-default btn-sm' onclick='eliminaTratamiento(" + data[i].id + ");'>Eliminar</a></td>";
+                        tr += "</tr>";
+                    }
+
+                    tr += "</table>";
+
+                    $("#tbltratamientos-almacenados tbody").html(tr);
+
+                }, "json");
+
+            }
+
+
+
+            function updateTrat(ind, action) {
+                switch (action) {
+                    case 0: // editar
+                        $("#itrat" + ind).show();
+                        $("#strat" + ind).hide();
+                        $("#tratupdate" + ind).show();
+                        $("#tratedit" + ind).hide();
+                        $("#tratcancel" + ind).show();
+                        $("#tratdel" + ind).hide();
+
+                        break;
+                    case 1: // update
+                        tratamiento[ind] = $("#itrat" + ind).val();
+                        $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));                        
+                        break;
+                    case 2: // Delete
+                        tratamiento.splice(ind, 1);
+                        $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));
+                        break;
+                    case 4: // Cancel
+                        $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));
+                        break;
+
+                    case 5: //Clear
+                        tratamiento.splice(0, tratamiento.length);
+                        $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));
+
+                        $('#tratamientos-almacenados').hide();
+                        
+                        $('#nuevo-tratamiento').fadeIn();
+
+                        break;
+                    case 6: //fill guardardo
+
+                        //tratamiento.splice(0, tratamiento.length);
+                        var cad = arrBuscaTratamiento[ind].lineas.split("|");
+                        for (var i = 0; i < cad.length; i++) {
+                            tratamiento.push(cad[i]);
+                        }
+                        $("#tblTratamientos tbody").html(CreateCustomTable(tratamiento));
+                }
+                
+            }
+        </script>
+
+        <!-- Modal para Tratamientos -->
+        <div id="panel-tratamiento" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Crear Tratamiento</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Escribe el tratamiento y haz click en agregar.</p>
+
+                        <div class="row">
+
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                    <input type="text" id="txtTratamiento" class="form-control" />
+                                </div>
+                                <div class="col-sm-4">
+                                   
+                                    <button type="button" class="btn btn-info" onclick="agregarTratamiento();">Agregar</button>
+                                    <button type="button" id="btn-buscar-tratamientos" class="btn btn-default" onclick="buscaTratamiento();" >Buscar</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr/>
+
+                        <div id="tratamientos-almacenados" class="panel panel-default" style="margin-bottom: 0; display: none" >
+                            <div class="panel-heading">
+                                Tratamientos Guardados
+                            </div>
+                            <table id="tbltratamientos-almacenados" class="table">
+
+
+                                <tr>
+                                    <td><strong>Mesulid sol gotas 5%</strong><br> tomar 4 gotas cada 12hr x 7 dias</td>
+                                    <td style="width: 130px"><a href="#" class="seleccionar btn btn-default btn-sm">Seleccionar</a>  </td>
+                                </tr>
+                         
+
+                            </table>
+                        </div><!-- #Tratamientos-almacenados -->
+
+
+                        <div id="nuevo-tratamiento" class="panel panel-info divmarg" style="margin-bottom: 0" >
+                            <div class="panel-heading noshowboton">
+                                Tratamiento para el Paciente
+                            </div>
+                            <table id="tblTratamientos" class="table">
+                                <tr class="sin-tratamiento">
+                                    <td colspan="2">
+                                        <div class="text-center alert-warning">No se ha agregado ningun tratamiento.</div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-default noshowboton" onclick="updateTrat(5,5)" >Quitar todos</button>
+                                <button type="button" class="btn btn-default noshowboton" data-toggle="modal" data-target="#panel-diag-tratamiento" >Guardar como...</button>
+                            </div>
+                        </div><!-- fin: #nuevo-Tratamiento -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="updateTrat(0, 5);" class="btn btn-default pull-left" data-dismiss="modal" >Cancelar</button>
+                        <button type="button" class="btn btn-default" onclick="printDataRec('nuevo-tratamiento')">Imprimir</button>
+                        <button type="button" class="btn btn-primary"  data-dismiss="modal">Agregar a Consulta</button>
+                        
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-diagnostico -->
+
+
+        <!-- Modal para Estudios de Laboratorio -->
+        <div id="panel-estudios-de-laboratorio" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Estudios de Laboratorio</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <p>Seleccione uno de los grupos para ver los estudios disponibles, haga click sobre el nombre del estudio para seleccionarlo.</p>
+
+                        <div class="panel-group" id="accordion">
+                            @{ byte c = 96;
+                               foreach (var t in ViewBag.catEstudios)
+                               {
+                                   if (t.Tipo == 0)
+                                   {
+                                       c += 1;
+                             <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#estudio-grupo-@(((char)c).ToString())" class="btn-block">
+                                           @t.descripcion
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="estudio-grupo-@(((char)c).ToString())" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table table-hover listado-de-estudios">
+                                         @foreach (var es in ViewBag.estudios)
+                                         {
+                                             if (es.idcategoriaestudio == t.idcategoriaestudio)
+                                             {                                                                             
+                                            <tr onmouseover="this.style.cursor='pointer'" class="noshowboton">
+                                                <td onclick="selecciona(this);" class="selector"><i class="glyphicon glyphicon-ok"></i></td>
+                                                <td><div id="divlab@(es.idestudio)">@es.descripcion </div>
+                                                  <textarea id="txtlab@(es.idestudio)" class="form-control" style="display:none" >@es.descripcion</textarea>
+                                                </td>
+                                                <td style="width: 80px"> 
+                                                    <a id="aeditlab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'lab',0);" class="btn btn-link btn-sm noshowboton">Editar</a> 
+                                                    <a id="aaceptlab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'lab',2);" style="display:none" class="btn btn-link btn-sm">Aceptar</a> 
+                                                    <a id="acanclab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'lab',1);" style="display:none" class="btn btn-link btn-sm">Cancelar</a> 
+                                                 </td>
+                                            </tr>
+                                             }
+                                         }  
+                                        </table>
+                                    </div>
+                                </div>
+                             </div>
+                                   }
+                               }
+                            }
+                           
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-default" onclick="printData('accordion')" >Imprimir</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar a Consulta</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-estudios-de-laboratorio -->
+
+
+        <!-- Modal para Estudios de Ganinete -->
+        <div id="panel-estudios-de-gabinete" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Estudios de Gabinete</h4>
+                    </div>
+                    <script>
+                        function selecciona(t)
+                        {
+                            if (t.parentNode.className.indexOf("activo") >=0)
+                                t.parentNode.className = "noshowboton";
+                            else
+                                t.parentNode.className = "activo";
+                        }
+                    </script>
+                    <div class="modal-body">
+
+                        <p>Seleccione uno de los grupos para ver los estudios disponibles, haga click sobre el nombre del estudio para seleccionarlo.</p>
+
+                        <div class="panel-group" id="accordion-estudios-de-gabinete">
+                            @{ 
+                                c = 96;
+                                foreach (var t in ViewBag.catEstudios)
+                                {
+                                    if (t.Tipo == 1)
+                                    {
+                                        c += 1;
+                             <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion-estudios-de-gabinete" href="#estudio-gabinete-grupo-@(((char)c).ToString())" class="btn-block">
+                                           @t.descripcion
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="estudio-gabinete-grupo-@(((char)c).ToString())" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table table-hover listado-de-estudios">
+                                         @foreach (var es in ViewBag.estudios)
+                                         {
+                                             if (es.idcategoriaestudio == t.idcategoriaestudio)
+                                             {                                                                             
+                                           
+                                            <tr onmouseover="this.style.cursor='pointer'" class="noshowboton">
+                                                <td onclick="selecciona(this);" class="selector"><i class="glyphicon glyphicon-ok"></i></td>
+                                                <td><div id="divgab@(es.idestudio)">@es.descripcion </div>
+                                                  <textarea id="txtgab@(es.idestudio)" class="form-control" style="display:none" >@es.descripcion</textarea>
+                                                </td>
+                                                <td style="width: 80px"> 
+                                                    <a id="aeditgab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'gab',0);" class="btn btn-link btn-sm noshowboton">Editar</a> 
+                                                    <a id="aaceptgab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'gab',2);" style="display:none" class="btn btn-link btn-sm">Aceptar</a> 
+                                                    <a id="acancgab@(es.idestudio)" href="javascript:updateEstudio(@(es.idestudio),'gab',1);" style="display:none" class="btn btn-link btn-sm">Cancelar</a> 
+                                                 </td>
+                                            </tr>
+
+                                             }
+                                         }  
+                                        </table>
+                                    </div>
+                                </div>
+                             </div>
+                                    }
+                                }
+                            }
+                            
+
+                         </div>
+                       
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Cancelar</button>
+                        <button type="button" class="btn btn-default" onclick="printData('accordion-estudios-de-gabinete');">Imprimir</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar a Consulta</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-estudios-de-gabinete -->
+                
+
+        <!-- Guardar como Diagnostico nuevo -->
+        <div id="panel-diag-diagnostico" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Guardar Diagnostico Como</h4>
+                    </div>
+                    <div class="modal-body">                        
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                     <input id="txtDiagnosticoGuardarComo" type="text" class="form-control" />
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left"   aria-hidden="true" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardaDiagnostico();" data-dismiss="modal">Guardar Diagnostico</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-diagnostico -->
+        
+
+         <!-- Guardar como Tratamiento nuevo -->
+        <div id="panel-diag-tratamiento" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Guardar Tratamiento Como</h4>
+                    </div>
+                    <div class="modal-body">                        
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-8">
+                                     <input id="txtTratamientoGuardarComo" type="text" class="form-control" />
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left"  aria-hidden="true" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardaTratamiento();" data-dismiss="modal">Guardar Tratamiento</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-diagnostico -->
+        
+         <!-- Modal para Pronostico -->
+        <div id="panel-pronostico" class="modal fade lg">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Pronóstico</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Bueno</h4>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="buenovida" type="checkbox" value="Bueno Para La Vida"> Para la vida.
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="buenofuncion" type="checkbox" value="Bueno Para La Funcion"> Para la función.
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Malo</h4>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="malovida" name="malovida" type="checkbox" value="Malo Para La Vida"> Para la vida.
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="malofuncion" name="malofuncion" type="checkbox" value="Malo Para La Función" > Para la función.
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="input-lg">
+                                    <input id="reservadoevol" name="reservadoevol" value="Reservado a evolución" type="checkbox"> Reservado a evolución.
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="javascript:guardaConsulta();" >Agregar a Consulta</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-pronostico -->
+
+         <!-- Modal para margenes -->
+        <div id="panel-margenes" class="modal fade lg">
+            
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Margenes</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display:none" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Margenes</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Recetas</h4>
+
+
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            Arriba
+                                            <input id="txttop1" type="text" class="form-control" value="@ViewBag.recetatop">
+                                       </label>                                       
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            Abajo<input id="txtbottom1" class="form-control" type="text" value="@ViewBag.recetabottom" />
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            Izquierda<input id="txtleft1" type="text" class="form-control" value="@ViewBag.recetaleft">
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            Derecha<input id="txtright1" class="form-control" type="text" value="@ViewBag.recetaright" />
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Consultas</h4>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                           Arriba <input id="txttop2" type="text" class="form-control" value="@ViewBag.consultatop">
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            Abajo<input id="txtbotton2" class="form-control" type="text" value="@ViewBag.consultabottom">
+                                        </label>
+                                    </div>
+                                     <div class="checkbox">
+                                        <label>
+                                           izquierda <input id="txtleft2" type="text" class="form-control" value="@ViewBag.consultaleft">
+                                        </label>
+                                    </div>
+
+                                    <div class="checkbox">
+                                        <label>
+                                            Derecha<input id="txtright2" class="form-control" type="text" value="@ViewBag.consultaright">
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" id="margins" class="btn btn-primary"  onclick="javascript:guardaMargenes();">Guardar</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- fin: #panel-margenes -->
+
+
+        <!--David Bustamante-->
+        <style>
+            #framePrint{ border:medium none; height:100%; overflow:hidden; width:100%;}
+            #contentPrint
+            { background:#fff none repeat scroll 0 0; 
+              border-radius:10px;
+              display:none;
+              height:100%;
+              margin:13px auto 40px;
+              position:relative;
+              z-index:1000;
+              width:100%;
+            }
+            .mfp-content { height:100% !important
+            }
+        </style>
+        
+        
+         <!-- Cargando Scripts -->
+        <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
+        <script>            window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+      
+        <script src="~/js/vendor/bootstrap.min.js"></script>
+        <script src="~/js/jquery.maskedinput.js"></script>
+        <script src="~/js/validador.js"></script>
+        <script src="~/js/main.js"></script>
+
+
+        <script>
+            //$('#txttop1, #txtbottom1, #txtleft1, #txtright1').mask('999');
+
+            //$('#txttop2, #txtbotton2, #txtleft2, #txtright2').mask('999');
+
+
+            // Diagnostico
+            $('#btn-buscar-diagnostico').click(function () {
+                $('#nuevo-diagnostico').hide();
+                $('#diagnosticos-almacenados').fadeIn();
+            });
+
+            $('#diagnosticos-almacenados a.seleccionar').click(function () {
+
+                $('#nuevo-diagnostico').fadeIn();
+                $('#diagnosticos-almacenados').hide();
+            });
+
+            // Tratamiento
+            $('#btn-buscar-tratamientos').click(function () {
+                $('#nuevo-tratamiento').hide();
+                $('#tratamientos-almacenados').fadeIn();
+            });
+
+
+            $('#tratamientos-almacenados a.seleccionar').click(function () {
+
+                $('#nuevo-tratamiento').fadeIn();
+                $('#tratamientos-almacenados').hide();
+            });
+
+
+
+
+
+        </script>
+
+        
+   <script src="~/js/jquery.blockUI.js"></script>
+        <script>  $(document).ajaxStop($.unblockUI);  </script>
+    </body>
+</html>

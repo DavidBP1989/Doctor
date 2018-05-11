@@ -1,0 +1,1934 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="emeciModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="CatCategoEstudios">
+          <Key>
+            <PropertyRef Name="idcategoriaestudio" />
+          </Key>
+          <Property Name="idcategoriaestudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tipo" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="catdiagnostico">
+          <Key>
+            <PropertyRef Name="idcatdiagnostico" />
+          </Key>
+          <Property Name="idcatdiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="lineas" Type="nvarchar" MaxLength="500" />
+          <Property Name="idmedico" Type="int" />
+        </EntityType>
+        <EntityType Name="CatEstudios">
+          <Key>
+            <PropertyRef Name="idestudio" />
+          </Key>
+          <Property Name="idestudio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="idcategoriaestudio" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catrecetas">
+          <Key>
+            <PropertyRef Name="idcatreceta" />
+          </Key>
+          <Property Name="idcatreceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="lineas" Type="ntext" />
+          <Property Name="idmedico" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Ciudades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="idciudad" />
+          </Key>
+          <Property Name="idciudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="idEstado" Type="nvarchar" MaxLength="2" />
+          <Property Name="IdPais" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="ConsultaGinecologa">
+          <Key>
+            <PropertyRef Name="idconsultaginecologa" />
+          </Key>
+          <Property Name="idconsultaginecologa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idconsulta" Type="int" Nullable="false" />
+          <Property Name="FechaUltimaMestruacion" Type="smalldatetime" />
+          <Property Name="Gestas" Type="tinyint" />
+          <Property Name="ParaGestas" Type="tinyint" />
+          <Property Name="Cesareas" Type="tinyint" />
+          <Property Name="abortos" Type="tinyint" />
+          <Property Name="RecienNacidosVivos" Type="tinyint" />
+          <Property Name="mortinatos" Type="tinyint" />
+          <Property Name="EdadInicioVidaSexual" Type="tinyint" />
+          <Property Name="menacma" Type="nchar" MaxLength="10" />
+          <Property Name="oligonorrea" Type="bit" />
+          <Property Name="Proiomenorrea" Type="bit" />
+          <Property Name="Hipermenorrea" Type="bit" />
+          <Property Name="Dismenorrea" Type="bit" />
+          <Property Name="Dispareunia" Type="bit" />
+          <Property Name="Leucorrea" Type="bit" />
+          <Property Name="Lactorrea" Type="bit" />
+          <Property Name="Amenorrea" Type="bit" />
+          <Property Name="Metrorragia" Type="bit" />
+          <Property Name="Otros" Type="bit" />
+          <Property Name="OtrosEspecifique" Type="ntext" />
+          <Property Name="TienePareja" Type="bit" />
+          <Property Name="SexoPareja" Type="nvarchar" MaxLength="1" />
+          <Property Name="EstadoCivilPareja" Type="nvarchar" MaxLength="30" />
+          <Property Name="GrupoRHPareja" Type="nvarchar" MaxLength="30" />
+          <Property Name="FechaNacimientoPareja" Type="smalldatetime" />
+          <Property Name="OcupacionPareja" Type="nvarchar" MaxLength="30" />
+          <Property Name="TelefonoPareja" Type="nvarchar" MaxLength="30" />
+          <Property Name="nombrePareja" Type="nvarchar" MaxLength="60" />
+          <Property Name="edadPareja" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="ConsultaObstetrica">
+          <Key>
+            <PropertyRef Name="IdConsultaObstetrica" />
+          </Key>
+          <Property Name="IdConsultaObstetrica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="noembarazo" Type="tinyint" />
+          <Property Name="abortos" Type="tinyint" />
+          <Property Name="FechaUltmoParto" Type="smalldatetime" />
+          <Property Name="PrimerDiaUltimaMestruacuion" Type="smalldatetime" />
+          <Property Name="ToxemiasPrevias" Type="tinyint" />
+          <Property Name="CesareasPrevia" Type="tinyint" />
+          <Property Name="UsoDeForceps" Type="tinyint" />
+          <Property Name="Motinatos" Type="tinyint" />
+          <Property Name="RMVivos" Type="tinyint" />
+          <Property Name="EmbarazoEtopicos" Type="tinyint" />
+          <Property Name="EmbrazosComplicadosPrevios" Type="tinyint" />
+          <Property Name="EmbrazoEtopicoExplique" Type="ntext" />
+          <Property Name="EmbarazosComplicadosExplique" Type="ntext" />
+          <Property Name="NoComplicacionesPertinales" Type="tinyint" />
+          <Property Name="ComplicacionesPerinatalesExplique" Type="ntext" />
+          <Property Name="NoEmbrazosAnormales" Type="tinyint" />
+          <Property Name="EmbarazosAnormalesExplique" Type="ntext" />
+          <Property Name="FU" Type="tinyint" />
+          <Property Name="FCF" Type="tinyint" />
+          <Property Name="CC" Type="tinyint" />
+          <Property Name="CA" Type="tinyint" />
+          <Property Name="LF" Type="tinyint" />
+          <Property Name="DSP" Type="tinyint" />
+          <Property Name="Posicion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Presentacion" Type="nvarchar" MaxLength="30" />
+          <Property Name="siuacuion" Type="nvarchar" MaxLength="30" />
+          <Property Name="Actitud" Type="nvarchar" MaxLength="30" />
+          <Property Name="MovimientosFetales" Type="nvarchar" MaxLength="30" />
+          <Property Name="PesoAproxProducto" Type="tinyint" />
+          <Property Name="TA" Type="tinyint" />
+          <Property Name="FCM" Type="tinyint" />
+          <Property Name="Edema" Type="nvarchar" MaxLength="30" />
+          <Property Name="SeHizoUf" Type="bit" />
+          <Property Name="idconsulta" Type="int" />
+          <Property Name="activaSexualmente" Type="bit" />
+          <Property Name="EspecifiqueToxemias" Type="nvarchar" MaxLength="100" />
+          <Property Name="Partos" Type="tinyint" />
+          <Property Name="TipoDistocia" Type="tinyint" />
+          <Property Name="MotivoDistocia" Type="tinyint" />
+          <Property Name="EspecifiqueMotivoDistocia" Type="nvarchar" MaxLength="80" />
+          <Property Name="EspecifiqueTipoDistocia" Type="nvarchar" MaxLength="80" />
+          <Property Name="ultrasonido" Type="nvarchar" MaxLength="100" />
+          <Property Name="exploracionFisica" Type="nvarchar" MaxLength="100" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Consultas">
+          <Key>
+            <PropertyRef Name="idconsulta" />
+          </Key>
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="idconsulta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" />
+          <Property Name="Peso" Type="real" />
+          <Property Name="Altura" Type="real" />
+          <Property Name="Temperatura" Type="real" />
+          <Property Name="Cabeza" Type="real" />
+          <Property Name="perimetroCefalico" Type="real" />
+          <Property Name="TensionArterial" Type="int" />
+          <Property Name="TensionArterialB" Type="int" />
+          <Property Name="FrecuenciaCardiaca" Type="int" />
+          <Property Name="FrecuenciaRespiratoria" Type="int" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="motivo" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SignosSintomas1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SignosSintomas2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SignosSintomas3" Type="nvarchar" MaxLength="1000" />
+          <Property Name="MedidasPreventivas" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProximaCita" Type="smalldatetime" />
+          <Property Name="observaciones" Type="ntext" />
+          <Property Name="Pronostico" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DatosTarjeta">
+          <Key>
+            <PropertyRef Name="iddatostarjeta" />
+          </Key>
+          <Property Name="noTarjeta" Type="nvarchar" MaxLength="15" />
+          <Property Name="Coordenada" Type="nvarchar" MaxLength="3" />
+          <Property Name="Dato" Type="nvarchar" MaxLength="3" />
+          <Property Name="iddatostarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnosticos">
+          <Key>
+            <PropertyRef Name="iddiagnostico" />
+          </Key>
+          <Property Name="idpaciente" Type="int" Nullable="false" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="Lineas" Type="ntext" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="LineasVital" Type="ntext" />
+          <Property Name="datos" Type="ntext" />
+          <Property Name="idconsulta" Type="int" />
+          <Property Name="iddiagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiagnosticosExc">
+          <Key>
+            <PropertyRef Name="iddiagexc" />
+          </Key>
+          <Property Name="idconsulta" Type="int" />
+          <Property Name="iddiagexc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lineas" Type="ntext" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Estados' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="idEstado" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdPais" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="codigo" Type="nvarchar" MaxLength="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Estudios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Estudios">
+          <Key>
+            <PropertyRef Name="idEstudio" />
+          </Key>
+          <Property Name="idEstudio" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="NombreEstudio" Type="nvarchar" MaxLength="80" />
+          <Property Name="CentroMedico" Type="nvarchar" MaxLength="50" />
+          <Property Name="idexpediente" Type="int" />
+          <Property Name="Resultado" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="EstudiosGab">
+          <Key>
+            <PropertyRef Name="idestudiogab" />
+          </Key>
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="Lineas" Type="ntext" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="idestudiogab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idconsulta" Type="int" />
+        </EntityType>
+        <EntityType Name="EstudiosLab">
+          <Key>
+            <PropertyRef Name="idestudiolab" />
+          </Key>
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="Lineas" Type="ntext" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="idestudiolab" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idconsulta" Type="int" />
+        </EntityType>
+        <EntityType Name="Familiares">
+          <Key>
+            <PropertyRef Name="IdFamiliar" />
+          </Key>
+          <Property Name="Nombre" Type="nvarchar" MaxLength="80" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="1" />
+          <Property Name="IdFamiliar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nacimiento" Type="smalldatetime" />
+          <Property Name="Enfermedades" Type="ntext" />
+          <Property Name="Relacion" Type="int" Nullable="false" />
+          <Property Name="DetalleRelacion" Type="nvarchar" MaxLength="80" />
+          <Property Name="idpaciente" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Imagenes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Imagenes">
+          <Key>
+            <PropertyRef Name="IdImagen" />
+          </Key>
+          <Property Name="IdImagen" Type="int" Nullable="false" />
+          <Property Name="idExpediente" Type="int" />
+          <Property Name="Archivo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ArchivoThumb" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Medico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Medico">
+          <Key>
+            
+            <PropertyRef Name="Idmedico" />
+          </Key>
+          <Property Name="IdRegistro" Type="int" Nullable="false" />
+          <Property Name="Idmedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEspecialidad" Type="int" />
+          <Property Name="CedulaEspecialidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="CertCMCP" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgrupacionLocal" Type="nvarchar" MaxLength="50" />
+          <Property Name="AgrupacionNacional" Type="nvarchar" MaxLength="50" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="20" />
+          <Property Name="PediatraPlus" Type="tinyint" />
+          <Property Name="CedulaProfesional" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoRegSSA" Type="nvarchar" MaxLength="50" />
+          <Property Name="UniversidadEspecialidad" Type="nvarchar" MaxLength="50" />
+          <Property Name="HospitalResidenciaPediatra" Type="nvarchar" MaxLength="50" />
+          <Property Name="DomicilioConsultorio" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoConsultorio" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoFax" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+          <Property Name="computadora" Type="nvarchar" MaxLength="25" />
+          <Property Name="guid" Type="nvarchar" MaxLength="30" />
+          <Property Name="recetatop" Type="int" />
+          <Property Name="recetabottom" Type="int" />
+          <Property Name="recetaleft" Type="int" />
+          <Property Name="consultatop" Type="int" />
+          <Property Name="recetaright" Type="int" />
+          <Property Name="consultabottom" Type="int" />
+          <Property Name="consultaleft" Type="int" />
+          <Property Name="consultaright" Type="int" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="idPaciente" />
+          </Key>
+          <Property Name="IdRegistro" Type="int" Nullable="false" />
+          <Property Name="Edad" Type="smallint" />
+          <Property Name="Sexo" Type="nvarchar" MaxLength="1" />
+          <Property Name="Escolaridad" Type="nvarchar" MaxLength="30" />
+          <Property Name="idPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+          <Property Name="grupoRH" Type="nvarchar" MaxLength="25" />
+          <Property Name="FechaNacimiento" Type="smalldatetime" />
+          <Property Name="HospitalNacer" Type="nvarchar" MaxLength="150" />
+          <Property Name="LugarNacer" Type="nvarchar" MaxLength="50" />
+          <Property Name="AbortosPrevios" Type="tinyint" />
+          <Property Name="PesoNacer" Type="real" />
+          <Property Name="TallaNacer" Type="real" />
+          <Property Name="PerCefalicoNacer" Type="real" />
+          <Property Name="AlergiaMedicina" Type="ntext" />
+          <Property Name="AlergiaOtros" Type="ntext" />
+          <Property Name="Patologia" Type="ntext" />
+          <Property Name="telefonooficina" Type="nvarchar" MaxLength="50" />
+          <Property Name="Etapa" Type="tinyint" />
+          <Property Name="TipoEscolaridad" Type="tinyint" />
+          <Property Name="otraescolaridad" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmbarazoNo" Type="tinyint" />
+          <Property Name="TipoEmbarazo" Type="nvarchar" MaxLength="2" />
+          <Property Name="EmbarazoParto" Type="nvarchar" MaxLength="2" />
+          <Property Name="tipodistocia" Type="nvarchar" MaxLength="1" />
+          <Property Name="tipodistociamencione" Type="nvarchar" MaxLength="80" />
+          <Property Name="motivodistocia" Type="nvarchar" MaxLength="1" />
+          <Property Name="motivodistociamencione" Type="nvarchar" MaxLength="80" />
+          <Property Name="CalApgarMin" Type="tinyint" />
+          <Property Name="CalApgar5Min" Type="tinyint" />
+          <Property Name="CalSilverMin" Type="tinyint" />
+          <Property Name="CalSilver5Min" Type="tinyint" />
+          <Property Name="Tamizneonatal" Type="nvarchar" MaxLength="1" />
+          <Property Name="NoFolioTamiz" Type="nvarchar" MaxLength="10" />
+          <Property Name="CompINM" Type="ntext" />
+          <Property Name="CompINMManejo" Type="ntext" />
+          <Property Name="CompMed" Type="ntext" />
+          <Property Name="CompMedManejo" Type="ntext" />
+          <Property Name="lactanciaMat" Type="nvarchar" MaxLength="1" />
+          <Property Name="tipolactancia" Type="nvarchar" MaxLength="1" />
+          <Property Name="nombreformula" Type="nvarchar" MaxLength="30" />
+          <Property Name="motivoreduccion" Type="ntext" />
+          <Property Name="motivoSuspension" Type="ntext" />
+          <Property Name="fechaConsultaPed" Type="smalldatetime" />
+          <Property Name="AntecedentePerionatal" Type="ntext" />
+          <Property Name="rubeola" Type="nvarchar" MaxLength="3" />
+          <Property Name="sarampion" Type="nvarchar" MaxLength="3" />
+          <Property Name="tosferina" Type="nvarchar" MaxLength="3" />
+          <Property Name="roseola" Type="nvarchar" MaxLength="3" />
+          <Property Name="varicela" Type="nvarchar" MaxLength="3" />
+          <Property Name="EnfInfectocontagiosas" Type="ntext" />
+          <Property Name="EnfContagiosas" Type="char" MaxLength="12" />
+          <Property Name="EnfContagiosasyEvol" Type="ntext" />
+          <Property Name="NombrePadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="ApellPaternoPadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="ApellMaternoPadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="NacimientoPadre" Type="smalldatetime" />
+          <Property Name="EstadoCivilPadre" Type="int" />
+          <Property Name="EscolaridadPadre" Type="int" />
+          <Property Name="DetalleEscolaridadPadre" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaludPadre" Type="tinyint" />
+          <Property Name="DetalleSaludPadre" Type="ntext" />
+          <Property Name="toxicomaniaPadre" Type="bit" />
+          <Property Name="DetalletoxicomaniaPadre" Type="ntext" />
+          <Property Name="AntecedentePadre" Type="char" MaxLength="8" />
+          <Property Name="OtrosAntecedentesPadre" Type="ntext" />
+          <Property Name="NombreMadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="ApellPaternoMadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="ApellMaternoMadre" Type="nvarchar" MaxLength="25" />
+          <Property Name="NacimientoMadre" Type="smalldatetime" />
+          <Property Name="EstadoCivilMadre" Type="int" />
+          <Property Name="EscolaridadMadre" Type="int" />
+          <Property Name="DetalleEscolaridadMadre" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaludMadre" Type="tinyint" />
+          <Property Name="DetalleSaludMadre" Type="ntext" />
+          <Property Name="toxicomaniaMadre" Type="bit" />
+          <Property Name="DetalletoxicomaniaMadre" Type="ntext" />
+          <Property Name="AntecedenteMadre" Type="char" MaxLength="8" />
+          <Property Name="OtrosAntecedentesMadre" Type="ntext" />
+          <Property Name="SostenCefalico" Type="int" />
+          <Property Name="Ablactacion" Type="int" />
+          <Property Name="Posicionsedente" Type="int" />
+          <Property Name="Destete" Type="int" />
+          <Property Name="Guarderia" Type="int" />
+          <Property Name="Jardin" Type="int" />
+          <Property Name="Primaria" Type="int" />
+          <Property Name="Secundaria" Type="int" />
+          <Property Name="Preparatoria" Type="int" />
+          <Property Name="Urbanización" Type="int" />
+          <Property Name="TipodeVivienda" Type="int" />
+          <Property Name="Cohabitantes" Type="int" />
+          <Property Name="caminarSinAyuda" Type="int" />
+          <Property Name="primerasilaba" Type="int" />
+          <Property Name="primeraspalabras" Type="int" />
+          <Property Name="historialclinico" Type="ntext" />
+          <Property Name="otravacuna" Type="nvarchar" MaxLength="150" />
+          <Property Name="vacunaenfprev" Type="nvarchar" MaxLength="80" />
+          <Property Name="vacunadosis" Type="nvarchar" MaxLength="30" />
+          <Property Name="vacunaedad" Type="nvarchar" MaxLength="30" />
+          <Property Name="vacunafecha" Type="nvarchar" MaxLength="30" />
+          <Property Name="TrataDiagExclusivos" Type="ntext" />
+          <Property Name="consultas" Type="ntext" />
+          <Property Name="PreCta" Type="nvarchar" MaxLength="7" />
+          <Property Name="preClave" Type="nvarchar" MaxLength="7" />
+          <Property Name="OtrasConsultas" Type="ntext" />
+          <Property Name="mortinatos" Type="tinyint" />
+          <Property Name="EdadGestal" Type="tinyint" />
+          <Property Name="tipoEdadGestal" Type="tinyint" />
+          <Property Name="acepto" Type="bit" />
+          <Property Name="ocupacion" Type="nvarchar" MaxLength="30" />
+          <Property Name="religion" Type="nvarchar" MaxLength="30" />
+          <Property Name="EdadMenarca" Type="int" />
+          <Property Name="estadoCivil" Type="int" />
+        </EntityType>
+        <EntityType Name="Patologias">
+          <Key>
+            <PropertyRef Name="idpatologia" />
+          </Key>
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fecha" Type="nvarchar" MaxLength="30" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="250" />
+          <Property Name="Alergeno" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manejo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Evoluciones" Type="nvarchar" MaxLength="50" />
+          <Property Name="EdadAdquirida" Type="int" />
+          <Property Name="Categoria" Type="int" />
+          <Property Name="RelacionSospechosa" Type="nvarchar" MaxLength="250" />
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="idpatologia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recetas">
+          <Key>
+            <PropertyRef Name="idreceta" />
+          </Key>
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="Lineas" Type="ntext" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="idreceta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idconsulta" Type="int" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="idRegistro" />
+          </Key>
+          <Property Name="idRegistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Apellido" Type="nvarchar" MaxLength="50" />
+          <Property Name="Domicilio" Type="nvarchar" MaxLength="150" />
+          <Property Name="Colonia" Type="nvarchar" MaxLength="150" />
+          <Property Name="idCiudad" Type="int" />
+          <Property Name="idEstado" Type="nvarchar" MaxLength="2" />
+          <Property Name="IdPais" Type="nvarchar" MaxLength="2" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="TelefonoCel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="1" />
+          <Property Name="Status" Type="nvarchar" MaxLength="1" />
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="25" />
+          <Property Name="FechaRegistro" Type="smalldatetime" />
+          <Property Name="FechaExpiracion" Type="smalldatetime" />
+          <Property Name="Emails" Type="nvarchar" MaxLength="150" />
+          <Property Name="FechaRenovacion" Type="smalldatetime" />
+          <Property Name="OtraCiudad" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoExt" Type="nvarchar" MaxLength="5" />
+          <Property Name="CodigoPostal" Type="nvarchar" MaxLength="5" />
+          <Property Name="clave" Type="nvarchar" MaxLength="15" />
+          <Property Name="Emeci" Type="nvarchar" MaxLength="15" />
+          <Property Name="apellido2" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Tarjetas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Tarjetas">
+          <Key>
+            <PropertyRef Name="idtarjeta" />
+          </Key>
+          <Property Name="idtarjeta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaRegistro" Type="smalldatetime" />
+          <Property Name="FechaExpira" Type="smalldatetime" />
+          <Property Name="EjeX" Type="tinyint" />
+          <Property Name="EjeY" Type="tinyint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.TemaComentarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TemaComentarios">
+          <Key>
+            <PropertyRef Name="idtema" />
+          </Key>
+          <Property Name="IdTemaComentario" Type="int" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="IdMedico" Type="int" />
+          <Property Name="Comentario" Type="nvarchar" MaxLength="400" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="idtema" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.Temas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Temas">
+          <Key>
+            <PropertyRef Name="IdTema" />
+          </Key>
+          <Property Name="IdTema" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="tinyint" />
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="idMedicoCreo" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.dbo.trackermedicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="trackermedicos">
+          <Key>
+            <PropertyRef Name="idtracker" />
+          </Key>
+          <Property Name="idtracker" Type="int" Nullable="false" />
+          <Property Name="TypeLink" Type="nvarchar" MaxLength="1" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="fecha" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Vacunas">
+          <Key>
+            <PropertyRef Name="idvacuna" />
+          </Key>
+          <Property Name="Fecha" Type="smalldatetime" />
+          <Property Name="codigo" Type="nvarchar" MaxLength="2" />
+          <Property Name="idpaciente" Type="int" />
+          <Property Name="vacunaenfprev" Type="nvarchar" MaxLength="50" />
+          <Property Name="vacunadosis" Type="nvarchar" MaxLength="30" />
+          <Property Name="vacunaEdad" Type="nvarchar" MaxLength="30" />
+          <Property Name="idvacuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Especialidades' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Especialidades">
+          <Key>
+            <PropertyRef Name="IdEspecialidad" />
+          </Key>
+          <Property Name="IdEspecialidad" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Paises' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.trackermedicos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="trackermedicos1">
+          <Key>
+            <PropertyRef Name="idtracker" />
+          </Key>
+          <Property Name="idtracker" Type="int" Nullable="false" />
+          <Property Name="TypeLink" Type="nvarchar" MaxLength="1" />
+          <Property Name="idmedico" Type="int" />
+          <Property Name="fecha" Type="smalldatetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'emeci.emecidbuser.Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Nombre" Type="ntext" />
+          <Property Name="Password" Type="nvarchar" MaxLength="25" />
+          <Property Name="Status" Type="nvarchar" MaxLength="1" />
+          <Property Name="FechaAcceso" Type="smalldatetime" />
+          <Property Name="NoTarjeta" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="emeciModelStoreContainer">
+          <EntitySet Name="CatCategoEstudios" EntityType="Self.CatCategoEstudios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catdiagnostico" EntityType="Self.catdiagnostico" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CatEstudios" EntityType="Self.CatEstudios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catrecetas" EntityType="Self.catrecetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultaGinecologa" EntityType="Self.ConsultaGinecologa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultaObstetrica" EntityType="Self.ConsultaObstetrica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultas" EntityType="Self.Consultas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatosTarjeta" EntityType="Self.DatosTarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnosticos" EntityType="Self.Diagnosticos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiagnosticosExc" EntityType="Self.DiagnosticosExc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstudiosGab" EntityType="Self.EstudiosGab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstudiosLab" EntityType="Self.EstudiosLab" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Familiares" EntityType="Self.Familiares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patologias" EntityType="Self.Patologias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recetas" EntityType="Self.Recetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registro" EntityType="Self.Registro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vacunas" EntityType="Self.Vacunas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudades" EntityType="Self.Ciudades" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Ciudades].[idciudad] AS [idciudad], 
+[Ciudades].[Nombre] AS [Nombre], 
+[Ciudades].[idEstado] AS [idEstado], 
+[Ciudades].[IdPais] AS [IdPais]
+FROM [dbo].[Ciudades] AS [Ciudades]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Estados" EntityType="Self.Estados" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Estados].[idEstado] AS [idEstado], 
+[Estados].[Nombre] AS [Nombre], 
+[Estados].[IdPais] AS [IdPais], 
+[Estados].[codigo] AS [codigo]
+FROM [dbo].[Estados] AS [Estados]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Estudios" EntityType="Self.Estudios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Estudios].[idEstudio] AS [idEstudio], 
+[Estudios].[Fecha] AS [Fecha], 
+[Estudios].[NombreEstudio] AS [NombreEstudio], 
+[Estudios].[CentroMedico] AS [CentroMedico], 
+[Estudios].[idexpediente] AS [idexpediente], 
+[Estudios].[Resultado] AS [Resultado]
+FROM [dbo].[Estudios] AS [Estudios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Imagenes" EntityType="Self.Imagenes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Imagenes].[IdImagen] AS [IdImagen], 
+[Imagenes].[idExpediente] AS [idExpediente], 
+[Imagenes].[Archivo] AS [Archivo], 
+[Imagenes].[ArchivoThumb] AS [ArchivoThumb]
+FROM [dbo].[Imagenes] AS [Imagenes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Medico" EntityType="Self.Medico" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Medico].[IdRegistro] AS [IdRegistro], 
+[Medico].[Idmedico] AS [Idmedico], 
+[Medico].[IdEspecialidad] AS [IdEspecialidad], 
+[Medico].[CedulaEspecialidad] AS [CedulaEspecialidad], 
+[Medico].[CertCMCP] AS [CertCMCP], 
+[Medico].[AgrupacionLocal] AS [AgrupacionLocal], 
+[Medico].[AgrupacionNacional] AS [AgrupacionNacional], 
+[Medico].[RFC] AS [RFC], 
+[Medico].[PediatraPlus] AS [PediatraPlus], 
+[Medico].[CedulaProfesional] AS [CedulaProfesional], 
+[Medico].[NoRegSSA] AS [NoRegSSA], 
+[Medico].[UniversidadEspecialidad] AS [UniversidadEspecialidad], 
+[Medico].[HospitalResidenciaPediatra] AS [HospitalResidenciaPediatra], 
+[Medico].[DomicilioConsultorio] AS [DomicilioConsultorio], 
+[Medico].[TelefonoConsultorio] AS [TelefonoConsultorio], 
+[Medico].[TelefonoFax] AS [TelefonoFax], 
+[Medico].[NoTarjeta] AS [NoTarjeta], 
+[Medico].[computadora] AS [computadora], 
+[Medico].[guid] AS [guid], 
+[Medico].[recetatop] AS [recetatop], 
+[Medico].[recetabottom] AS [recetabottom], 
+[Medico].[recetaleft] AS [recetaleft], 
+[Medico].[consultatop] AS [consultatop], 
+[Medico].[recetaright] AS [recetaright], 
+[Medico].[consultabottom] AS [consultabottom], 
+[Medico].[consultaleft] AS [consultaleft], 
+[Medico].[consultaright] AS [consultaright]
+FROM [dbo].[Medico] AS [Medico]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Tarjetas].[idtarjeta] AS [idtarjeta], 
+[Tarjetas].[NoTarjeta] AS [NoTarjeta], 
+[Tarjetas].[FechaRegistro] AS [FechaRegistro], 
+[Tarjetas].[FechaExpira] AS [FechaExpira], 
+[Tarjetas].[EjeX] AS [EjeX], 
+[Tarjetas].[EjeY] AS [EjeY]
+FROM [dbo].[Tarjetas] AS [Tarjetas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TemaComentarios" EntityType="Self.TemaComentarios" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[TemaComentarios].[IdTemaComentario] AS [IdTemaComentario], 
+[TemaComentarios].[Fecha] AS [Fecha], 
+[TemaComentarios].[IdMedico] AS [IdMedico], 
+[TemaComentarios].[Comentario] AS [Comentario], 
+[TemaComentarios].[Status] AS [Status], 
+[TemaComentarios].[idtema] AS [idtema]
+FROM [dbo].[TemaComentarios] AS [TemaComentarios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Temas" EntityType="Self.Temas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Temas].[IdTema] AS [IdTema], 
+[Temas].[Nombre] AS [Nombre], 
+[Temas].[Descripcion] AS [Descripcion], 
+[Temas].[Status] AS [Status], 
+[Temas].[Fecha] AS [Fecha], 
+[Temas].[idMedicoCreo] AS [idMedicoCreo]
+FROM [dbo].[Temas] AS [Temas]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="trackermedicos" EntityType="Self.trackermedicos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[trackermedicos].[idtracker] AS [idtracker], 
+[trackermedicos].[TypeLink] AS [TypeLink], 
+[trackermedicos].[idmedico] AS [idmedico], 
+[trackermedicos].[fecha] AS [fecha]
+FROM [dbo].[trackermedicos] AS [trackermedicos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Especialidades" EntityType="Self.Especialidades" store:Type="Tables" store:Schema="emecidbuser">
+            <DefiningQuery>SELECT 
+[Especialidades].[IdEspecialidad] AS [IdEspecialidad], 
+[Especialidades].[Nombre] AS [Nombre]
+FROM [emecidbuser].[Especialidades] AS [Especialidades]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Paises" EntityType="Self.Paises" store:Type="Tables" store:Schema="emecidbuser">
+            <DefiningQuery>SELECT 
+[Paises].[IdPais] AS [IdPais], 
+[Paises].[Nombre] AS [Nombre]
+FROM [emecidbuser].[Paises] AS [Paises]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="trackermedicos1" EntityType="Self.trackermedicos1" store:Type="Tables" store:Schema="emecidbuser" store:Name="trackermedicos">
+            <DefiningQuery>SELECT 
+[trackermedicos1].[idtracker] AS [idtracker], 
+[trackermedicos1].[TypeLink] AS [TypeLink], 
+[trackermedicos1].[idmedico] AS [idmedico], 
+[trackermedicos1].[fecha] AS [fecha]
+FROM [emecidbuser].[trackermedicos] AS [trackermedicos1]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" store:Type="Tables" store:Schema="emecidbuser">
+            <DefiningQuery>SELECT 
+[Usuarios].[IdUsuario] AS [IdUsuario], 
+[Usuarios].[Nombre] AS [Nombre], 
+[Usuarios].[Password] AS [Password], 
+[Usuarios].[Status] AS [Status], 
+[Usuarios].[FechaAcceso] AS [FechaAcceso], 
+[Usuarios].[NoTarjeta] AS [NoTarjeta]
+FROM [emecidbuser].[Usuarios] AS [Usuarios]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="emeciModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="emeciEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Medico" EntityType="emeciModel.Medico" />
+          <EntitySet Name="Paciente" EntityType="emeciModel.Paciente" />
+          <EntitySet Name="Recetas" EntityType="emeciModel.Recetas" />
+          <EntitySet Name="DatosTarjeta" EntityType="emeciModel.DatosTarjeta" />
+          <EntitySet Name="Registro" EntityType="emeciModel.Registro" />
+          <EntitySet Name="Diagnosticos" EntityType="emeciModel.Diagnosticos" />
+          <EntitySet Name="CatCategoEstudios" EntityType="emeciModel.CatCategoEstudios" />
+          <EntitySet Name="CatEstudios" EntityType="emeciModel.CatEstudios" />
+          <EntitySet Name="catrecetas" EntityType="emeciModel.catrecetas" />
+          <EntitySet Name="catdiagnostico" EntityType="emeciModel.catdiagnostico" />
+          <EntitySet Name="EstudiosLab" EntityType="emeciModel.EstudiosLab" />
+          <EntitySet Name="EstudiosGab" EntityType="emeciModel.EstudiosGab" />
+          <EntitySet Name="Patologias" EntityType="emeciModel.Patologias" />
+          <EntitySet Name="Ciudades" EntityType="emeciModel.Ciudades" />
+          <EntitySet Name="Estados" EntityType="emeciModel.Estados" />
+          <EntitySet Name="Vacunas" EntityType="emeciModel.Vacunas" />
+          <EntitySet Name="DiagnosticosExc" EntityType="emeciModel.DiagnosticosExc" />
+          <EntitySet Name="Consultas" EntityType="emeciModel.Consultas" />
+          <EntitySet Name="Familiares" EntityType="emeciModel.Familiares" />
+          <EntitySet Name="Estudios" EntityType="emeciModel.Estudios" />
+          <EntitySet Name="Imagenes" EntityType="emeciModel.Imagenes" />
+          <EntitySet Name="Tarjetas" EntityType="emeciModel.Tarjetas" />
+          <EntitySet Name="TemaComentarios" EntityType="emeciModel.TemaComentarios" />
+          <EntitySet Name="Temas" EntityType="emeciModel.Temas" />
+          <EntitySet Name="trackermedicos" EntityType="emeciModel.trackermedicos" />
+          <EntitySet Name="ConsultaGinecologa" EntityType="emeciModel.ConsultaGinecologa" />
+          <EntitySet Name="Especialidades" EntityType="emeciModel.Especialidades" />
+          <EntitySet Name="Paises" EntityType="emeciModel.Paises" />
+          <EntitySet Name="trackermedicos1" EntityType="emeciModel.trackermedicos1" />
+          <EntitySet Name="Usuarios" EntityType="emeciModel.Usuarios" />
+          <EntitySet Name="ConsultaObstetrica" EntityType="emeciModel.ConsultaObstetrica" />
+        </EntityContainer>
+        <EntityType Name="Medico">
+          <Key>
+            <PropertyRef Name="Idmedico" />
+          </Key>
+          <Property Name="IdRegistro" Type="Int32" Nullable="false" />
+          <Property Name="Idmedico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEspecialidad" Type="Int32" />
+          <Property Name="CedulaEspecialidad" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CertCMCP" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AgrupacionLocal" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AgrupacionNacional" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RFC" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="PediatraPlus" Type="Byte" />
+          <Property Name="CedulaProfesional" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NoRegSSA" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="UniversidadEspecialidad" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HospitalResidenciaPediatra" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DomicilioConsultorio" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TelefonoConsultorio" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TelefonoFax" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NoTarjeta" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="computadora" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="guid" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="recetatop" />
+          <Property Type="Int32" Name="recetabottom" />
+          <Property Type="Int32" Name="recetaleft" />
+          <Property Type="Int32" Name="recetaright" />
+          <Property Type="Int32" Name="consultatop" />
+          <Property Type="Int32" Name="consultabottom" />
+          <Property Type="Int32" Name="consultaleft" />
+          <Property Type="Int32" Name="consultaright" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="idPaciente" />
+          </Key>
+          <Property Name="IdRegistro" Type="Int32" Nullable="false" />
+          <Property Name="Edad" Type="Int16" />
+          <Property Name="Sexo" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="Escolaridad" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="idPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoTarjeta" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="grupoRH" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="HospitalNacer" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="LugarNacer" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AbortosPrevios" Type="Byte" />
+          <Property Name="PesoNacer" Type="Single" />
+          <Property Name="TallaNacer" Type="Single" />
+          <Property Name="PerCefalicoNacer" Type="Single" />
+          <Property Name="AlergiaMedicina" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AlergiaOtros" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Patologia" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="telefonooficina" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Etapa" Type="Byte" />
+          <Property Name="TipoEscolaridad" Type="Byte" />
+          <Property Name="otraescolaridad" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="EmbarazoNo" Type="Byte" />
+          <Property Name="TipoEmbarazo" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="EmbarazoParto" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="tipodistocia" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="tipodistociamencione" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="motivodistocia" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="motivodistociamencione" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="CalApgarMin" Type="Byte" />
+          <Property Name="CalApgar5Min" Type="Byte" />
+          <Property Name="CalSilverMin" Type="Byte" />
+          <Property Name="CalSilver5Min" Type="Byte" />
+          <Property Name="Tamizneonatal" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="NoFolioTamiz" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="CompINM" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CompINMManejo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CompMed" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="CompMedManejo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="lactanciaMat" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="tipolactancia" Type="String" MaxLength="1" Unicode="true" FixedLength="false" />
+          <Property Name="nombreformula" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="motivoreduccion" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="motivoSuspension" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="fechaConsultaPed" Type="DateTime" Precision="0" />
+          <Property Name="AntecedentePerionatal" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="rubeola" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="sarampion" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="tosferina" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="roseola" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="varicela" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="EnfInfectocontagiosas" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EnfContagiosas" Type="String" MaxLength="12" Unicode="false" FixedLength="true" />
+          <Property Name="EnfContagiosasyEvol" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombrePadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="ApellPaternoPadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="ApellMaternoPadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="NacimientoPadre" Type="DateTime" Precision="0" />
+          <Property Name="EstadoCivilPadre" Type="Int32" />
+          <Property Name="EscolaridadPadre" Type="Int32" />
+          <Property Name="DetalleEscolaridadPadre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SaludPadre" Type="Byte" />
+          <Property Name="DetalleSaludPadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="toxicomaniaPadre" Type="Boolean" />
+          <Property Name="DetalletoxicomaniaPadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AntecedentePadre" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="OtrosAntecedentesPadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NombreMadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="ApellPaternoMadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="ApellMaternoMadre" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="NacimientoMadre" Type="DateTime" Precision="0" />
+          <Property Name="EstadoCivilMadre" Type="Int32" />
+          <Property Name="EscolaridadMadre" Type="Int32" />
+          <Property Name="DetalleEscolaridadMadre" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SaludMadre" Type="Byte" />
+          <Property Name="DetalleSaludMadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="toxicomaniaMadre" Type="Boolean" />
+          <Property Name="DetalletoxicomaniaMadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AntecedenteMadre" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="OtrosAntecedentesMadre" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SostenCefalico" Type="Int32" />
+          <Property Name="Ablactacion" Type="Int32" />
+          <Property Name="Posicionsedente" Type="Int32" />
+          <Property Name="Destete" Type="Int32" />
+          <Property Name="Guarderia" Type="Int32" />
+          <Property Name="Jardin" Type="Int32" />
+          <Property Name="Primaria" Type="Int32" />
+          <Property Name="Secundaria" Type="Int32" />
+          <Property Name="Preparatoria" Type="Int32" />
+          <Property Name="Urbanización" Type="Int32" />
+          <Property Name="TipodeVivienda" Type="Int32" />
+          <Property Name="Cohabitantes" Type="Int32" />
+          <Property Name="caminarSinAyuda" Type="Int32" />
+          <Property Name="primerasilaba" Type="Int32" />
+          <Property Name="primeraspalabras" Type="Int32" />
+          <Property Name="historialclinico" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="otravacuna" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="vacunaenfprev" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="vacunadosis" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="vacunaedad" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="vacunafecha" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="TrataDiagExclusivos" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="consultas" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PreCta" Type="String" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="preClave" Type="String" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="OtrasConsultas" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="mortinatos" Type="Byte" />
+          <Property Name="EdadGestal" Type="Byte" />
+          <Property Name="tipoEdadGestal" Type="Byte" />
+          <Property Type="Boolean" Name="acepto" />
+          <Property Name="ocupacion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="religion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EdadMenarca" Type="Int32" />
+          <Property Name="estadoCivil" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Recetas">
+          <Key>
+            <PropertyRef Name="idreceta" />
+          </Key>
+          <Property Name="idreceta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idconsulta" Type="Int32" />
+          <Property Name="idpaciente" Type="Int32" />
+          <Property Name="idmedico" Type="Int32" />
+          <Property Name="Lineas" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DatosTarjeta">
+          <Key>
+            <PropertyRef Name="iddatostarjeta" />
+          </Key>
+          <Property Type="Int32" Name="iddatostarjeta" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="noTarjeta" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Coordenada" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Dato" MaxLength="3" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Registro">
+          <Key>
+            <PropertyRef Name="idRegistro" />
+          </Key>
+          <Property Type="Int32" Name="idRegistro" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Apellido" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Domicilio" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Colonia" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idCiudad" />
+          <Property Type="String" Name="idEstado" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IdPais" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefono" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TelefonoCel" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Tipo" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Status" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IdUsuario" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaRegistro" Precision="0" />
+          <Property Type="DateTime" Name="FechaExpiracion" Precision="0" />
+          <Property Type="String" Name="Emails" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaRenovacion" Precision="0" />
+          <Property Type="String" Name="OtraCiudad" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NoExt" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CodigoPostal" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="clave" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Emeci" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="apellido2" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Diagnosticos">
+          <Key>
+            <PropertyRef Name="iddiagnostico" />
+          </Key>
+          <Property Type="Int32" Name="idpaciente" Nullable="false" />
+          <Property Type="Int32" Name="idmedico" />
+          <Property Type="String" Name="Lineas" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Fecha" Precision="0" />
+          <Property Type="String" Name="LineasVital" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="datos" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="iddiagnostico" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idconsulta" />
+        </EntityType>
+        <EntityType Name="CatCategoEstudios">
+          <Key>
+            <PropertyRef Name="idcategoriaestudio" />
+          </Key>
+          <Property Type="Int32" Name="idcategoriaestudio" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="Tipo" />
+        </EntityType>
+        <EntityType Name="CatEstudios">
+          <Key>
+            <PropertyRef Name="idestudio" />
+          </Key>
+          <Property Type="Int32" Name="idestudio" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="idcategoriaestudio" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catrecetas">
+          <Key>
+            <PropertyRef Name="idcatreceta" />
+          </Key>
+          <Property Type="Int32" Name="idcatreceta" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="lineas" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idmedico" />
+        </EntityType>
+        <EntityType Name="catdiagnostico">
+          <Key>
+            <PropertyRef Name="idcatdiagnostico" />
+          </Key>
+          <Property Type="Int32" Name="idcatdiagnostico" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="lineas" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idmedico" />
+        </EntityType>
+        <EntityType Name="EstudiosLab">
+          <Key>
+            <PropertyRef Name="idestudiolab" />
+          </Key>
+          <Property Type="Int32" Name="idpaciente" />
+          <Property Type="Int32" Name="idmedico" />
+          <Property Type="String" Name="Lineas" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Fecha" Precision="0" />
+          <Property Type="Int32" Name="idestudiolab" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idconsulta" />
+        </EntityType>
+        <EntityType Name="EstudiosGab">
+          <Key>
+            <PropertyRef Name="idestudiogab" />
+          </Key>
+          <Property Type="Int32" Name="idpaciente" />
+          <Property Type="Int32" Name="idmedico" />
+          <Property Type="String" Name="Lineas" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Fecha" Precision="0" />
+          <Property Type="Int32" Name="idestudiogab" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="idconsulta" />
+        </EntityType>
+        <EntityType Name="Patologias">
+          <Key>
+            <PropertyRef Name="idpatologia" />
+          </Key>
+          <Property Type="String" Name="Nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fecha" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Observaciones" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Alergeno" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Manejo" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Evoluciones" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EdadAdquirida" />
+          <Property Type="Int32" Name="Categoria" />
+          <Property Type="String" Name="RelacionSospechosa" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idpaciente" />
+          <Property Type="Int32" Name="idpatologia" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Ciudades">
+          <Key>
+            <PropertyRef Name="idciudad" />
+          </Key>
+          <Property Type="Int32" Name="idciudad" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="idEstado" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IdPais" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstado" />
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Type="String" Name="idEstado" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nombre" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="IdPais" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="codigo" MaxLength="2" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Vacunas">
+          <Key>
+            <PropertyRef Name="idvacuna" />
+          </Key>
+          <Property Type="DateTime" Name="Fecha" Precision="0" />
+          <Property Type="String" Name="codigo" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idpaciente" />
+          <Property Type="String" Name="vacunaenfprev" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="vacunadosis" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="vacunaEdad" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="idvacuna" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DiagnosticosExc">
+          <Key>
+            <PropertyRef Name="iddiagexc" />
+          </Key>
+          <Property Type="Int32" Name="idconsulta" />
+          <Property Type="Int32" Name="iddiagexc" Nullable="false" />
+          <Property Type="String" Name="lineas" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Consultas">
+          <Key>
+            <PropertyRef Name="idconsulta" />
+          </Key>
+          <Property Name="idpaciente" Type="Int32" />
+          <Property Name="idconsulta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="3" />
+          <Property Name="Peso" Type="Single" />
+          <Property Name="Altura" Type="Single" />
+          <Property Name="Temperatura" Type="Single" />
+          <Property Name="Cabeza" Type="Single" />
+          <Property Name="perimetroCefalico" Type="Single" />
+          <Property Name="TensionArterial" Type="Int32" />
+          <Property Name="TensionArterialB" Type="Int32" />
+          <Property Name="FrecuenciaCardiaca" Type="Int32" />
+          <Property Name="FrecuenciaRespiratoria" Type="Int32" />
+          <Property Name="idmedico" Type="Int32" />
+          <Property Name="motivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="SignosSintomas1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="SignosSintomas2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="SignosSintomas3" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="MedidasPreventivas" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ProximaCita" Type="DateTime" Precision="0" />
+          <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pronostico" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Familiares">
+          <Key>
+            <PropertyRef Name="IdFamiliar" />
+          </Key>
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IdFamiliar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Enfermedades" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Relacion" Type="Int32" Nullable="false" />
+          <Property Name="DetalleRelacion" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="idpaciente" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Estudios">
+          <Key>
+            <PropertyRef Name="idEstudio" />
+          </Key>
+          <Property Name="idEstudio" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="NombreEstudio" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="CentroMedico" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idexpediente" Type="Int32" />
+          <Property Name="Resultado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Imagenes">
+          <Key>
+            <PropertyRef Name="IdImagen" />
+          </Key>
+          <Property Name="IdImagen" Type="Int32" Nullable="false" />
+          <Property Name="idExpediente" Type="Int32" />
+          <Property Name="Archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArchivoThumb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Tarjetas">
+          <Key>
+            <PropertyRef Name="idtarjeta" />
+          </Key>
+          <Property Name="idtarjeta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoTarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <Property Name="FechaExpira" Type="DateTime" Precision="0" />
+          <Property Name="EjeX" Type="Byte" />
+          <Property Name="EjeY" Type="Byte" />
+        </EntityType>
+        <EntityType Name="TemaComentarios">
+          <Key>
+            <PropertyRef Name="idtema" />
+          </Key>
+          <Property Name="IdTemaComentario" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="IdMedico" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="idtema" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Temas">
+          <Key>
+            <PropertyRef Name="IdTema" />
+          </Key>
+          <Property Name="IdTema" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Byte" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="idMedicoCreo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="trackermedicos">
+          <Key>
+            <PropertyRef Name="idtracker" />
+          </Key>
+          <Property Name="idtracker" Type="Int32" Nullable="false" />
+          <Property Name="TypeLink" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="idmedico" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="ConsultaGinecologa">
+          <Key>
+            <PropertyRef Name="idconsultaginecologa" />
+          </Key>
+          <Property Name="idconsultaginecologa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idconsulta" Type="Int32" Nullable="false" />
+          <Property Name="FechaUltimaMestruacion" Type="DateTime" Precision="0" />
+          <Property Name="Gestas" Type="Byte" />
+          <Property Name="ParaGestas" Type="Byte" />
+          <Property Name="Cesareas" Type="Byte" />
+          <Property Name="abortos" Type="Byte" />
+          <Property Name="RecienNacidosVivos" Type="Byte" />
+          <Property Name="mortinatos" Type="Byte" />
+          <Property Name="EdadInicioVidaSexual" Type="Byte" />
+          <Property Name="menacma" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="oligonorrea" Type="Boolean" />
+          <Property Name="Proiomenorrea" Type="Boolean" />
+          <Property Name="Hipermenorrea" Type="Boolean" />
+          <Property Name="Dismenorrea" Type="Boolean" />
+          <Property Name="Dispareunia" Type="Boolean" />
+          <Property Name="Leucorrea" Type="Boolean" />
+          <Property Name="Lactorrea" Type="Boolean" />
+          <Property Name="Amenorrea" Type="Boolean" />
+          <Property Name="Metrorragia" Type="Boolean" />
+          <Property Name="Otros" Type="Boolean" />
+          <Property Name="OtrosEspecifique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TienePareja" Type="Boolean" />
+          <Property Name="SexoPareja" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoCivilPareja" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="GrupoRHPareja" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FechaNacimientoPareja" Type="DateTime" Precision="0" />
+          <Property Name="OcupacionPareja" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoPareja" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="nombrePareja" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="edadPareja" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Especialidades">
+          <Key>
+            <PropertyRef Name="IdEspecialidad" />
+          </Key>
+          <Property Name="IdEspecialidad" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="trackermedicos1">
+          <Key>
+            <PropertyRef Name="idtracker" />
+          </Key>
+          <Property Name="idtracker" Type="Int32" Nullable="false" />
+          <Property Name="TypeLink" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="idmedico" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="FechaAcceso" Type="DateTime" Precision="0" />
+          <Property Name="NoTarjeta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ConsultaObstetrica">
+          <Key>
+            <PropertyRef Name="IdConsultaObstetrica" />
+          </Key>
+          <Property Name="IdConsultaObstetrica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="noembarazo" Type="Byte" />
+          <Property Name="abortos" Type="Byte" />
+          <Property Name="FechaUltmoParto" Type="DateTime" Precision="0" />
+          <Property Name="PrimerDiaUltimaMestruacuion" Type="DateTime" Precision="0" />
+          <Property Name="ToxemiasPrevias" Type="Byte" />
+          <Property Name="CesareasPrevia" Type="Byte" />
+          <Property Name="UsoDeForceps" Type="Byte" />
+          <Property Name="Motinatos" Type="Byte" />
+          <Property Name="RMVivos" Type="Byte" />
+          <Property Name="EmbarazoEtopicos" Type="Byte" />
+          <Property Name="EmbrazosComplicadosPrevios" Type="Byte" />
+          <Property Name="EmbrazoEtopicoExplique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmbarazosComplicadosExplique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoComplicacionesPertinales" Type="Byte" />
+          <Property Name="ComplicacionesPerinatalesExplique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoEmbrazosAnormales" Type="Byte" />
+          <Property Name="EmbarazosAnormalesExplique" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FU" Type="Byte" />
+          <Property Name="FCF" Type="Byte" />
+          <Property Name="CC" Type="Byte" />
+          <Property Name="CA" Type="Byte" />
+          <Property Name="LF" Type="Byte" />
+          <Property Name="DSP" Type="Byte" />
+          <Property Name="Posicion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Presentacion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="siuacuion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Actitud" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MovimientosFetales" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PesoAproxProducto" Type="Byte" />
+          <Property Name="TA" Type="Byte" />
+          <Property Name="FCM" Type="Byte" />
+          <Property Name="Edema" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SeHizoUf" Type="Boolean" />
+          <Property Name="idconsulta" Type="Int32" />
+          <Property Name="activaSexualmente" Type="Boolean" />
+          <Property Name="EspecifiqueToxemias" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Partos" Type="Byte" />
+          <Property Name="TipoDistocia" Type="Byte" />
+          <Property Name="MotivoDistocia" Type="Byte" />
+          <Property Name="EspecifiqueMotivoDistocia" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="EspecifiqueTipoDistocia" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ultrasonido" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="exploracionFisica" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="emeciModelStoreContainer" CdmEntityContainer="emeciEntities">
+          <EntitySetMapping Name="Medico"><EntityTypeMapping TypeName="emeciModel.Medico"><MappingFragment StoreEntitySet="Medico">
+            <ScalarProperty Name="consultaright" ColumnName="consultaright" />
+                <ScalarProperty Name="consultaleft" ColumnName="consultaleft" />
+                <ScalarProperty Name="consultabottom" ColumnName="consultabottom" />
+                <ScalarProperty Name="consultatop" ColumnName="consultatop" />
+                <ScalarProperty Name="recetaright" ColumnName="recetaright" />
+                <ScalarProperty Name="recetaleft" ColumnName="recetaleft" />
+                <ScalarProperty Name="recetabottom" ColumnName="recetabottom" />
+                <ScalarProperty Name="recetatop" ColumnName="recetatop" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+            <ScalarProperty Name="Idmedico" ColumnName="Idmedico" />
+            <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+            <ScalarProperty Name="CedulaEspecialidad" ColumnName="CedulaEspecialidad" />
+            <ScalarProperty Name="CertCMCP" ColumnName="CertCMCP" />
+            <ScalarProperty Name="AgrupacionLocal" ColumnName="AgrupacionLocal" />
+            <ScalarProperty Name="AgrupacionNacional" ColumnName="AgrupacionNacional" />
+            <ScalarProperty Name="RFC" ColumnName="RFC" />
+            <ScalarProperty Name="PediatraPlus" ColumnName="PediatraPlus" />
+            <ScalarProperty Name="CedulaProfesional" ColumnName="CedulaProfesional" />
+            <ScalarProperty Name="NoRegSSA" ColumnName="NoRegSSA" />
+            <ScalarProperty Name="UniversidadEspecialidad" ColumnName="UniversidadEspecialidad" />
+            <ScalarProperty Name="HospitalResidenciaPediatra" ColumnName="HospitalResidenciaPediatra" />
+            <ScalarProperty Name="DomicilioConsultorio" ColumnName="DomicilioConsultorio" />
+            <ScalarProperty Name="TelefonoConsultorio" ColumnName="TelefonoConsultorio" />
+            <ScalarProperty Name="TelefonoFax" ColumnName="TelefonoFax" />
+            <ScalarProperty Name="NoTarjeta" ColumnName="NoTarjeta" />
+            <ScalarProperty Name="computadora" ColumnName="computadora" />
+            <ScalarProperty Name="guid" ColumnName="guid" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Paciente"><EntityTypeMapping TypeName="emeciModel.Paciente"><MappingFragment StoreEntitySet="Paciente">
+            <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="EdadMenarca" ColumnName="EdadMenarca" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="ocupacion" ColumnName="ocupacion" />
+                <ScalarProperty Name="acepto" ColumnName="acepto" />
+                <ScalarProperty Name="IdRegistro" ColumnName="IdRegistro" />
+            <ScalarProperty Name="Edad" ColumnName="Edad" />
+            <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+            <ScalarProperty Name="Escolaridad" ColumnName="Escolaridad" />
+            <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+            <ScalarProperty Name="NoTarjeta" ColumnName="NoTarjeta" />
+            <ScalarProperty Name="grupoRH" ColumnName="grupoRH" />
+            <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+            <ScalarProperty Name="HospitalNacer" ColumnName="HospitalNacer" />
+            <ScalarProperty Name="LugarNacer" ColumnName="LugarNacer" />
+            <ScalarProperty Name="AbortosPrevios" ColumnName="AbortosPrevios" />
+            <ScalarProperty Name="PesoNacer" ColumnName="PesoNacer" />
+            <ScalarProperty Name="TallaNacer" ColumnName="TallaNacer" />
+            <ScalarProperty Name="PerCefalicoNacer" ColumnName="PerCefalicoNacer" />
+            <ScalarProperty Name="AlergiaMedicina" ColumnName="AlergiaMedicina" />
+            <ScalarProperty Name="AlergiaOtros" ColumnName="AlergiaOtros" />
+            <ScalarProperty Name="Patologia" ColumnName="Patologia" />
+            <ScalarProperty Name="telefonooficina" ColumnName="telefonooficina" />
+            <ScalarProperty Name="Etapa" ColumnName="Etapa" />
+            <ScalarProperty Name="TipoEscolaridad" ColumnName="TipoEscolaridad" />
+            <ScalarProperty Name="otraescolaridad" ColumnName="otraescolaridad" />
+            <ScalarProperty Name="EmbarazoNo" ColumnName="EmbarazoNo" />
+            <ScalarProperty Name="TipoEmbarazo" ColumnName="TipoEmbarazo" />
+            <ScalarProperty Name="EmbarazoParto" ColumnName="EmbarazoParto" />
+            <ScalarProperty Name="tipodistocia" ColumnName="tipodistocia" />
+            <ScalarProperty Name="tipodistociamencione" ColumnName="tipodistociamencione" />
+            <ScalarProperty Name="motivodistocia" ColumnName="motivodistocia" />
+            <ScalarProperty Name="motivodistociamencione" ColumnName="motivodistociamencione" />
+            <ScalarProperty Name="CalApgarMin" ColumnName="CalApgarMin" />
+            <ScalarProperty Name="CalApgar5Min" ColumnName="CalApgar5Min" />
+            <ScalarProperty Name="CalSilverMin" ColumnName="CalSilverMin" />
+            <ScalarProperty Name="CalSilver5Min" ColumnName="CalSilver5Min" />
+            <ScalarProperty Name="Tamizneonatal" ColumnName="Tamizneonatal" />
+            <ScalarProperty Name="NoFolioTamiz" ColumnName="NoFolioTamiz" />
+            <ScalarProperty Name="CompINM" ColumnName="CompINM" />
+            <ScalarProperty Name="CompINMManejo" ColumnName="CompINMManejo" />
+            <ScalarProperty Name="CompMed" ColumnName="CompMed" />
+            <ScalarProperty Name="CompMedManejo" ColumnName="CompMedManejo" />
+            <ScalarProperty Name="lactanciaMat" ColumnName="lactanciaMat" />
+            <ScalarProperty Name="tipolactancia" ColumnName="tipolactancia" />
+            <ScalarProperty Name="nombreformula" ColumnName="nombreformula" />
+            <ScalarProperty Name="motivoreduccion" ColumnName="motivoreduccion" />
+            <ScalarProperty Name="motivoSuspension" ColumnName="motivoSuspension" />
+            <ScalarProperty Name="fechaConsultaPed" ColumnName="fechaConsultaPed" />
+            <ScalarProperty Name="AntecedentePerionatal" ColumnName="AntecedentePerionatal" />
+            <ScalarProperty Name="rubeola" ColumnName="rubeola" />
+            <ScalarProperty Name="sarampion" ColumnName="sarampion" />
+            <ScalarProperty Name="tosferina" ColumnName="tosferina" />
+            <ScalarProperty Name="roseola" ColumnName="roseola" />
+            <ScalarProperty Name="varicela" ColumnName="varicela" />
+            <ScalarProperty Name="EnfInfectocontagiosas" ColumnName="EnfInfectocontagiosas" />
+            <ScalarProperty Name="EnfContagiosas" ColumnName="EnfContagiosas" />
+            <ScalarProperty Name="EnfContagiosasyEvol" ColumnName="EnfContagiosasyEvol" />
+            <ScalarProperty Name="NombrePadre" ColumnName="NombrePadre" />
+            <ScalarProperty Name="ApellPaternoPadre" ColumnName="ApellPaternoPadre" />
+            <ScalarProperty Name="ApellMaternoPadre" ColumnName="ApellMaternoPadre" />
+            <ScalarProperty Name="NacimientoPadre" ColumnName="NacimientoPadre" />
+            <ScalarProperty Name="EstadoCivilPadre" ColumnName="EstadoCivilPadre" />
+            <ScalarProperty Name="EscolaridadPadre" ColumnName="EscolaridadPadre" />
+            <ScalarProperty Name="DetalleEscolaridadPadre" ColumnName="DetalleEscolaridadPadre" />
+            <ScalarProperty Name="SaludPadre" ColumnName="SaludPadre" />
+            <ScalarProperty Name="DetalleSaludPadre" ColumnName="DetalleSaludPadre" />
+            <ScalarProperty Name="toxicomaniaPadre" ColumnName="toxicomaniaPadre" />
+            <ScalarProperty Name="DetalletoxicomaniaPadre" ColumnName="DetalletoxicomaniaPadre" />
+            <ScalarProperty Name="AntecedentePadre" ColumnName="AntecedentePadre" />
+            <ScalarProperty Name="OtrosAntecedentesPadre" ColumnName="OtrosAntecedentesPadre" />
+            <ScalarProperty Name="NombreMadre" ColumnName="NombreMadre" />
+            <ScalarProperty Name="ApellPaternoMadre" ColumnName="ApellPaternoMadre" />
+            <ScalarProperty Name="ApellMaternoMadre" ColumnName="ApellMaternoMadre" />
+            <ScalarProperty Name="NacimientoMadre" ColumnName="NacimientoMadre" />
+            <ScalarProperty Name="EstadoCivilMadre" ColumnName="EstadoCivilMadre" />
+            <ScalarProperty Name="EscolaridadMadre" ColumnName="EscolaridadMadre" />
+            <ScalarProperty Name="DetalleEscolaridadMadre" ColumnName="DetalleEscolaridadMadre" />
+            <ScalarProperty Name="SaludMadre" ColumnName="SaludMadre" />
+            <ScalarProperty Name="DetalleSaludMadre" ColumnName="DetalleSaludMadre" />
+            <ScalarProperty Name="toxicomaniaMadre" ColumnName="toxicomaniaMadre" />
+            <ScalarProperty Name="DetalletoxicomaniaMadre" ColumnName="DetalletoxicomaniaMadre" />
+            <ScalarProperty Name="AntecedenteMadre" ColumnName="AntecedenteMadre" />
+            <ScalarProperty Name="OtrosAntecedentesMadre" ColumnName="OtrosAntecedentesMadre" />
+            <ScalarProperty Name="SostenCefalico" ColumnName="SostenCefalico" />
+            <ScalarProperty Name="Ablactacion" ColumnName="Ablactacion" />
+            <ScalarProperty Name="Posicionsedente" ColumnName="Posicionsedente" />
+            <ScalarProperty Name="Destete" ColumnName="Destete" />
+            <ScalarProperty Name="Guarderia" ColumnName="Guarderia" />
+            <ScalarProperty Name="Jardin" ColumnName="Jardin" />
+            <ScalarProperty Name="Primaria" ColumnName="Primaria" />
+            <ScalarProperty Name="Secundaria" ColumnName="Secundaria" />
+            <ScalarProperty Name="Preparatoria" ColumnName="Preparatoria" />
+            <ScalarProperty Name="Urbanización" ColumnName="Urbanización" />
+            <ScalarProperty Name="TipodeVivienda" ColumnName="TipodeVivienda" />
+            <ScalarProperty Name="Cohabitantes" ColumnName="Cohabitantes" />
+            <ScalarProperty Name="caminarSinAyuda" ColumnName="caminarSinAyuda" />
+            <ScalarProperty Name="primerasilaba" ColumnName="primerasilaba" />
+            <ScalarProperty Name="primeraspalabras" ColumnName="primeraspalabras" />
+            <ScalarProperty Name="historialclinico" ColumnName="historialclinico" />
+            <ScalarProperty Name="otravacuna" ColumnName="otravacuna" />
+            <ScalarProperty Name="vacunaenfprev" ColumnName="vacunaenfprev" />
+            <ScalarProperty Name="vacunadosis" ColumnName="vacunadosis" />
+            <ScalarProperty Name="vacunaedad" ColumnName="vacunaedad" />
+            <ScalarProperty Name="vacunafecha" ColumnName="vacunafecha" />
+            <ScalarProperty Name="TrataDiagExclusivos" ColumnName="TrataDiagExclusivos" />
+            <ScalarProperty Name="consultas" ColumnName="consultas" />
+            <ScalarProperty Name="PreCta" ColumnName="PreCta" />
+            <ScalarProperty Name="preClave" ColumnName="preClave" />
+            <ScalarProperty Name="OtrasConsultas" ColumnName="OtrasConsultas" />
+            <ScalarProperty Name="mortinatos" ColumnName="mortinatos" />
+            <ScalarProperty Name="EdadGestal" ColumnName="EdadGestal" />
+            <ScalarProperty Name="tipoEdadGestal" ColumnName="tipoEdadGestal" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Recetas"><EntityTypeMapping TypeName="emeciModel.Recetas"><MappingFragment StoreEntitySet="Recetas">
+            <ScalarProperty Name="idreceta" ColumnName="idreceta" />
+            <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+            <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+            <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+            <ScalarProperty Name="Lineas" ColumnName="Lineas" />
+            <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="DatosTarjeta">
+            <EntityTypeMapping TypeName="emeciModel.DatosTarjeta">
+              <MappingFragment StoreEntitySet="DatosTarjeta">
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
+                <ScalarProperty Name="Coordenada" ColumnName="Coordenada" />
+                <ScalarProperty Name="noTarjeta" ColumnName="noTarjeta" />
+                <ScalarProperty Name="iddatostarjeta" ColumnName="iddatostarjeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registro">
+            <EntityTypeMapping TypeName="emeciModel.Registro">
+              <MappingFragment StoreEntitySet="Registro">
+                <ScalarProperty Name="apellido2" ColumnName="apellido2" />
+                <ScalarProperty Name="Emeci" ColumnName="Emeci" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="NoExt" ColumnName="NoExt" />
+                <ScalarProperty Name="OtraCiudad" ColumnName="OtraCiudad" />
+                <ScalarProperty Name="FechaRenovacion" ColumnName="FechaRenovacion" />
+                <ScalarProperty Name="Emails" ColumnName="Emails" />
+                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="TelefonoCel" ColumnName="TelefonoCel" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Domicilio" ColumnName="Domicilio" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idRegistro" ColumnName="idRegistro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnosticos">
+            <EntityTypeMapping TypeName="emeciModel.Diagnosticos">
+              <MappingFragment StoreEntitySet="Diagnosticos">
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="iddiagnostico" ColumnName="iddiagnostico" />
+                <ScalarProperty Name="datos" ColumnName="datos" />
+                <ScalarProperty Name="LineasVital" ColumnName="LineasVital" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Lineas" ColumnName="Lineas" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatCategoEstudios">
+            <EntityTypeMapping TypeName="emeciModel.CatCategoEstudios">
+              <MappingFragment StoreEntitySet="CatCategoEstudios">
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idcategoriaestudio" ColumnName="idcategoriaestudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CatEstudios">
+            <EntityTypeMapping TypeName="emeciModel.CatEstudios">
+              <MappingFragment StoreEntitySet="CatEstudios">
+                <ScalarProperty Name="idcategoriaestudio" ColumnName="idcategoriaestudio" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idestudio" ColumnName="idestudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catrecetas">
+            <EntityTypeMapping TypeName="emeciModel.catrecetas">
+              <MappingFragment StoreEntitySet="catrecetas">
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="lineas" ColumnName="lineas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idcatreceta" ColumnName="idcatreceta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catdiagnostico">
+            <EntityTypeMapping TypeName="emeciModel.catdiagnostico">
+              <MappingFragment StoreEntitySet="catdiagnostico">
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="lineas" ColumnName="lineas" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idcatdiagnostico" ColumnName="idcatdiagnostico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstudiosLab">
+            <EntityTypeMapping TypeName="emeciModel.EstudiosLab">
+              <MappingFragment StoreEntitySet="EstudiosLab">
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="idestudiolab" ColumnName="idestudiolab" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Lineas" ColumnName="Lineas" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstudiosGab">
+            <EntityTypeMapping TypeName="emeciModel.EstudiosGab">
+              <MappingFragment StoreEntitySet="EstudiosGab">
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="idestudiogab" ColumnName="idestudiogab" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Lineas" ColumnName="Lineas" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patologias">
+            <EntityTypeMapping TypeName="emeciModel.Patologias">
+              <MappingFragment StoreEntitySet="Patologias">
+                <ScalarProperty Name="idpatologia" ColumnName="idpatologia" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+                <ScalarProperty Name="RelacionSospechosa" ColumnName="RelacionSospechosa" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="EdadAdquirida" ColumnName="EdadAdquirida" />
+                <ScalarProperty Name="Evoluciones" ColumnName="Evoluciones" />
+                <ScalarProperty Name="Manejo" ColumnName="Manejo" />
+                <ScalarProperty Name="Alergeno" ColumnName="Alergeno" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudades">
+            <EntityTypeMapping TypeName="emeciModel.Ciudades">
+              <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idciudad" ColumnName="idciudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="emeciModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vacunas">
+            <EntityTypeMapping TypeName="emeciModel.Vacunas">
+              <MappingFragment StoreEntitySet="Vacunas">
+                <ScalarProperty Name="idvacuna" ColumnName="idvacuna" />
+                <ScalarProperty Name="vacunaEdad" ColumnName="vacunaEdad" />
+                <ScalarProperty Name="vacunadosis" ColumnName="vacunadosis" />
+                <ScalarProperty Name="vacunaenfprev" ColumnName="vacunaenfprev" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticosExc">
+            <EntityTypeMapping TypeName="emeciModel.DiagnosticosExc">
+              <MappingFragment StoreEntitySet="DiagnosticosExc">
+                <ScalarProperty Name="lineas" ColumnName="lineas" />
+                <ScalarProperty Name="iddiagexc" ColumnName="iddiagexc" />
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultas">
+            <EntityTypeMapping TypeName="emeciModel.Consultas">
+              <MappingFragment StoreEntitySet="Consultas">
+                <ScalarProperty Name="Pronostico" ColumnName="Pronostico" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="ProximaCita" ColumnName="ProximaCita" />
+                <ScalarProperty Name="MedidasPreventivas" ColumnName="MedidasPreventivas" />
+                <ScalarProperty Name="SignosSintomas3" ColumnName="SignosSintomas3" />
+                <ScalarProperty Name="SignosSintomas2" ColumnName="SignosSintomas2" />
+                <ScalarProperty Name="SignosSintomas1" ColumnName="SignosSintomas1" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="FrecuenciaRespiratoria" ColumnName="FrecuenciaRespiratoria" />
+                <ScalarProperty Name="FrecuenciaCardiaca" ColumnName="FrecuenciaCardiaca" />
+                <ScalarProperty Name="TensionArterialB" ColumnName="TensionArterialB" />
+                <ScalarProperty Name="TensionArterial" ColumnName="TensionArterial" />
+                <ScalarProperty Name="perimetroCefalico" ColumnName="perimetroCefalico" />
+                <ScalarProperty Name="Cabeza" ColumnName="Cabeza" />
+                <ScalarProperty Name="Temperatura" ColumnName="Temperatura" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Familiares">
+            <EntityTypeMapping TypeName="emeciModel.Familiares">
+              <MappingFragment StoreEntitySet="Familiares">
+                <ScalarProperty Name="idpaciente" ColumnName="idpaciente" />
+                <ScalarProperty Name="DetalleRelacion" ColumnName="DetalleRelacion" />
+                <ScalarProperty Name="Relacion" ColumnName="Relacion" />
+                <ScalarProperty Name="Enfermedades" ColumnName="Enfermedades" />
+                <ScalarProperty Name="Nacimiento" ColumnName="Nacimiento" />
+                <ScalarProperty Name="IdFamiliar" ColumnName="IdFamiliar" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estudios">
+            <EntityTypeMapping TypeName="emeciModel.Estudios">
+              <MappingFragment StoreEntitySet="Estudios">
+                <ScalarProperty Name="Resultado" ColumnName="Resultado" />
+                <ScalarProperty Name="idexpediente" ColumnName="idexpediente" />
+                <ScalarProperty Name="CentroMedico" ColumnName="CentroMedico" />
+                <ScalarProperty Name="NombreEstudio" ColumnName="NombreEstudio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="idEstudio" ColumnName="idEstudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagenes">
+            <EntityTypeMapping TypeName="emeciModel.Imagenes">
+              <MappingFragment StoreEntitySet="Imagenes">
+                <ScalarProperty Name="ArchivoThumb" ColumnName="ArchivoThumb" />
+                <ScalarProperty Name="Archivo" ColumnName="Archivo" />
+                <ScalarProperty Name="idExpediente" ColumnName="idExpediente" />
+                <ScalarProperty Name="IdImagen" ColumnName="IdImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjetas">
+            <EntityTypeMapping TypeName="emeciModel.Tarjetas">
+              <MappingFragment StoreEntitySet="Tarjetas">
+                <ScalarProperty Name="EjeY" ColumnName="EjeY" />
+                <ScalarProperty Name="EjeX" ColumnName="EjeX" />
+                <ScalarProperty Name="FechaExpira" ColumnName="FechaExpira" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="NoTarjeta" ColumnName="NoTarjeta" />
+                <ScalarProperty Name="idtarjeta" ColumnName="idtarjeta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemaComentarios">
+            <EntityTypeMapping TypeName="emeciModel.TemaComentarios">
+              <MappingFragment StoreEntitySet="TemaComentarios">
+                <ScalarProperty Name="idtema" ColumnName="idtema" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="IdMedico" ColumnName="IdMedico" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdTemaComentario" ColumnName="IdTemaComentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temas">
+            <EntityTypeMapping TypeName="emeciModel.Temas">
+              <MappingFragment StoreEntitySet="Temas">
+                <ScalarProperty Name="idMedicoCreo" ColumnName="idMedicoCreo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdTema" ColumnName="IdTema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trackermedicos">
+            <EntityTypeMapping TypeName="emeciModel.trackermedicos">
+              <MappingFragment StoreEntitySet="trackermedicos">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="TypeLink" ColumnName="TypeLink" />
+                <ScalarProperty Name="idtracker" ColumnName="idtracker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultaGinecologa">
+            <EntityTypeMapping TypeName="emeciModel.ConsultaGinecologa">
+              <MappingFragment StoreEntitySet="ConsultaGinecologa">
+                <ScalarProperty Name="edadPareja" ColumnName="edadPareja" />
+                <ScalarProperty Name="nombrePareja" ColumnName="nombrePareja" />
+                <ScalarProperty Name="TelefonoPareja" ColumnName="TelefonoPareja" />
+                <ScalarProperty Name="OcupacionPareja" ColumnName="OcupacionPareja" />
+                <ScalarProperty Name="FechaNacimientoPareja" ColumnName="FechaNacimientoPareja" />
+                <ScalarProperty Name="GrupoRHPareja" ColumnName="GrupoRHPareja" />
+                <ScalarProperty Name="EstadoCivilPareja" ColumnName="EstadoCivilPareja" />
+                <ScalarProperty Name="SexoPareja" ColumnName="SexoPareja" />
+                <ScalarProperty Name="TienePareja" ColumnName="TienePareja" />
+                <ScalarProperty Name="OtrosEspecifique" ColumnName="OtrosEspecifique" />
+                <ScalarProperty Name="Otros" ColumnName="Otros" />
+                <ScalarProperty Name="Metrorragia" ColumnName="Metrorragia" />
+                <ScalarProperty Name="Amenorrea" ColumnName="Amenorrea" />
+                <ScalarProperty Name="Lactorrea" ColumnName="Lactorrea" />
+                <ScalarProperty Name="Leucorrea" ColumnName="Leucorrea" />
+                <ScalarProperty Name="Dispareunia" ColumnName="Dispareunia" />
+                <ScalarProperty Name="Dismenorrea" ColumnName="Dismenorrea" />
+                <ScalarProperty Name="Hipermenorrea" ColumnName="Hipermenorrea" />
+                <ScalarProperty Name="Proiomenorrea" ColumnName="Proiomenorrea" />
+                <ScalarProperty Name="oligonorrea" ColumnName="oligonorrea" />
+                <ScalarProperty Name="menacma" ColumnName="menacma" />
+                <ScalarProperty Name="EdadInicioVidaSexual" ColumnName="EdadInicioVidaSexual" />
+                <ScalarProperty Name="mortinatos" ColumnName="mortinatos" />
+                <ScalarProperty Name="RecienNacidosVivos" ColumnName="RecienNacidosVivos" />
+                <ScalarProperty Name="abortos" ColumnName="abortos" />
+                <ScalarProperty Name="Cesareas" ColumnName="Cesareas" />
+                <ScalarProperty Name="ParaGestas" ColumnName="ParaGestas" />
+                <ScalarProperty Name="Gestas" ColumnName="Gestas" />
+                <ScalarProperty Name="FechaUltimaMestruacion" ColumnName="FechaUltimaMestruacion" />
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="idconsultaginecologa" ColumnName="idconsultaginecologa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Especialidades">
+            <EntityTypeMapping TypeName="emeciModel.Especialidades">
+              <MappingFragment StoreEntitySet="Especialidades">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="emeciModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="trackermedicos1">
+            <EntityTypeMapping TypeName="emeciModel.trackermedicos1">
+              <MappingFragment StoreEntitySet="trackermedicos1">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="idmedico" ColumnName="idmedico" />
+                <ScalarProperty Name="TypeLink" ColumnName="TypeLink" />
+                <ScalarProperty Name="idtracker" ColumnName="idtracker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="emeciModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="NoTarjeta" ColumnName="NoTarjeta" />
+                <ScalarProperty Name="FechaAcceso" ColumnName="FechaAcceso" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultaObstetrica">
+            <EntityTypeMapping TypeName="emeciModel.ConsultaObstetrica">
+              <MappingFragment StoreEntitySet="ConsultaObstetrica">
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="exploracionFisica" ColumnName="exploracionFisica" />
+                <ScalarProperty Name="ultrasonido" ColumnName="ultrasonido" />
+                <ScalarProperty Name="EspecifiqueTipoDistocia" ColumnName="EspecifiqueTipoDistocia" />
+                <ScalarProperty Name="EspecifiqueMotivoDistocia" ColumnName="EspecifiqueMotivoDistocia" />
+                <ScalarProperty Name="MotivoDistocia" ColumnName="MotivoDistocia" />
+                <ScalarProperty Name="TipoDistocia" ColumnName="TipoDistocia" />
+                <ScalarProperty Name="Partos" ColumnName="Partos" />
+                <ScalarProperty Name="EspecifiqueToxemias" ColumnName="EspecifiqueToxemias" />
+                <ScalarProperty Name="activaSexualmente" ColumnName="activaSexualmente" />
+                <ScalarProperty Name="idconsulta" ColumnName="idconsulta" />
+                <ScalarProperty Name="SeHizoUf" ColumnName="SeHizoUf" />
+                <ScalarProperty Name="Edema" ColumnName="Edema" />
+                <ScalarProperty Name="FCM" ColumnName="FCM" />
+                <ScalarProperty Name="TA" ColumnName="TA" />
+                <ScalarProperty Name="PesoAproxProducto" ColumnName="PesoAproxProducto" />
+                <ScalarProperty Name="MovimientosFetales" ColumnName="MovimientosFetales" />
+                <ScalarProperty Name="Actitud" ColumnName="Actitud" />
+                <ScalarProperty Name="siuacuion" ColumnName="siuacuion" />
+                <ScalarProperty Name="Presentacion" ColumnName="Presentacion" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="DSP" ColumnName="DSP" />
+                <ScalarProperty Name="LF" ColumnName="LF" />
+                <ScalarProperty Name="CA" ColumnName="CA" />
+                <ScalarProperty Name="CC" ColumnName="CC" />
+                <ScalarProperty Name="FCF" ColumnName="FCF" />
+                <ScalarProperty Name="FU" ColumnName="FU" />
+                <ScalarProperty Name="EmbarazosAnormalesExplique" ColumnName="EmbarazosAnormalesExplique" />
+                <ScalarProperty Name="NoEmbrazosAnormales" ColumnName="NoEmbrazosAnormales" />
+                <ScalarProperty Name="ComplicacionesPerinatalesExplique" ColumnName="ComplicacionesPerinatalesExplique" />
+                <ScalarProperty Name="NoComplicacionesPertinales" ColumnName="NoComplicacionesPertinales" />
+                <ScalarProperty Name="EmbarazosComplicadosExplique" ColumnName="EmbarazosComplicadosExplique" />
+                <ScalarProperty Name="EmbrazoEtopicoExplique" ColumnName="EmbrazoEtopicoExplique" />
+                <ScalarProperty Name="EmbrazosComplicadosPrevios" ColumnName="EmbrazosComplicadosPrevios" />
+                <ScalarProperty Name="EmbarazoEtopicos" ColumnName="EmbarazoEtopicos" />
+                <ScalarProperty Name="RMVivos" ColumnName="RMVivos" />
+                <ScalarProperty Name="Motinatos" ColumnName="Motinatos" />
+                <ScalarProperty Name="UsoDeForceps" ColumnName="UsoDeForceps" />
+                <ScalarProperty Name="CesareasPrevia" ColumnName="CesareasPrevia" />
+                <ScalarProperty Name="ToxemiasPrevias" ColumnName="ToxemiasPrevias" />
+                <ScalarProperty Name="PrimerDiaUltimaMestruacuion" ColumnName="PrimerDiaUltimaMestruacuion" />
+                <ScalarProperty Name="FechaUltmoParto" ColumnName="FechaUltmoParto" />
+                <ScalarProperty Name="abortos" ColumnName="abortos" />
+                <ScalarProperty Name="noembarazo" ColumnName="noembarazo" />
+                <ScalarProperty Name="IdConsultaObstetrica" ColumnName="IdConsultaObstetrica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ModelEmeci" ZoomLevel="64">
+        <EntityTypeShape EntityType="emeciModel.Medico" Width="1.5" PointX="8.5" PointY="0.5" Height="0.4" IsExpanded="true" />
+        <EntityTypeShape EntityType="emeciModel.Paciente" Width="1.5" PointX="5.75" PointY="1.375" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.Recetas" Width="1.5" PointX="3.5" PointY="0.5" Height="0.4" IsExpanded="true" />
+        <EntityTypeShape EntityType="emeciModel.DatosTarjeta" Width="1.5" PointX="6.625" PointY="1.75" Height="0.4" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.Registro" Width="1.5" PointX="4.25" PointY="3.75" Height="0.4" IsExpanded="true" />
+        <EntityTypeShape EntityType="emeciModel.Diagnosticos" Width="1.5" PointX="6.25" PointY="3.875" Height="2.1725878906249996" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.CatCategoEstudios" Width="1.5" PointX="2.125" PointY="4" Height="1.4033821614583317" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.CatEstudios" Width="1.5" PointX="3.75" PointY="5.5" Height="1.5956835937499996" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.catrecetas" Width="1.5" PointX="3.625" PointY="4.75" Height="1.7879850260416674" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.catdiagnostico" Width="1.5" PointX="0.75" PointY="6.5" Height="1.7879850260416674" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.EstudiosLab" Width="1.5" PointX="6.375" PointY="6.75" Height="1.9802864583333397" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.EstudiosGab" Width="1.5" PointX="3" PointY="8.125" Height="1.9802864583333388" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.Patologias" Width="1.5" PointX="8.375" PointY="6.75" Height="3.1340950520833388" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.Ciudades" Width="1.5" PointX="6.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="emeciModel.Estados" Width="1.5" PointX="7.75" PointY="9.625" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.Vacunas" Width="1.5" PointX="4.625" PointY="9.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="emeciModel.DiagnosticosExc" Width="1.5" PointX="1.5704329710316065" PointY="13.362113794946165" />
+        <EntityTypeShape EntityType="emeciModel.Consultas" Width="1.5" PointX="4.375" PointY="10.75" />
+        <EntityTypeShape EntityType="emeciModel.Familiares" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="emeciModel.Estudios" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="emeciModel.Imagenes" Width="1.5" PointX="6.75" PointY="11.75" />
+        <EntityTypeShape EntityType="emeciModel.Tarjetas" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="emeciModel.TemaComentarios" Width="1.5" PointX="12.75" PointY="3.75" />
+        <EntityTypeShape EntityType="emeciModel.Temas" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="emeciModel.trackermedicos" Width="1.5" PointX="12.75" PointY="9.75" />
+        <EntityTypeShape EntityType="emeciModel.ConsultaGinecologa" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="emeciModel.Especialidades" Width="1.5" PointX="6.75" PointY="14.75" />
+        <EntityTypeShape EntityType="emeciModel.Paises" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="emeciModel.trackermedicos1" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="emeciModel.Usuarios" Width="1.5" PointX="15.75" PointY="3.75" />
+        <EntityTypeShape EntityType="emeciModel.ConsultaObstetrica" Width="1.5" PointX="9.375" PointY="11.75" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

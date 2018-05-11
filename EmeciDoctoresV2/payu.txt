@@ -1,0 +1,83 @@
+{
+   "language": "es",
+   "command": "SUBMIT_TRANSACTION",
+   "merchant": {
+	  "apiKey": "5ualu0dhdlfptqa9fthtr2h78k",
+      "apiLogin": "dd4f844298f2098"
+   },
+   "transaction": {
+      "order": {
+         "accountId": "500547",
+         "referenceCode": "{REFERENCECODE}",
+         "description": "{DESCRIPTION}",
+         "language": "es",
+         "signature": "{SIGNATURE}",
+         "notifyUrl": "HTTP://WWWEMECI.COM/CONFIRMA.ASPX",
+         "additionalValues": {
+            "TX_VALUE": {
+               "value": {TOTAL},
+               "currency": "MXN"
+            }
+         },
+         "buyer": {
+            "merchantBuyerId": "1",
+            "fullName": "",
+            "emailAddress": "",
+            "contactPhone": "",
+            "dniNumber": "",
+            "shippingAddress": {
+               "street1": "",
+               "street2": "",
+               "city": "",
+               "state": "",
+               "country": "",
+               "postalCode": "",
+               "phone": ""
+            }
+         },
+         "shippingAddress": {
+            "street1": "",
+            "street2": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "postalCode": "",
+            "phone": ""
+         }
+      },
+      "payer": {
+         "merchantPayerId": "1",
+         "fullName": "",
+         "emailAddress": "",
+         "contactPhone": "",
+         "dniNumber":"",
+         "billingAddress": {
+            "street1": "",
+            "street2": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "postalCode": "",
+            "phone": ""
+         }
+      },
+      "creditCard": {
+         "number": "{NUMBER}",
+         "securityCode": "{SECURITYCODE}",
+         "expirationDate": "{MONTHYEAR}",
+         "name": "{NAME}"
+      },
+      "extraParameters": {
+         "INSTALLMENTS_NUMBER": 1
+      },
+      "type": "AUTHORIZATION_AND_CAPTURE",
+      "paymentMethod": "{PAYMENTMETHOD}",
+      "paymentCountry": "MX",
+
+      "deviceSessionId": "{DEVICESESSIONID}",
+      "ipAddress": "127.0.0.1",
+      "cookie": "pt1t38347bs6jc9ruv2ecpv7o2",
+      "userAgent": "Mozilla/5.0 (Windows NT 5.1; rv:18.0) Gecko/20100101 Firefox/18.0"
+   },
+   "test": true
+}

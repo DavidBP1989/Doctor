@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <style type="text/css">
+        #move {
+            border: 1px solid;
+            width: 70% !important;
+            display: inline-block;
+            height: 1002px;
+            padding: 10px;
+            font-size:13px;
+            position:relative;
+            top:5px;
+            left:9px;
+        }
+        h3{ color: orange}
+
+        .btnPrint {
+            background-color: #5bc0de;
+            border: medium none;
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 0 2px 0 #00a047;
+            position:fixed;
+            right:5%;
+            padding:5px;
+            z-index:2;
+            cursor:pointer;
+        }
+        input[type="button"] {
+            float: right;
+        }
+        .noshowboton { display:none;}
+        .divmarg{ padding : 25px 0px 5px 200px; display:inline-block; }
+        .list-unstyled{ display:none; }
+        .btn{ display:none; }
+        .contenido-de-panel{ padding:30px; }
+        .col-sm-3, .col-sm-6{ float:left; }
+        .row{ display:table; 
+              margin-left:-15px;
+              margin-right:-15px;
+              width:100%;
+
+        }
+        .col-sm-3{ width:25%; }
+        .col-sm-6{ width:25%; } 
+        .form-group { margin-bottom:15px; }
+        .form-group label { text-transform:uppercase; font-weight: bold }
+        .dropdown-menu { display:none }
+    </style>
+    <title></title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var p = window.location.href.split('=');
+
+            var tag = $(parent.document.getElementById(p[1])).clone();
+
+            $('#content').html(tag);
+            $('#medicoName').html(unescape(p[2]));
+            $('#pacienteName').html(unescape(p[3]));
+            $('#birth').html(unescape(p[4]));
+            $('#date').html(unescape(p[5]));
+            $('#move').css({'left': parseInt(unescape(p[7])) + 'px', 'top': parseInt(unescape(p[6])) + 'px'});
+
+            $('#move').draggable();
+            //$('#move').resizable();
+
+			$('.btnPrint').click(function(){
+				$(this).hide();
+				$('h3').hide();
+				$('hr').hide();
+				$('#move').css('border', 'none');
+                
+				var tag = $('#move');
+				var left = tag.css('left').substring(0, tag.css('left').length - 2);
+				var top = tag.css('top').substring(0, tag.css('top').length - 2);
+				var margins = {
+				    left: left
+                    , top: top
+				}
+
+				$.post("Consulta/Save_Margenes", margins, function (data, textStatus) {
+				    if (data.status === 'OK') {
+				        console.log('se guardaron los margenes');
+				        window.print();
+				        parent.closePrint(left, top);
+				    }
+				}, "json");
+				
+			});
+
+
+		});
+    </script>
+</head>
+<body>
+    <input type="button" class="btnPrint" value="Imprimir" />
+    <div id="move">
+        <h3>Mover recuadro para ajustar margenes</h3>
+        <hr />
+        
+        <div>
+            <h2 id="medicoName"></h2>
+            <b>Nombre del paciente:</b> <span id="pacienteName"></span><br />
+            <b>Fecha de nacimiento:</b> <span id="birth"></span><br />
+            <b>Fecha:</b> <span id="date"></span>
+        </div>
+        <div id="content">
+            
+        </div>
+    </div>
+</body>
+</html>
